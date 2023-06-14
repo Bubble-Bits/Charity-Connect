@@ -1,0 +1,13 @@
+version: 2.1
+
+jobs:
+  build:
+    working_directory: ~/your-app-directory
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm ci
+      - run:
+          name: Run tests
+          command: npm run test
