@@ -5,12 +5,12 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install dependencies
-        command: |
-        cd charity-connect
-        npm install
+          name: Install dependencies
+          command: |
+            cd charity-connect
+            npm install
       - run:
-        name: Run test
-        command: |
-        cd charity-connect
-        npm run test
+          name: Run tests
+          command: |
+            cd charity-connect
+            npm run test
