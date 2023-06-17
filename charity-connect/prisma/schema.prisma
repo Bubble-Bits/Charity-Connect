@@ -13,6 +13,7 @@ datasource db {
 // TODO:  Create your schema here
 
 //* Example Schema
+
 //! model User {
 //!   id             String    @id @default(auto()) @map("_id") @db.ObjectId
 //!   name           String?
@@ -47,3 +48,6 @@ datasource db {
 
 //!   @@unique([provider, providerAccountId])
 //! }
+
+//
+
