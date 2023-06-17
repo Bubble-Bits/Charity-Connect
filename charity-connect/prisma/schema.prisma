@@ -6,11 +6,30 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 // TODO:  Create your schema here
+
+model User {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  inbox  Chat[] @relation("userSentTo")
+  outbox Chat[] @relation("userSentFrom")
+}
+
+// CHAT SCHEMA //
+
+model Chat {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  chatId         String    @db.ObjectId
+  to             User      @relation("userSentTo", fields: [chatId], references: [id], onDelete: Cascade)
+  from           User      @relation("userSentFrom", fields: [chatId], references: [id], onDelete: Cascade)
+  content        String
+  photos         String[]
+  sentAt         DateTime  @default(now())
+  messageStatus  String
+}
 
 //* Example Schema
 
