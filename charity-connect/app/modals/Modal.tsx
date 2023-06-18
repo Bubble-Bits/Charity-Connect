@@ -135,14 +135,12 @@ function Modal({
                   {secondaryAction && secondaryLabel && (
                     <Button
                       outline
-                      disabled
                       label={secondaryLabel}
                       onClick={handleSecondaryAction}
                     />
                   )}
                   <Button
                     outline
-                    disabled
                     label={actionLabel}
                     onClick={handleSecondaryAction}
                   />

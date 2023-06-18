@@ -21,7 +21,7 @@ import { firebaseAuth } from "@/firebase/Firebase";
 import useSignupModal from "../hooks/useSignupModal";
 type Props = {};
 
-function LoginModal({}: Props) {
+function SignupModal({}: Props) {
   const router = useRouter();
   const loginModal = useLoginModal();
   const signupModal = useSignupModal();
@@ -44,13 +44,16 @@ function LoginModal({}: Props) {
     }
   };
   const toggle = useCallback(() => {
-    loginModal.onClose();
-    signupModal.onOpen();
+    signupModal.onClose();
+    loginModal.onOpen();
   }, [loginModal, signupModal]);
 
   const bodyContent = (
     <div className="items-center">
-      <Heading title="Welcome Back 🎉" subtitle="Login to your account! " />
+      <Heading
+        title="Welcome to Charity Connect ❤️"
+        subtitle="Create an account! "
+      />
       <hr />
       <Input id="email" label="Email" disabled={isLoading} required />
       <Input
@@ -81,12 +84,12 @@ function LoginModal({}: Props) {
 
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="justify-center flex flex-row items-center gap-2">
-          <div className="">First time using Charity Connect?</div>
+          <div className="">Already have an account?</div>
           <div
             onClick={toggle}
             className="text-green-300 cursor-pointer hover:underline"
           >
-            Create an account
+            Login
           </div>
         </div>
       </div>
@@ -94,10 +97,10 @@ function LoginModal({}: Props) {
   );
   return (
     <Modal
-      isOpen={loginModal.isOpen}
-      title="Login"
+      isOpen={signupModal.isOpen}
+      title="Signup"
       actionLabel="Continue"
-      onClose={loginModal.onClose}
+      onClose={signupModal.onClose}
       onSubmit={handleGoogle}
       body={bodyContent}
       footer={footerContent}
@@ -105,4 +108,4 @@ function LoginModal({}: Props) {
   );
 }
 
-export default LoginModal;
+export default SignupModal;
