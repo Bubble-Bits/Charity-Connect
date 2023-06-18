@@ -2,12 +2,14 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import Button from "../components/Button";
 
 type Props = {
   isOpen?: boolean;
   onClose: () => void;
   onSubmit: () => void;
   title?: string;
+  footer?: React.ReactElement;
   body?: React.ReactElement;
   actionLabel: string;
   disabled?: boolean;
@@ -20,6 +22,7 @@ function Modal({
   onClose,
   onSubmit,
   title,
+  footer,
   body,
   actionLabel,
   disabled,
@@ -101,10 +104,9 @@ function Modal({
               rounded-lg
               shadow-lg
               relative
-              flex
               flex-cols
               w-full
-              bg-white
+              bg-[#01002e]
               outline-none
               focus:outline-none"
             >
@@ -119,10 +121,33 @@ function Modal({
               >
                 <button
                   onClick={handleClose}
-                  className="p-1 border-0 hover:opacity-70 transition absolute left-9"
+                  className="p-1 border-0 hover:opacity-70  text-green-400 transition absolute left-9"
                 >
                   <IoMdClose size={18} />
                 </button>
+                <div className="text-lg font-semibold text-green-500">
+                  {title}
+                </div>
+              </div>
+              <div className="relative p-6 flex-auto">{body}</div>
+              <div className="flex flex-col gap-2 p-6">
+                <div className="flex flex-row items-center gap-4 w-full">
+                  {secondaryAction && secondaryLabel && (
+                    <Button
+                      outline
+                      disabled
+                      label={secondaryLabel}
+                      onClick={handleSecondaryAction}
+                    />
+                  )}
+                  <Button
+                    outline
+                    disabled
+                    label={actionLabel}
+                    onClick={handleSecondaryAction}
+                  />
+                </div>
+                {footer}
               </div>
             </div>
           </div>

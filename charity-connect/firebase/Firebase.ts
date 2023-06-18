@@ -1,4 +1,6 @@
-// Import the functions you need from the SDKs you need
+import dotenv from "dotenv";
+dotenv.config();
+
 import { initializeApp } from "firebase/app";
 import firebase from "firebase/app";
 import { getAuth } from "firebase/auth";
@@ -8,13 +10,14 @@ import "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+
 const firebaseConfig = {
-  apiKey: process.env.apiKey,
-  authDomain: process.env.authDomain,
-  projectId: process.env.projectId,
-  storageBucket: process.env.storageBucket,
-  messagingSenderId: process.env.messagingSenderId,
-  appId: process.env.appId,
+  apiKey: "AIzaSyBOALvmCBliD_UXLJ7pcqVgs25NOFkzRqI",
+  authDomain: "charity-connect-dae3f.firebaseapp.com",
+  projectId: "charity-connect-dae3f",
+  storageBucket: "charity-connect-dae3f.appspot.com",
+  messagingSenderId: "110335350854",
+  appId: "1:110335350854:web:074d29696b4efb635cd247",
 };
 
 // Initialize Firebase
