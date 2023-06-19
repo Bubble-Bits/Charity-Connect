@@ -2,17 +2,21 @@ import React from "react";
 
 type Props = {
   id: string;
+  value: string;
   label: string;
   type?: string;
   disabled?: boolean;
+  stateChange: React.Dispatch<React.SetStateAction<string>>;
 
   required?: boolean;
 };
 
-function Input({ id, label, type, disabled }: Props) {
+function Input({ id, label, type, disabled, stateChange, value }: Props) {
   return (
     <div className="w-full relative my-5">
       <input
+        onChange={(e) => stateChange(e.target.value)}
+        value={value}
         id={id}
         disabled={disabled}
         type={type}

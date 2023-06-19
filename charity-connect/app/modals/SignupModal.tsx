@@ -1,11 +1,13 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useState } from "react";
+import { toast } from "react-hot-toast";
 import useLoginModal from "../hooks/useLoginModal";
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   signInWithPopup,
   GithubAuthProvider,
   FacebookAuthProvider,
@@ -19,9 +21,12 @@ import { GrApple } from "react-icons/gr";
 import Modal from "./Modal";
 import { firebaseAuth } from "@/firebase/Firebase";
 import useSignupModal from "../hooks/useSignupModal";
+import { Message } from "postcss";
 type Props = {};
 
 function SignupModal({}: Props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
   const loginModal = useLoginModal();
   const signupModal = useSignupModal();
@@ -31,18 +36,30 @@ function SignupModal({}: Props) {
   const handleGoogle = async () => {
     try {
       signInWithPopup(firebaseAuth, new GoogleAuthProvider());
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      toast.error(error.message);
     }
   };
   //? This function handles the github provider through firebase
   const handleGithub = async () => {
     try {
       signInWithPopup(firebaseAuth, new GithubAuthProvider());
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      toast.error(error.message);
     }
   };
+  //? This function handles email and password logins
+  const handleEmailAndPassword = async () => {
+    try {
+      await createUserWithEmailAndPassword(firebaseAuth, email, password);
+    } catch (error: any) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
+  };
+
   const toggle = useCallback(() => {
     signupModal.onClose();
     loginModal.onOpen();
@@ -55,11 +72,20 @@ function SignupModal({}: Props) {
         subtitle="Create an account! "
       />
       <hr />
-      <Input id="email" label="Email" disabled={isLoading} required />
+      <Input
+        id="email"
+        label="Email"
+        disabled={isLoading}
+        value={email}
+        stateChange={setEmail}
+        required
+      />
       <Input
         id="password"
         type="password"
         label="Password"
+        value={password}
+        stateChange={setPassword}
         disabled={isLoading}
         required
       />
@@ -104,6 +130,7 @@ function SignupModal({}: Props) {
       onSubmit={handleGoogle}
       body={bodyContent}
       footer={footerContent}
+      secondaryAction={handleEmailAndPassword}
     />
   );
 }
