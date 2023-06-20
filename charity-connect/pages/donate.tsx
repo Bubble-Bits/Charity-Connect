@@ -5,10 +5,8 @@ type Props = {};
 
 function donate({}: Props) {
   return (
-    <div className="fixed w-full bg-[#01002e] z-10 shadow-sm text-white">
-      {/* <div className="py-4 border-b-[1px]">
-      </div> */}
-      <form>
+    // <div className="fixed w-full bg-[#01002e] z-10 shadow-sm text-white justify-items-center">
+      <div className="flex flex-col w-full h-full border-[5px]">
         <label htmlFor="description" >Description</label>
         <input type="text" name="description" />
         <label htmlFor="tenure" >Time Owned</label>
@@ -21,9 +19,8 @@ function donate({}: Props) {
         <input type="text" name="category" />
         <label htmlFor="delivery" >Delivery</label>
         <input type="text" name="delivery" />
-        <input type="button"></input>
-      </form>
-    </div>
+        <button>Donate</button>
+      </div>
   );
 }
 
