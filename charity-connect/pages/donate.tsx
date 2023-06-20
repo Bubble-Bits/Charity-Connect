@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
+import "../app/globals.css";
 
 type Props = {};
 
 function donate({}: Props) {
   return (
     // <div className="fixed w-full bg-[#01002e] z-10 shadow-sm text-white justify-items-center">
-      <div className="flex flex-col w-full h-full border-[5px]">
+      <div className="flex flex-col justify-evenly align-middle w-full h-full border-[5px]">
         <label htmlFor="description" >Description</label>
         <input type="text" name="description" />
         <label htmlFor="tenure" >Time Owned</label>
