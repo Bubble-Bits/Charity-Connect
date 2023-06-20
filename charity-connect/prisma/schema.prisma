@@ -31,6 +31,24 @@ model Chat {
   messageStatus  String
 }
 
+// ITEMS SCHEMA //
+model Item {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  category       String
+  description    String
+  timeOwned      String
+  features       String[]
+  postedAt       DateTime  @default(now())
+  photos         String[]
+  zipcode        String
+  pickup         Boolean   @default(false)
+  shipping       Boolean   @default(false)
+  status         String
+  poster         User
+  claimer        User
+}
+
 //* Example Schema
 
 //! model User {
