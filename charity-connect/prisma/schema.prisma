@@ -35,18 +35,18 @@ model Chat {
 model Item {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
   name           String
-  category       String
+  category       String?
   description    String
-  timeOwned      String
+  timeOwned      String?
   features       String[]
   postedAt       DateTime  @default(now())
   photos         String[]
   zipcode        String
   pickup         Boolean   @default(false)
   shipping       Boolean   @default(false)
-  status         String
-  poster         User
-  claimer        User
+  status         String    @default("Available")
+  // poster         User      @relation()
+  // claimer        User      @relation()
 }
 
 //* Example Schema
