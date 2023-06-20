@@ -16,6 +16,8 @@ model User {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
   inbox  Chat[] @relation("userSentTo")
   outbox Chat[] @relation("userSentFrom")
+  postedItems Item[] @relation("ItemPostedBy")
+  claimedItems Item[] @relation("ItemClaimedBy")
 }
 
 // CHAT SCHEMA //
@@ -32,12 +34,13 @@ model Chat {
 }
 
 // ITEMS SCHEMA //
+
 model Item {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
   name           String
   category       String?
   description    String
-  timeOwned      String?
+  timeOwned      DateTime?
   features       String[]
   postedAt       DateTime  @default(now())
   photos         String[]
@@ -45,8 +48,10 @@ model Item {
   pickup         Boolean   @default(false)
   shipping       Boolean   @default(false)
   status         String    @default("Available")
-  // poster         User      @relation()
-  // claimer        User      @relation()
+  poster         User      @relation("ItemPostedBy", fields: [posterId], references: [id])
+  posterId       String    @db.ObjectId
+  claimer        User?     @relation("ItemClaimedBy", fields: [claimerId], references: [id])
+  claimerId      String?   @db.ObjectId
 }
 
 //* Example Schema
