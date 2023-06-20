@@ -3,7 +3,7 @@ import React from "react";
 
 type Props = {};
 
-function ClaimButton({}: Props) {
+function LiveTracker({}: Props) {
   return (
     <div className="fixed w-full bg-[#01002e] z-10 shadow-sm text-white">
       <div className="py-4 border-b-[1px]">
@@ -12,4 +12,4 @@ function ClaimButton({}: Props) {
   );
 }
 
-export default ClaimButton;
+export default LiveTracker;
