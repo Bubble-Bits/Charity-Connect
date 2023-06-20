@@ -3,11 +3,11 @@ import React from "react";
 
 type Props = {};
 
-function Donate({}: Props) {
+function donate({}: Props) {
   return (
     <div className="fixed w-full bg-[#01002e] z-10 shadow-sm text-white">
-      <div className="py-4 border-b-[1px]">
-      </div>
+      {/* <div className="py-4 border-b-[1px]">
+      </div> */}
       <form>
         <label htmlFor="description" >Description</label>
         <input type="text" name="description" />
@@ -27,4 +27,4 @@ function Donate({}: Props) {
   );
 }
 
-export default Donate;
+export default donate;
