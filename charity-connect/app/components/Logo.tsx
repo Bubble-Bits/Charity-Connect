@@ -1,6 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 import { IoEarthOutline } from "react-icons/io5";
+import { firebaseAuth } from "@/firebase/Firebase";
+import useSignupModal from "../hooks/useSignupModal";
 type Props = {};
 
 function Logo({}: Props) {
