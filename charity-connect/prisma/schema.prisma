@@ -10,12 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// TODO:  Create your schema here
+// USERS SCHEMA //
 
 model User {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
   inbox  Chat[] @relation("userSentTo")
   outbox Chat[] @relation("userSentFrom")
+  postedItems Item[] @relation("ItemPostedBy")
+  claimedItems Item[] @relation("ItemClaimedBy")
+  name           String @unique
+  email          String @unique
+  bio            String?
+  profilePic     String?
+  address   String
+  itemsClaimed   Int  @default(0)
+  itemsSuccessClaimed  Int @default(0)
+  blocked        String[]
 }
 
 // CHAT SCHEMA //
@@ -29,6 +39,27 @@ model Chat {
   photos         String[]
   sentAt         DateTime  @default(now())
   messageStatus  String
+}
+
+// ITEMS SCHEMA //
+
+model Item {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  category       String?
+  description    String
+  timeOwned      DateTime?
+  features       String[]
+  postedAt       DateTime  @default(now())
+  photos         String[]
+  address        String
+  pickup         Boolean   @default(false)
+  shipping       Boolean   @default(false)
+  status         String    @default("Available")
+  poster         User      @relation("ItemPostedBy", fields: [posterId], references: [id])
+  posterId       String    @db.ObjectId
+  claimer        User?     @relation("ItemClaimedBy", fields: [claimerId], references: [id])
+  claimerId      String?   @db.ObjectId
 }
 
 //* Example Schema
