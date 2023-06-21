@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// TODO:  Create your schema here
+// USERS SCHEMA //
 
 model User {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
@@ -20,6 +20,12 @@ model User {
   claimedItems Item[] @relation("ItemClaimedBy")
   name           String @unique
   email          String @unique
+  bio            String?
+  profilePic     String?
+  address   String
+  itemsClaimed   Int  @default(0)
+  itemsSuccessClaimed  Int @default(0)
+  blocked        String[]
 }
 
 // CHAT SCHEMA //
@@ -46,7 +52,7 @@ model Item {
   features       String[]
   postedAt       DateTime  @default(now())
   photos         String[]
-  zipcode        String
+  address        String
   pickup         Boolean   @default(false)
   shipping       Boolean   @default(false)
   status         String    @default("Available")
