@@ -1,36 +1,27 @@
 import React, { useEffect, useState } from "react";
 
-const LocationComponent = () => {
-  const [long, setLong] = useState(0);
-  const [lat, setLat] = useState(0);
+type Props = {
+  long: number;
+  lat: number;
+};
 
-  const options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
-  };
-
-  const error = () => {
-    console.log("Failed to receive location!");
-  };
+const LocationComponent = ({ long, lat }: Props) => {
+  const [longitude, setLong] = useState(0);
+  const [latitude, setLat] = useState(0);
+  const [address, setAddress] = useState("");
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        console.log("Position====>", position);
-        setLong(position.coords.longitude);
-        setLat(position.coords.latitude);
-      },
-      error,
-      options
-    );
+    setLong(40.6328942);
+    setLat(-74.019474);
+    setAddress("6823 Vista Place, Brooklyn NY 11220");
   }, []);
 
   return (
     <div>
       <h1>Location</h1>
-      <div> Longitude:{long}</div>
-      <div>Latitude: {lat}</div>
+      <div>Address: {address}</div>
+      <div>Longitude: {longitude}</div>
+      <div>Latitude: {latitude}</div>
     </div>
   );
 };
