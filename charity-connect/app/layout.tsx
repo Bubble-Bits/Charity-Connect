@@ -3,6 +3,10 @@ import Navbar from "./components/Navbar";
 import Chats from "./components/chat/Chats"
 import "./globals.css";
 import { Inter } from "next/font/google";
+import Modal from "./modals/Modal";
+import LoginModal from "./modals/LoginModal";
+import SignupModal from "./modals/SignupModal";
+import ToasterProvider from "./providers/ToasterProvider";
 
 import {useState} from 'react';
 
@@ -27,8 +31,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+<<<<<<< HEAD
         <Navbar onChatIconClick={toggleChats}/>
         {showChats && <Chats />}
+=======
+        <ToasterProvider />
+        <Navbar />
+        <LoginModal />
+        <SignupModal />
+>>>>>>> 1e5d24277dfb337b91314ea4655b99087a69f6d8
         {children}
       </body>
     </html>
