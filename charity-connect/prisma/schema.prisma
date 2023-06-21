@@ -18,6 +18,8 @@ model User {
   outbox Chat[] @relation("userSentFrom")
   postedItems Item[] @relation("ItemPostedBy")
   claimedItems Item[] @relation("ItemClaimedBy")
+  name           String @unique
+  email          String @unique
 }
 
 // CHAT SCHEMA //
