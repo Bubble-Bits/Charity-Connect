@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import "../app/globals.css";
-import Calendar from "../app/components/Donation/Calendar.jsx";
-import NavBar from "../app/components/Navbar.tsx"
+import Calendar from "../app/components/Donation/Calendar";
+import NavBar from "../app/components/Navbar"
 
 type Props = {};
 
@@ -19,6 +19,7 @@ function Donate({}: Props) {
       <NavBar />
       <div className="flex justify-center w-full h-full">
         <div className="absolute top-24 flex flex-col justify-evenly w-1/2 h-3/5 border-[5px]">
+          <input type="file"></input>
           <label htmlFor="description" >Description</label>
           <input type="text" name="description" />
           <label htmlFor="tenure" >Time Owned</label>
@@ -31,14 +32,6 @@ function Donate({}: Props) {
           <input type="text" name="category" />
           <label htmlFor="delivery" >Delivery</label>
           <input type="text" name="delivery" />
-          <Calendar
-          options={{
-            value: calendarValue,
-            onchange: handleCalendarChange,
-            readonly: false,
-            placeholder: "Choose a date"
-          }}
-          />
           <button>Donate</button>
         </div>
       </div>
