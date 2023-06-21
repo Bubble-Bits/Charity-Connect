@@ -13,9 +13,9 @@ datasource db {
 // TODO:  Create your schema here
 
 model User {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  inbox  Chat[] @relation("userSentTo")
-  outbox Chat[] @relation("userSentFrom")
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  inbox         Chat[] @relation("userSentTo")
+  outbox        Chat[] @relation("userSentFrom")
 }
 
 // CHAT SCHEMA //

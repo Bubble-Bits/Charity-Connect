@@ -1,4 +1,7 @@
+'use client';
 import Image from "next/image";
+import {useState} from 'react';
+import Chats from "./components/chat/Chats"
 
 export default function Home() {
   return (
