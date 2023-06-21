@@ -1,17 +1,13 @@
 "use client";
 import { useState } from "react";
 import "../app/globals.css";
-import Calendar from "../app/components/Donation/Calendar";
+import Calendar from 'react-calendar';
 import NavBar from "../app/components/Navbar"
 
 type Props = {};
 
 function Donate({}: Props) {
-  const [calendarValue, setCalendarValue] = useState("");
-
-  const handleCalendarChange = (element: any, currentValue: string) => {
-    setCalendarValue(currentValue);
-  };
+  const [value, setValue] = useState(new Date());
 
   return (
     // <div className="fixed w-full bg-[#01002e] z-10 shadow-sm text-white justify-items-center">
@@ -32,6 +28,9 @@ function Donate({}: Props) {
           <input type="text" name="category" />
           <label htmlFor="delivery" >Delivery</label>
           <input type="text" name="delivery" />
+        <div>
+          <Calendar onChange={(e: any)=> {console.log(e); setValue(e)}} />
+        </div>
           <button>Donate</button>
         </div>
       </div>
