@@ -28,7 +28,8 @@ function Donate({}: Props) {
   const submitInformation = async (dataSet: object) => {
     if (images.length && name && description && address) {
       // !Address to be changed for deployment
-      await axios.post('https://localhost:3000/items', dataSet);
+      console.log('Sent');
+      await axios.post('http://localhost:3000/api/items', dataSet);
     }
     console.log(dataSet);
   }
