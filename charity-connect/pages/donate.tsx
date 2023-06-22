@@ -3,6 +3,7 @@ import { useState } from "react";
 import "../app/globals.css";
 import Calendar from 'react-calendar';
 import NavBar from "../app/components/Navbar";
+import axios from 'axios';
 
 type Props = {};
 
@@ -24,6 +25,14 @@ function Donate({}: Props) {
   const textStyle: string="text-white";
   const textInput: string="w-4/5 rounded peer";
 
+  const submitInformation = async (dataSet: object) => {
+    if (images.length && name && description && address) {
+      // !Address to be changed for deployment
+      await axios.post('https://localhost:3000/items', dataSet);
+    }
+    console.log(dataSet);
+  }
+
   return (
     <div className="bg-white">
       <NavBar />
@@ -43,7 +52,7 @@ function Donate({}: Props) {
           <input type="text" name="tenure" disabled className={textInput} placeholder={owned}/>
           {opened ?
           <div className="absolute flex justify-center items-center w-full h-full bg-black/50">
-            <Calendar className="bg-white w-1/4 h-1/4" onChange={(e: any)=> {setOwned(e); openModal(!opened);}}/>
+            <Calendar className="bg-white w-1/2 h-1/4" onChange={(e: any)=> {setOwned(e); openModal(!opened);}}/>
           </div>
           : null}
 
@@ -66,7 +75,7 @@ function Donate({}: Props) {
             <option value="shipping">Shipping</option>
           </select>
 
-          <button className="text-white bg-green-500 w-4/5 rounded hover:bg-green-700">Donate</button>
+          <button className="text-white bg-green-500 w-4/5 rounded hover:bg-green-700" onClick={()=>{submitInformation({images, name, description, owned, address, features, category, delivery})}}>Donate</button>
 
         </div>
       </div>
