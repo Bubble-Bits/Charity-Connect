@@ -25,7 +25,27 @@ function Chats(props: Props) {
   }
 
   return (
-    <div className="fixed bottom-0 right-0 bg-blue-500 bg-opacity-25 w-full h-full md:w-1/4 md:h-3/4 lg:w-1/5 lg:h-3/4 flex flex-col text-green-700">
+    <div
+      className="
+      fixed
+      bottom-0
+      right-0
+      bg-blue-200
+      w-full
+      md:w-1/3
+      lg:w-1/4
+      xl:w-1/5
+      h-full
+      pt-20
+      md:h-3/5
+      md:pt-0
+      lg:h-3/5
+      lg:pt-0
+      xl:h-3/5
+      xl:pt-0
+      flex
+      flex-col
+      text-green-700">
       {chatSelected < 0 ? (
         <div className="flex-grow flex flex-col">
           <div className="text-3xl font-bold p-4 bg-green-600 text-blue-200">Chats</div>

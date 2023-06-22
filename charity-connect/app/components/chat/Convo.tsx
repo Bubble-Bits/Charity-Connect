@@ -3,7 +3,7 @@
 import { BiArrowBack } from 'react-icons/bi';
 import Image from 'next/image';
 import { format, parseISO } from "date-fns";
-
+import { IoMdSend } from 'react-icons/io';
 type Props = {
   id: number
   userName: string
@@ -43,9 +43,14 @@ const ChatConversation = ({id, userName, sender, goBackFunc}: Props) => {
           </div>
         ))}
       </div>
-      <form className="p-4">
-        <input type="text" className="border rounded-lg p-2 w-full" />
-      </form>
+      <form className="p-4 flex flex-row">
+      <textarea
+        className="border rounded-lg p-2 flex-grow resize-none overflow-y-auto"
+        rows={2}
+      />
+      <IoMdSend className="object-center h-full w-1/5" />
+</form>
+
     </div>
   );
 };
