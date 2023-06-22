@@ -4,6 +4,7 @@ import "../app/globals.css";
 import Calendar from 'react-calendar';
 import NavBar from "../app/components/Navbar";
 import axios from 'axios';
+import ImageUploader from '../app/components/Donation/ImageUploader';
 
 type Props = {};
 
@@ -38,38 +39,39 @@ function Donate({}: Props) {
       <NavBar />
       <div className="flex justify-center w-full h-full">
         <div className="absolute top-20 flex flex-col justify-evenly items-center w-screen h-screen border-[5px] bg-[#01002e]">
+        <label className={textStyle}>Upload Images</label>
+          <ImageUploader />
+          {/* <label className={textStyle}>Upload Images</label>
+          <input type="file" className={textStyle} name="images"></input> */}
 
-          <label htmlFor="images" className={textStyle}>Upload Images</label>
-          <input type="file" className={textStyle} name="images"></input>
-
-          <label htmlFor="name" className={textStyle}>Item Name</label>
+          <label className={textStyle}>Item Name</label>
           <input type="text" name="name" className={textInput} onChange={(e)=>{setName(e.target.value)}}/>
 
-          <label htmlFor="description" className={textStyle}>Description</label>
+          <label className={textStyle}>Description</label>
           <textarea name="description" rows={3} className={textInput} placeholder="Insert Description Here" onChange={(e)=>{setDescription(e.target.value)}}></textarea>
 
           <button onClick={()=>{openModal(!opened)}} className="text-white bg-green-500 w-1/2 rounded hover:bg-green-700">Select Date Owned</button>
           <input type="text" name="tenure" disabled className={textInput} placeholder={owned}/>
           {opened ?
           <div className="absolute flex justify-center items-center w-full h-full bg-black/50">
-            <Calendar className="bg-white w-1/2 h-1/4" onChange={(e: any)=> {setOwned(e); openModal(!opened);}}/>
+            <Calendar className="bg-white md:w-1/3 w-3/5 h-1/4 border-green-500 border-[2px]" onChange={(e: any)=> {setOwned(e); openModal(!opened);}}/>
           </div>
           : null}
 
-          <label htmlFor="address" className={textStyle}>Address</label>
+          <label className={textStyle}>Address</label>
           <input type="text" name="address" className={textInput} onChange={(e)=>{setAddress(e.target.value)}}/>
 
-          <label htmlFor="features" className={textStyle}>Features</label>
+          <label className={textStyle}>Features</label>
           <input type="text" name="features" className={textInput} placeholder="List Features Here Separate By Commas" onChange={(e)=>{setFeatures(e.target.value)}}/>
 
-          <label htmlFor="category" className={textStyle}>Category</label>
+          <label className={textStyle}>Category</label>
           <select name="category" className={textInput} onChange={(e)=>{setCategory(e.target.value)}}>
             {categories.map(category => (
               <option value={category} key={category}>{category}</option>
             ))}
           </select>
 
-          <label htmlFor="delivery" className={textStyle}>Preferred Delivery Method</label>
+          <label className={textStyle}>Preferred Delivery Method</label>
           <select name="delivery" className={textInput} onChange={(e)=>{setDelivery(e.target.value)}}>
             <option value="pickup">Pickup</option>
             <option value="shipping">Shipping</option>
