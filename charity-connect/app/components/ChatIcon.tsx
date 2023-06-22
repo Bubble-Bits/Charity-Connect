@@ -15,7 +15,7 @@ function ChatIcon({onIconClick}: Props) {
         <div className="p-2 bg-green-500 rounded-full text-black">
           <BsFillChatFill />
         </div>
-        <div className="hidden md:block text-sm font-semibold">Messages</div>
+        <div className="hidden md:block text-sm font-semibold">Chats</div>
       </div>
     </>
   );

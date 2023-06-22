@@ -13,32 +13,32 @@ datasource db {
 // TODO:  Create your schema here
 
 model User {
-<<<<<<< HEAD
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  inbox         Chat[] @relation("userSentTo")
-  outbox        Chat[] @relation("userSentFrom")
-=======
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  inbox  Chat[] @relation("userSentTo")
-  outbox Chat[] @relation("userSentFrom")
-  postedItems Item[] @relation("ItemPostedBy")
-  claimedItems Item[] @relation("ItemClaimedBy")
-  name           String @unique
-  email          String @unique
->>>>>>> 1e5d24277dfb337b91314ea4655b99087a69f6d8
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  chatIds        String[]    @db.ObjectId
+  chats          Chat[]      @relation(fields: [chatIds], references: [id])
+  postedItems    Item[]      @relation("ItemPostedBy")
+  claimedItems   Item[]      @relation("ItemClaimedBy")
+  name           String      @unique
+  email          String      @unique
 }
 
 // CHAT SCHEMA //
 
 model Chat {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  chatId         String    @db.ObjectId
-  to             User      @relation("userSentTo", fields: [chatId], references: [id], onDelete: Cascade)
-  from           User      @relation("userSentFrom", fields: [chatId], references: [id], onDelete: Cascade)
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  userIds        String[]    @db.ObjectId
+  users          User[]      @relation(fields: [userIds], references: [id])
+  messages       Message[]
+}
+
+model Message {
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  chat           Chat        @relation(fields: [chatId], references: [id])
+  chatId         String      @db.ObjectId
   content        String
   photos         String[]
-  sentAt         DateTime  @default(now())
-  messageStatus  String
+  sentAt         DateTime
+  sender         String
 }
 
 // ITEMS SCHEMA //

@@ -31,15 +31,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-<<<<<<< HEAD
-        <Navbar onChatIconClick={toggleChats}/>
-        {showChats && <Chats />}
-=======
         <ToasterProvider />
-        <Navbar />
+        <Navbar onChatClick={toggleChats}/>
+        {showChats && <Chats />}
         <LoginModal />
         <SignupModal />
->>>>>>> 1e5d24277dfb337b91314ea4655b99087a69f6d8
         {children}
       </body>
     </html>
