@@ -5,6 +5,7 @@ import Calendar from 'react-calendar';
 import RootLayout from "../app/layout";
 import axios from 'axios';
 import ImageUploader from '../app/components/Donation/ImageUploader';
+import NavBar from "../app/components/Navbar";
 
 type Props = {};
 
@@ -35,8 +36,9 @@ function Donate({}: Props) {
   }
 
   return (
-    <RootLayout>
+    // <RootLayout>
       <div className="bg-white">
+        <NavBar />
         <div className="flex justify-center w-full h-full">
           <div className="absolute top-20 flex flex-col justify-evenly items-center w-screen h-screen border-[5px] bg-[#01002e]">
           <label className={textStyle}>Upload Images</label>
@@ -82,7 +84,7 @@ function Donate({}: Props) {
           </div>
         </div>
       </div>
-    </RootLayout>
+    // </RootLayout>
   );
 }
 
