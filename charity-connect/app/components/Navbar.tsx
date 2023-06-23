@@ -5,10 +5,12 @@ import Logo from "./Logo";
 import Search from "./Search";
 import User from "./User";
 import ChatIcon from "./ChatIcon";
+import axios from "axios";
 
-type Props = {onChatClick: () => void};
+type Props = { onChatClick: () => void };
 
-function Navbar({onChatClick}: Props) {
+function Navbar({ onChatClick }: Props) {
+  //axios.post("./api/register", {}).then((user) => console.log(user));
   return (
     <div className="fixed w-full bg-[#01002e] z-10 shadow-sm text-white">
       <div className="py-4 border-b-[1px]">
@@ -17,7 +19,7 @@ function Navbar({onChatClick}: Props) {
             <Logo />
             <Search />
             <User />
-            <ChatIcon onIconClick={onChatClick}/>
+            <ChatIcon onIconClick={onChatClick} />
           </div>
         </Container>
       </div>
