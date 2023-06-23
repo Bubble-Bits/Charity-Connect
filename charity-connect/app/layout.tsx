@@ -6,9 +6,9 @@ import { Inter } from "next/font/google";
 import Modal from "./modals/Modal";
 import LoginModal from "./modals/LoginModal";
 import SignupModal from "./modals/SignupModal";
+import { useChats } from './hooks/useChats';
 import ToasterProvider from "./providers/ToasterProvider";
 
-import {useState} from 'react';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,11 +22,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [showChats, setShowChats] = useState(false);
 
-  const toggleChats = () => {
-    setShowChats(!showChats);
-  };
+  const { showChats, toggleChats } = useChats();
 
   return (
     <html lang="en">

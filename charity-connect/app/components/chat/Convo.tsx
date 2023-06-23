@@ -4,7 +4,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import Image from 'next/image';
 import { format, parseISO } from "date-fns";
 import { IoMdSend } from 'react-icons/io';
-import io from 'socket.io-client';
+//import io from 'socket.io-client';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -15,7 +15,7 @@ type Props = {
   sender: string
 }
 
-let socket;
+// let socket;
 
 const ChatConversation = ({id, userId, sender, goBackFunc}: Props) => {
   const messageData = [
@@ -24,22 +24,24 @@ const ChatConversation = ({id, userId, sender, goBackFunc}: Props) => {
 
   const [chatInput, setInput] = useState('');
 
-  useEffect(() => {
-    socketInitializer();
-  }, [])
+  // useEffect(() => {
+  //   socketInitializer();
+  // }, [])
 
-  async function socketInitializer() {
-    // await axios.get('api/socket');
-    socket = io();
-  }
+  // async function socketInitializer() {
+  //   // await axios.get('api/socket');
+  //   //socket = io();
+  // }
 
   const sendMessage = () => {
     console.log(chatInput);
-    const data = {chatInput, userId};
-    axios.post('/api/chat', data).then(() => {
-      console.log('success');
+    const data = {chatId: '60c945d72fbb363a38e2f48a', chatInput, userId};
+    axios.post('../../api/register', data).then((res) => {
+      console.log(res);
     }
-    )
+    ).catch((err) => {
+      console.log(err);
+    })
   }
 
   return (
