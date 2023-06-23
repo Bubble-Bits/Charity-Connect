@@ -35,8 +35,8 @@ const ChatConversation = ({id, userId, sender, goBackFunc}: Props) => {
 
   const sendMessage = () => {
     console.log(chatInput);
-    const data = {chatId: '60c945d72fbb363a38e2f48a', chatInput, userId};
-    axios.post('../../api/register', data).then((res) => {
+    const data = {userIds: ['6495fab420529e88f6120674', '649600ca20529e88f6120676']};
+    axios.post('../../api/chat', data).then((res) => {
       console.log(res);
     }
     ).catch((err) => {

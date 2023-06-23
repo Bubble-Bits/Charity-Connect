@@ -45,7 +45,7 @@ model Message {
   content        String
   photo          String?
   sentAt         DateTime
-  sender         String      @db.ObjectId
+  sender         String
 }
 
 // ITEMS SCHEMA //

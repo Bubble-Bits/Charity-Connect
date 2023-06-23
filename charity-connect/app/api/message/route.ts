@@ -18,9 +18,10 @@ export async function POST(request: Request) {
     });
 
     console.log('Message created:', message);
-
+    return NextResponse.json(message);
   } catch (error) {
     console.error('Error creating message:', error);
+    return NextResponse.json(error);
   }
 }
 
