@@ -45,10 +45,10 @@ function Chats(props: Props) {
       xl:pt-0
       flex
       flex-col
-      text-green-700">
+      text-green-600">
       {chatSelected < 0 ? (
         <div className="flex-grow flex flex-col">
-          <div className="text-3xl font-bold p-4 bg-green-600 text-blue-200">Chats</div>
+          <div className="text-3xl font-bold p-4 bg-green-800 text-blue-200">Chats</div>
           <hr className="border-black mb-6" />
           <div className="flex flex-col items-start overflow-y-auto">
             {chatData.map((chat, counter) => (
@@ -71,7 +71,7 @@ function Chats(props: Props) {
       ) : (
         <ChatConversation
           id={chatSelected}
-          userName={username}
+          userId={username}
           sender={chatData[chatSelected].users[1].name}
           goBackFunc={() => setSelected(-1)}
         />

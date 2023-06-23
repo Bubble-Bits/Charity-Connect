@@ -36,9 +36,9 @@ model Message {
   chat           Chat        @relation(fields: [chatId], references: [id])
   chatId         String      @db.ObjectId
   content        String
-  photos         String[]
+  photo          String?
   sentAt         DateTime
-  sender         String
+  sender         String      @db.ObjectId
 }
 
 // ITEMS SCHEMA //
