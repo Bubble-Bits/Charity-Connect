@@ -29,19 +29,17 @@ const ChatConversation = ({id, userId, sender, goBackFunc}: Props) => {
   }, [])
 
   async function socketInitializer() {
-    await axios.get('api/socket');
+    // await axios.get('api/socket');
     socket = io();
   }
 
   const sendMessage = () => {
     console.log(chatInput);
-    axios.post(`/api/chat?userId=${userId}&content=${chatInput}`, (err: Error, res: any) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('woo');
-      }
-    })
+    const data = {chatInput, userId};
+    axios.post('/api/chat', data).then(() => {
+      console.log('success');
+    }
+    )
   }
 
   return (
