@@ -5,6 +5,7 @@ import Modal from "./modals/Modal";
 import LoginModal from "./modals/LoginModal";
 import SignupModal from "./modals/SignupModal";
 import ToasterProvider from "./providers/ToasterProvider";
+import Maps from "./components/Maps";
 
 const inter = Inter({ subsets: ["latin"] });
 
