@@ -1,14 +1,22 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "../Container";
 import Logo from "./Logo";
 import Search from "./Search";
+import { useDispatch, useSelector } from "react-redux";
 import User from "./User";
 import ChatIcon from "./ChatIcon";
+import { getAuth } from "../store/store";
+type Props = { onChatClick?: () => void };
 
-type Props = {onChatClick?: () => void};
+function Navbar({ onChatClick }: Props) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAuth(""));
+  }, []);
 
-function Navbar({onChatClick}: Props) {
+  const Auth = useSelector((state) => state.charity.Auth);
+  console.log(Auth);
   return (
     <div className="fixed w-full bg-[#01002e] z-10 shadow-sm text-white">
       <div className="py-4 border-b-[1px]">
@@ -17,7 +25,7 @@ function Navbar({onChatClick}: Props) {
             <Logo />
             <Search />
             <User />
-            {onChatClick ? <ChatIcon onIconClick={onChatClick}/> : <></>}
+            {onChatClick ? <ChatIcon onIconClick={onChatClick} /> : <></>}
           </div>
         </Container>
       </div>
