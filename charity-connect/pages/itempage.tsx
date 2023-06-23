@@ -4,6 +4,7 @@ import Image from "next/image";
 import Navbar from "../app/components/Navbar";
 import "@/app/globals.css";
 import ItemDescription from "@/app/components/ItemPage/ItemDescription";
+import Axios from "axios";
 
 export default function ItemPage() {
   /*
@@ -27,12 +28,23 @@ export default function ItemPage() {
 
   items-center = vertically center
   justify-content = horizontally center
-
-
   */
 
+  // var testing = () => {
+  //   Axios.post("/api/register", {})
+  //     .then((data) => {
+  //       if (!data) {
+  //         throw data;
+  //       }
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
   var string =
-    "This is the item description for the items page. When the words exceed pass 200 characters, the see more button will show up and on click, will drop the whole entire description. This way, our page will have a much cleaner look";
+    "TEST: This is the item description for the items page. When the words exceed pass 200 characters, the see more button will show up and on click, will drop the whole entire description. This way, our page will have a much cleaner look";
   return (
     // This keeps it fixed in the div. How do we keep everything inside of the div?
     <div className="">

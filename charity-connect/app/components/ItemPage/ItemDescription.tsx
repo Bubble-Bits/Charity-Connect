@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import "@/app/globals.css";
+import Axios from "axios";
 
 type Props = {};
 
@@ -15,6 +16,17 @@ const ItemDescription = ({ description }) => {
   }, [description.length]);
 
   const toggleDescription = () => {
+    // Axios.post("/api/register", {})
+    //   .then((data) => {
+    //     if (!data) {
+    //       throw data;
+    //     }
+    //     console.log(data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
     seeMoreTrigger(!seeMore);
 
     if (seeLess) {

@@ -69,6 +69,11 @@ model Item {
   claimerId      String?   @db.ObjectId
 }
 
+model Test {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  content String
+}
+
 //* Example Schema
 
 //! model User {
