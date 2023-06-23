@@ -7,7 +7,7 @@ interface SignupModalStore {
 }
 
 const useSignupModal = create<SignupModalStore>((set) => ({
-  isOpen: true,
+  isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));
