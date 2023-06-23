@@ -6,7 +6,7 @@ import Search from "./Search";
 import User from "./User";
 import ChatIcon from "./ChatIcon";
 
-type Props = {onChatClick: () => void};
+type Props = {onChatClick?: () => void};
 
 function Navbar({onChatClick}: Props) {
   return (
@@ -17,7 +17,7 @@ function Navbar({onChatClick}: Props) {
             <Logo />
             <Search />
             <User />
-            <ChatIcon onIconClick={onChatClick}/>
+            {onChatClick ? <ChatIcon onIconClick={onChatClick}/> : <></>}
           </div>
         </Container>
       </div>
