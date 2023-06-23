@@ -1,0 +1,13 @@
+{
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "version": 2,
+  "scripts": {
+    "build": "npm run prisma:generate && npm run build",
+    "prisma:generate": "prisma generate"
+  }
+}
