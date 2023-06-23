@@ -1,30 +1,40 @@
 'use client'
 import Item from './Item';
-import React from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 
-const temp = [
+interface ItemsType {
+  id: number;
+  name: string;
+  category: string;
+  postedAt: number;
+}
+
+const categories: string[] = ['Apparel', 'Electronics', 'Entertainment', 'Family', 'Garden and Outdoors', 'Hobbies', 'Homegoods', 'Music',
+'Sports', 'Supplies', 'Toys and Games', 'Vehicles', 'Other']
+
+const temp: ItemsType[] = [
   {
     "id": 1,
     "name": "Alvin",
-    "category": "Clothes",
+    "category": "Apparel",
     "postedAt": 52
   },
   {
     "id": 2,
     "name": "Lovinson",
-    "category": "Video Games",
+    "category": "Sports",
     "postedAt": 1
   },
   {
     "id": 3,
     "name": "Stanley",
-    "category": "Exercise Equipment",
+    "category": "Homegoods",
     "postedAt": 10
   },
   {
     "id": 4,
     "name": "Christina",
-    "category": "Furniture",
+    "category": "Supplies",
     "postedAt": 33
   },
   {
@@ -36,24 +46,53 @@ const temp = [
   {
     "id": 6,
     "name": "Nick",
-    "category": "Toys",
+    "category": "Toys and Games",
     "postedAt": 14
   }
-]
+];
+
+let filteredItems = temp;
 
 export default function ItemList() {
+  const [items, setItems] = useState<ItemsType[]>([]);
+  const [filteredItems, setFilteredItems] = useState<ItemsType[]>([]);
+  const [filter, setFilter] = useState('All');
+
+  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+    setFilter(e.target.value);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await new Promise((resolve) => {return setTimeout(resolve, 1000)});
+      const data:any = temp;
+      setItems(data);
+      setFilteredItems(data);
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    let filtered = items.filter((item: any) => {
+      if (filter === 'All') return true;
+      return filter === item.category;
+      }
+    );
+    setFilteredItems(filtered);
+    console.log(items);
+  }, [filter])
+
 
   return (
     <>
       <div className='Filters flex gap-4 ml-48'>
         <div className='FilterCategory m-5'>
           <span className='FilterName text-xl mr-5'>Category:</span>
-          <select className='p-2.5 mr-5'>
-            <option>Clothes</option>
-            <option>Video Games</option>
-            <option>Exercise Equipment</option>
-            <option>Electronics</option>
-            <option>Toys</option>
+          <select className='p-2.5 mr-5' onChange={handleSelect}>
+            <option>All</option>
+            {categories.map((category) => {
+              return <option key={category}>{category}</option>
+            })}
           </select>
         </div>
         <div className='FilterDistance m-5'>
@@ -72,8 +111,8 @@ export default function ItemList() {
       flex flex-wrap gap-4 justify-center ml-1
       h-screen w-screen'
       >
-        {temp.map((item) => {
-          return <Item key={item.id} category={item.category}/>
+        {filteredItems.length !== 0 && filteredItems.map((item) => {
+          return <Item key={item.id} category={item.category} />
         })}
       </div>
     </>
