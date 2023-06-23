@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Navbar from "../app/components/Navbar";
 import "@/app/globals.css";
+import ItemDescription from "@/app/components/ItemPage/ItemDescription";
 
 export default function ItemPage() {
   /*
@@ -30,12 +31,8 @@ export default function ItemPage() {
 
   */
 
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleDescription = () => {
-    setIsExpanded(!isExpanded);
-  };
-
+  var string =
+    "This is the item description for the items page. When the words exceed pass 200 characters, the see more button will show up and on click, will drop the whole entire description. This way, our page will have a much cleaner look";
   return (
     // This keeps it fixed in the div. How do we keep everything inside of the div?
     <div className="">
@@ -44,7 +41,12 @@ export default function ItemPage() {
       <div className="pt-24 md:grid grid-cols-7">
         <div className="space-y-2 col-span-5 pb-4 ">
           <div className="justify-center flex ">
-            <img src="https://www.tutorialspoint.com/assets/questions/media/426142-1668760872.png"></img>
+            <Image
+              src="https://www.tutorialspoint.com/assets/questions/media/426142-1668760872.png"
+              alt="Description of the image"
+              width={300}
+              height={200}
+            />
           </div>
           <div className="justify-center flex ">Item gallery boxes</div>
         </div>
@@ -59,63 +61,10 @@ export default function ItemPage() {
               listed 2 days ago in San Francisco
             </h1>
             <h1 className="text-green-500 text-xl">Item Description</h1>
-            <div
-              className={
-                isExpanded
-                  ? "text-white pb-1 max-h-full"
-                  : "text-white pb-1 max-h-16 overflow-hidden"
-              }
-            >
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-              testing testing testing testing testing testing testing testing
-            </div>
 
-            {!isExpanded && (
-              <button
-                className="text-blue-500 pt-1 pb-5"
-                onClick={toggleDescription}
-              >
-                See More
-              </button>
-            )}
-            {isExpanded && (
-              <button
-                className="text-blue-500 pt-1 pb-5"
-                onClick={toggleDescription}
-              >
-                See Less
-              </button>
-            )}
+            <ItemDescription description={string} />
 
-            <div className="text-xl flex items-center pb-5">
+            <div className="text-xl flex items-center pb-5 pt-5">
               <div className="w-20 h-20 bg-gray-500 rounded-full inline-block"></div>
               <div className="inline-block pl-5  text-white">User Profile</div>
             </div>
