@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { NextResponse, NextRequest } from "next/server";
+import { Chat } from '.prisma/client';
 
 export async function POST(request: NextRequest | Request) {
   const bodyText = await request.text();
@@ -13,7 +14,7 @@ export async function POST(request: NextRequest | Request) {
         create: [],
       },
     };
-    const chat = await prisma.chat.create({
+    const chat: Chat = await prisma.chat.create({
       data: chatData,
       include: {
         messages: true,
