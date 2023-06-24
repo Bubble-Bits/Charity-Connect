@@ -7,61 +7,102 @@ interface ItemsType {
   name: string;
   category: string;
   postedAt: number;
+  distance: number;
+}
+
+interface Filters {
+  categories: string[],
+  distance: number
 }
 
 const categories: string[] = ['Apparel', 'Electronics', 'Entertainment', 'Family', 'Garden and Outdoors', 'Hobbies', 'Homegoods', 'Music',
-'Sports', 'Supplies', 'Toys and Games', 'Vehicles', 'Other']
+'Sports', 'Supplies', 'Toys and Games', 'Vehicles', 'Other'];
+const distance: (string | number)[] = ['Any', 5, 10, 15, 20, 25, 30];
+
 
 const temp: ItemsType[] = [
   {
     "id": 1,
     "name": "Alvin",
     "category": "Apparel",
-    "postedAt": 52
+    "postedAt": 52,
+    'distance': 52
   },
   {
     "id": 2,
     "name": "Lovinson",
     "category": "Sports",
-    "postedAt": 1
+    "postedAt": 1,
+    "distance": 1
   },
   {
     "id": 3,
     "name": "Stanley",
     "category": "Homegoods",
-    "postedAt": 10
+    "postedAt": 10,
+    "distance": 10
   },
   {
     "id": 4,
     "name": "Christina",
     "category": "Supplies",
-    "postedAt": 33
+    "postedAt": 33,
+    "distance": 33
   },
   {
     "id": 5,
     "name": "Anthony",
     "category": "Electronics",
-    "postedAt": 4
+    "postedAt": 4,
+    "distance": 4
   },
   {
     "id": 6,
     "name": "Nick",
     "category": "Toys and Games",
-    "postedAt": 14
+    "postedAt": 14,
+    "distance": 14
   }
 ];
-
-let filteredItems = temp;
 
 export default function ItemList() {
   const [items, setItems] = useState<ItemsType[]>([]);
   const [filteredItems, setFilteredItems] = useState<ItemsType[]>([]);
-  const [filter, setFilter] = useState('All');
+  const [filters, setFilters] = useState<Filters>({categories: [], distance: 100});
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
-  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    setFilter(e.target.value);
+  const handleFilterChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    filterType: 'category' | 'distance'
+    ) => {
+      const selectedOption = e.target.value;
+      const updatedFilters = {...filters};
+
+      if (filterType === 'category') {
+        const categoryFilters = updatedFilters.categories;
+
+        if (categoryFilters.includes(selectedOption)) {
+          const index = categoryFilters.indexOf(selectedOption);
+          categoryFilters.splice(index, 1);
+        } else {
+          categoryFilters.push(selectedOption);
+        }
+      } else if (filterType === 'distance') {
+          if (selectedOption === 'Any' || Number(selectedOption) === updatedFilters.distance) {
+            updatedFilters.distance = 100;
+          } else {
+            updatedFilters.distance = Number(selectedOption);
+          }
+      }
+
+      setFilters(updatedFilters);
   };
 
+  const toggleFilter = (filter: string) => {
+    setActiveFilter(activeFilter === filter ? null : filter);
+  };
+
+  //to set state with data from db - might change
   useEffect(() => {
     const fetchData = async () => {
       await new Promise((resolve) => {return setTimeout(resolve, 1000)});
@@ -72,48 +113,78 @@ export default function ItemList() {
     fetchData();
   }, []);
 
+  //to filter list
   useEffect(() => {
+    console.log(filters);
+    console.log('items', items);
     let filtered = items.filter((item: any) => {
-      if (filter === 'All') return true;
-      return filter === item.category;
+      //if filters are default, then allow all items to pass
+      //check category in db, to see the spelling and caps or not
+      //refactor how to implement filters for distance, depending on the db
+      const categoryMatch = filters.categories.includes(item.category) || filters.categories.length === 0;
+      const distanceMatch = item.distance <= filters.distance || filters.distance == 100;
+
+      console.log(item.distance, filters.distance, distanceMatch, categoryMatch)
+      return categoryMatch && distanceMatch;
       }
     );
     setFilteredItems(filtered);
-    console.log(items);
-  }, [filter])
+    console.log('filtered', filtered);
+  }, [filters])
 
 
   return (
     <>
-      <div className='Filters flex gap-4 ml-48'>
+      <div className='Filters flex md:gap-4 md:ml-48'>
         <div className='FilterCategory m-5'>
-          <span className='FilterName text-xl mr-5'>Category:</span>
-          <select className='p-2.5 mr-5' onChange={handleSelect}>
-            <option>All</option>
-            {categories.map((category) => {
-              return <option key={category}>{category}</option>
-            })}
-          </select>
+        <span
+          className="FilterName text-xl mr-5"
+          onClick={() => toggleFilter('Category')}
+        >
+          Category
+        </span>
+        <div className="FilterCategory flex flex-wrap">
+          {categories.map((category) => (
+            <label key={category} className="flex items-center mr-5">
+              <input
+                type="checkbox"
+                value={category}
+                onChange={(e) => handleFilterChange(e, 'category')}
+                className="mr-1"
+              />
+              {category}
+            </label>
+          ))}
+        </div>
         </div>
         <div className='FilterDistance m-5'>
-        <span className='FilterName text-xl mr-5'>Distance:</span>
-        <select className='p-2.5 mr-5'>
-            <option>&lt; 5</option>
-            <option>&lt; 10</option>
-            <option>&lt; 15</option>
-            <option>&lt; 20</option>
-            <option>&lt; 30</option>
-          </select>
+        <span
+          className='FilterName text-xl mr-5'
+          onClick={() => toggleFilter('Distance')}
+        >
+          Distance
+        </span>
+        <div className="FilterDistance flex flex-wrap">
+          {distance.map((miles) => (
+            <label key={miles} className="flex items-center mr-5">
+              <input
+                type="checkbox"
+                value={miles}
+                onChange={(e) => {handleFilterChange(e, 'distance')}}
+                className="mr-1"
+              />
+              {miles}
+            </label>
+          ))}
+        </div>
         </div>
       </div>
-      <div
-      className='ItemList
-      flex flex-wrap gap-4 justify-center ml-1
-      h-screen w-screen'
-      >
-        {filteredItems.length !== 0 && filteredItems.map((item) => {
-          return <Item key={item.id} category={item.category} />
-        })}
+      <div className='h-[70vh] w-screen overflow-x-hidden'>
+        <div className='ItemList flex flex-wrap gap-5 justify-center ml-1 w-screen overflow-x-hidden'>
+          {filteredItems.length !== 0 && filteredItems.map((item) => {
+            return <Item key={item.id} category={item.category} />
+          })}
+        </div>
       </div>
     </>
   )
