@@ -1,8 +1,8 @@
 "use client";
 import "../app/globals.css";
 import React, { useEffect, useState } from "react";
-import exampleDataAddress from "./exampleData-address.js";
-import exampleDataLocations from "./exampleData-locations.js";
+import exampleDataAddress from "@/example/exampleData-address.js";
+import exampleDataLocations from "@/example/exampleData-locations.js";
 import axios from "axios";
 require("dotenv").config();
 import GoogleMapReact from "google-map-react";
@@ -17,7 +17,7 @@ type Props = {
 
 const input: String | undefined = process.env.NEXT_PUBLIC_INPUT;
 const pw = process.env.NEXT_PUBLIC_GEOLOCATION;
-const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || '1';
+const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || "1";
 
 const LocationComponent = ({ long, lat, user_address }: Props) => {
   const [longitude, setLong] = useState(0);
@@ -66,7 +66,7 @@ const LocationComponent = ({ long, lat, user_address }: Props) => {
           <div>Latitude:{latitude}</div>
 
           <div style={{ height: "80vh", width: "80vw" }}>
-{/*             <GoogleMapReact
+            {/*             <GoogleMapReact
               bootstrapURLKeys={{ key: googleApi }}
               defaultCenter={defaultProps.center}
               defaultZoom={defaultProps.zoom}
