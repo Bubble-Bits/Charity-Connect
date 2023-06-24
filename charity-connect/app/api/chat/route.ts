@@ -1,31 +1,30 @@
-import { Request } from "node-fetch";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
+import { Chat } from '.prisma/client';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest | Request) {
   const bodyText = await request.text();
   const body = JSON.parse(bodyText);
-  const {userIds} = body;
+  const { userIds } = body;
   try {
-    const chat = await prisma.chat.create({
-      data: {
-        userIds: userIds,
-        messages: {
-          create: [
-          ],
-        },
-      },
-      include: {
-        messages: true,
-      },
-    });
+    // const chatData: any = {
+    //   userIds: { set: userIds },
+    //   messages: {
+    //     create: [],
+    //   },
+    // };
+    // const chat: Chat = await prisma.chat.create({
+    //   data: chatData,
+    //   include: {
+    //     messages: true,
+    //   },
+    // });
 
-    return NextResponse.json(chat);
+    return NextResponse.json({temp: 'data'});
   } catch (error) {
-    console.error('Error creating chat:', error);
+    console.error("Error creating chat:", error);
     return NextResponse.json(error);
   }
 }
-
 
