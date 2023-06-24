@@ -66,7 +66,7 @@ const LocationComponent = ({ long, lat, user_address }: Props) => {
           <div>Latitude:{latitude}</div>
 
           <div style={{ height: "80vh", width: "80vw" }}>
-            <GoogleMapReact
+{/*             <GoogleMapReact
               bootstrapURLKeys={{ key: googleApi }}
               defaultCenter={defaultProps.center}
               defaultZoom={defaultProps.zoom}
@@ -90,7 +90,7 @@ const LocationComponent = ({ long, lat, user_address }: Props) => {
                 lat={latitude}
                 lng={longitude}
               />
-            </GoogleMapReact>
+            </GoogleMapReact> */}
           </div>
         </div>
       </div>
