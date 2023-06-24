@@ -19,7 +19,7 @@ import { BsGithub } from "react-icons/bs";
 import Modal from "./Modal";
 import { firebaseAuth } from "@/firebase/Firebase";
 import useSignupModal from "../hooks/useSignupModal";
-import AuthStatus from "@/firebase/AuthState";
+
 type Props = {};
 
 function LoginModal({}: Props) {
@@ -32,7 +32,6 @@ function LoginModal({}: Props) {
 
   //? This function handles the google provider through firebase
 
-  console.log(AuthStatus(), " ");
   const handleGoogle = async () => {
     try {
       signInWithPopup(firebaseAuth, new GoogleAuthProvider());
