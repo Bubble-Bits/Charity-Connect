@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest | Request) {
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get("userId") ?? undefined;
 

@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { NextResponse, NextRequest } from "next/server";
 
 const prisma = new PrismaClient();
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest | Request) {
   //test user
   try {
     const user = await prisma.user.create({
