@@ -14,11 +14,11 @@ exports.Prisma = Prisma
 
 /**
  * Prisma Client JS version: 4.15.0
- * Query Engine version: 8fbc245156db7124f997f4cecdd8d1219e360944
+ * Query Engine version: b20ead4d3ab9e78ac112966e242ded703f4a052c
  */
 Prisma.prismaVersion = {
   client: "4.15.0",
-  engine: "8fbc245156db7124f997f4cecdd8d1219e360944"
+  engine: "b20ead4d3ab9e78ac112966e242ded703f4a052c"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -86,9 +86,31 @@ Prisma.NullTypes = {
  * Enums
  */
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  chatIds: 'chatIds',
+  name: 'name',
+  email: 'email',
+  bio: 'bio',
+  profilePic: 'profilePic',
+  address: 'address',
+  itemsClaimed: 'itemsClaimed',
+  itemsSuccessClaimed: 'itemsSuccessClaimed',
+  blocked: 'blocked'
+};
+
 exports.Prisma.ChatScalarFieldEnum = {
   id: 'id',
   userIds: 'userIds'
+};
+
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  chatId: 'chatId',
+  content: 'content',
+  photo: 'photo',
+  sentAt: 'sentAt',
+  sender: 'sender'
 };
 
 exports.Prisma.ItemScalarFieldEnum = {
@@ -108,23 +130,14 @@ exports.Prisma.ItemScalarFieldEnum = {
   claimerId: 'claimerId'
 };
 
-exports.Prisma.MessageScalarFieldEnum = {
-  id: 'id',
-  chatId: 'chatId',
-  content: 'content',
-  photos: 'photos',
-  sentAt: 'sentAt',
-  sender: 'sender'
-};
-
 exports.Prisma.PhScalarFieldEnum = {
   id: 'id',
   name: 'name'
 };
 
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
+exports.Prisma.TestScalarFieldEnum = {
+  id: 'id',
+  content: 'content'
 };
 
 exports.Prisma.SortOrder = {
@@ -132,17 +145,9 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.UserScalarFieldEnum = {
-  id: 'id',
-  chatIds: 'chatIds',
-  name: 'name',
-  email: 'email',
-  bio: 'bio',
-  profilePic: 'profilePic',
-  address: 'address',
-  itemsClaimed: 'itemsClaimed',
-  itemsSuccessClaimed: 'itemsSuccessClaimed',
-  blocked: 'blocked'
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
 
@@ -151,7 +156,8 @@ exports.Prisma.ModelName = {
   Chat: 'Chat',
   Message: 'Message',
   Item: 'Item',
-  ph: 'ph'
+  ph: 'ph',
+  Test: 'Test'
 };
 
 /**

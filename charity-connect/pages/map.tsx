@@ -1,8 +1,8 @@
 "use client";
 import "../app/globals.css";
 import React, { useEffect, useState } from "react";
-import exampleDataAddress from "./exampleData-address.js";
-import exampleDataLocations from "./exampleData-locations.js";
+import exampleDataAddress from "@/example/exampleData-address.js";
+import exampleDataLocations from "@/example/exampleData-locations.js";
 import axios from "axios";
 require("dotenv").config();
 import GoogleMapReact from "google-map-react";
