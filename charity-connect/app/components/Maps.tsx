@@ -17,11 +17,11 @@ const pw = process.env.NEXT_PUBLIC_GEOLOCATION || '';
 const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || '';
 
 const LocationComponent = ({}: Props) => {
-  const [longitude, setLong] = useState(0);
-  const [latitude, setLat] = useState(0);
-  const [address, setAddress] = useState("");
-  const [pin, setPin] = useState(false);
-  const [items, setItems] = useState(exampleDataLocations);
+  // const [longitude, setLong] = useState(0);
+  // const [latitude, setLat] = useState(0);
+  // const [address, setAddress] = useState("");
+  // const [pin, setPin] = useState(false);
+  // const [items, setItems] = useState(exampleDataLocations);
   // useEffect(() => {
   //   // axios
   //   //   // grabs longitude & latitude based on given address
