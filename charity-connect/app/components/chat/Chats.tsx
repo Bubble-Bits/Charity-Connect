@@ -1,28 +1,47 @@
 "use client";
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ChatConversation from './Convo';
 import Image from 'next/image'
-
+import axios from 'axios';
 
 type Props = {
+  userId: string
 }
 
 function Chats(props: Props) {
   // const convoData = props.
-  const username = 'bob';
-  const chatData = [
-    {id: 1, users: [{name: 'bob'}, {name: 'ned'}]},
-    {id: 2, users: [{name: 'bob'}, {name: 'nancy'}]},
-    {id: 3, users: [{name: 'bob'}, {name: 'fred'}]},
-    {id: 4, users: [{name: 'bob'}, {name: 'arnold'}]},
-    {id: 5, users: [{name: 'bob'}, {name: 'vincent'}]}]
 
-  const [chatSelected, setSelected] = useState(-1);
+  const [chats, setChats] = useState([]);
+  const userId = props.userId;
 
-  const handleChatSelect = (id: number) =>  {
+  useEffect(() => {
+
+    axios.get(`../../api/getChats?userId=${userId}`).then((res) => {
+      setChats(res.data.reduce((acc: any[], currChat: any) => {
+        const output = acc;
+        let username;
+        if (currChat.users[0].id === userId) {
+          username = currChat.users[1].name;
+        } else {
+          username = currChat.users[0].name;
+        }
+        const messages = currChat.messages;
+        const chatId = currChat.id;
+        output.push({username, chatId, messages});
+        return output;
+      }, []));
+    })
+  }, [userId])
+
+  const [chatSelected, setSelected] = useState('');
+  const [nameSelected, setName] = useState('');
+  const [selectedMessages, setMessages] = useState([]);
+
+  const handleChatSelect = (id: string) =>  {
     setSelected(id);
   }
+  console.log(chatSelected.length);
 
   return (
     <div
@@ -45,22 +64,22 @@ function Chats(props: Props) {
       xl:pt-0
       flex
       flex-col
-      text-green-700">
-      {chatSelected < 0 ? (
+      text-green-600">
+      {!chatSelected.length ? (
         <div className="flex-grow flex flex-col">
-          <div className="text-3xl font-bold p-4 bg-green-600 text-blue-200">Chats</div>
+          <div className="text-3xl font-bold p-4 bg-green-800 text-blue-200">Chats</div>
           <hr className="border-black mb-6" />
           <div className="flex flex-col items-start overflow-y-auto">
-            {chatData.map((chat, counter) => (
+            {chats.map((chat: any, counter: number) => (
               <div
-                key={chat.id}
+                key={chat.chatId}
                 className="w-full px-4 py-3 hover:bg-gray-100 cursor-pointer"
-                onClick={() => handleChatSelect(counter)}
+                onClick={() => {handleChatSelect(chat.chatId); setName(chat.username); setMessages(chat.messages)}}
               >
                 <div className="flex items-center">
                   <Image src='https://res.cloudinary.com/dzadys1ug/image/upload/v1680980608/fmxs3bgftywl7q3ctmek.jpg' alt='profpic' width='10' height='10' className="h-10 w-10 rounded-full bg-gray-200 flex-shrink-0 mr-3" />
                   <div className="flex flex-col">
-                    <div className="text-base font-bold">{chat.users[1].name}</div>
+                    <div className="text-base font-bold">{chat.username}</div>
                     <div className="text-sm text-gray-500">Last message timestamp</div>
                   </div>
                 </div>
@@ -71,9 +90,10 @@ function Chats(props: Props) {
       ) : (
         <ChatConversation
           id={chatSelected}
-          userName={username}
-          sender={chatData[chatSelected].users[1].name}
-          goBackFunc={() => setSelected(-1)}
+          userId={userId}
+          chatWith={nameSelected}
+          goBackFunc={() => setSelected('')}
+          messages={selectedMessages}
         />
       )}
     </div>
