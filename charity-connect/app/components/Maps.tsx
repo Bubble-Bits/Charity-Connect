@@ -8,13 +8,11 @@ require("dotenv").config();
 import GoogleMapReact from "google-map-react";
 import FmdGoodTwoToneIcon from "@mui/icons-material/FmdGoodTwoTone";
 
-type Props = {
-  
-};
+type Props = {};
 
-const input = process.env.NEXT_PUBLIC_INPUT || '';
-const pw = process.env.NEXT_PUBLIC_GEOLOCATION || '';
-const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || '';
+const input = process.env.NEXT_PUBLIC_INPUT || "";
+const pw = process.env.NEXT_PUBLIC_GEOLOCATION || "";
+const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || "";
 
 const LocationComponent = ({}: Props) => {
   // const [longitude, setLong] = useState(0);
@@ -45,7 +43,7 @@ const LocationComponent = ({}: Props) => {
   //   console.log("Input", input);
   // }, [items]);
 
-  const address = '';
+  const address = "";
   const longitude = 4;
   const latitude = 5;
 
