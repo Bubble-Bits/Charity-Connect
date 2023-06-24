@@ -45,6 +45,10 @@ const LocationComponent = ({}: Props) => {
   //   console.log("Input", input);
   // }, [items]);
 
+  const address = '';
+  const longitude = 4;
+  const latitute = 5;
+
   const defaultProps = {
     center: {
       lat: 0,
