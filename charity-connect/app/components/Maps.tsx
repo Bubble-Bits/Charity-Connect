@@ -9,14 +9,14 @@ import GoogleMapReact from "google-map-react";
 import FmdGoodTwoToneIcon from "@mui/icons-material/FmdGoodTwoTone";
 
 type Props = {
-  user_address: string;
+  
 };
 
 const input = process.env.NEXT_PUBLIC_INPUT || '';
 const pw = process.env.NEXT_PUBLIC_GEOLOCATION || '';
 const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || '';
 
-const LocationComponent = ({ user_address }: Props) => {
+const LocationComponent = ({}: Props) => {
   const [longitude, setLong] = useState(0);
   const [latitude, setLat] = useState(0);
   const [address, setAddress] = useState("");
