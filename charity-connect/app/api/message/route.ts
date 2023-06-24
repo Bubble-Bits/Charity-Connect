@@ -1,4 +1,3 @@
-import { Request } from "node-fetch";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { NextResponse, NextRequest } from "next/server";
