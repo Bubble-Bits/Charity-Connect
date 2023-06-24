@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { NextResponse, NextRequest } from "next/server";
 
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest | Request) {
   const bodyText = await request.text();
   const body = JSON.parse(bodyText);
   const { chatId, chatInput, userId } = body;
