@@ -1,13 +1,15 @@
+import { PrismaClient } from "@prisma/client";
 import { NextResponse, NextRequest } from "next/server";
 
-export async function POST(request: Request) {
+const prisma = new PrismaClient();
+export async function POST(request: NextRequest | Request) {
   //test user
   try {
     const user = await prisma.user.create({
       data: {
-        name: 'testperson',
-        email: 'test@testmail.com',
-        bio: 'Hello, I am test!',
+        name: "testperson",
+        email: "test@testmail.com",
+        bio: "Hello, I am test!",
         address: `198 South Young Ave.
         Providence, RI 02904`,
         itemsClaimed: 0,
@@ -17,10 +19,11 @@ export async function POST(request: Request) {
         chatIds: [], // Empty array for chatIds
       },
     });
-    console.log('User created:', user);
+    console.log("User created:", user);
     return NextResponse.json(user);
   } catch (error) {
-    console.error('Error creating user:', error);
+    console.error("Error creating user:", error);
     return NextResponse.json(error);
-  } 
+  }
 }
+
