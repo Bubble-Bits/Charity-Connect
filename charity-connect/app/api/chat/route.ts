@@ -10,7 +10,7 @@ export async function POST(request: NextRequest | Request) {
   try {
     // const chatData: any = {
     //   userIds: { set: userIds },
-    //   messages: { 
+    //   messages: {  
     //     create: [],
     //   },
     // };
