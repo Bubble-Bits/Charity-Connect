@@ -1,21 +1,36 @@
-'use client';
+"use client";
 
-import { BiArrowBack } from 'react-icons/bi';
-import Image from 'next/image';
-import { format, parseISO } from "date-fns";
-import { IoMdSend } from 'react-icons/io';
+import { BiArrowBack } from "react-icons/bi";
+import Image from "next/image";
+// import { format, parseISO } from "date-fns";
+import { IoMdSend } from "react-icons/io";
 type Props = {
-  id: number
-  userName: string
-  goBackFunc: () => void
-  sender: string
-}
+  id: number;
+  userName: string;
+  goBackFunc: () => void;
+  sender: string;
+};
 
-const ChatConversation = ({id, userName, sender, goBackFunc}: Props) => {
+const ChatConversation = ({ id, userName, sender, goBackFunc }: Props) => {
   console.log(userName, sender);
   const messageData = [
-    {id: 1, chatId: id, content: 'hi', photos: [], sentAt: '2023-06-20T10:30:00Z', sender: userName},
-    {id: 2, chatId: id, content: 'hows it going?', photos: [], sentAt: '2023-06-20T10:32:00Z', sender}]
+    {
+      id: 1,
+      chatId: id,
+      content: "hi",
+      photos: [],
+      sentAt: "2023-06-20T10:30:00Z",
+      sender: userName,
+    },
+    {
+      id: 2,
+      chatId: id,
+      content: "hows it going?",
+      photos: [],
+      sentAt: "2023-06-20T10:32:00Z",
+      sender,
+    },
+  ];
 
   return (
     <div className="flex flex-col h-full">
@@ -27,9 +42,13 @@ const ChatConversation = ({id, userName, sender, goBackFunc}: Props) => {
       </div>
       <div className="flex-1 overflow-y-auto p-4 w-full">
         {messageData.map((message) => (
-         <div key={message.id} className={`mb-4 w-full`}>
-            <div className="text-xs">{format(parseISO(message.sentAt), 'MM/dd/yyyy, hh:mm:ss a')}</div>
-            <div dir={message.sender === userName ? 'rtl' : ''}>{message.content}</div>
+          <div key={message.id} className={`mb-4 w-full`}>
+            <div className="text-xs">
+              {format(parseISO(message.sentAt), "MM/dd/yyyy, hh:mm:ss a")}
+            </div>
+            <div dir={message.sender === userName ? "rtl" : ""}>
+              {message.content}
+            </div>
             <div className="flex mt-2">
               {message.photos.map((photo) => (
                 <Image
@@ -44,13 +63,12 @@ const ChatConversation = ({id, userName, sender, goBackFunc}: Props) => {
         ))}
       </div>
       <form className="p-4 flex flex-row">
-      <textarea
-        className="border rounded-lg p-2 flex-grow resize-none overflow-y-auto"
-        rows={2}
-      />
-      <IoMdSend className="object-center h-full w-1/5" />
-</form>
-
+        <textarea
+          className="border rounded-lg p-2 flex-grow resize-none overflow-y-auto"
+          rows={2}
+        />
+        <IoMdSend className="object-center h-full w-1/5" />
+      </form>
     </div>
   );
 };

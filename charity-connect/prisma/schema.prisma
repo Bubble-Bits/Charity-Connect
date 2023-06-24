@@ -16,6 +16,7 @@ model User {
   id             String      @id @default(auto()) @map("_id") @db.ObjectId
   chatIds        String[]    @db.ObjectId
   chats          Chat[]      @relation(fields: [chatIds], references: [id])
+  postedItemIds  String[]    @db.ObjectId
   postedItems    Item[]      @relation("ItemPostedBy")
   claimedItems   Item[]      @relation("ItemClaimedBy")
   name           String      @unique
@@ -107,4 +108,3 @@ model Item {
 //! }
 
 //
-
