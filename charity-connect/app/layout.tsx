@@ -30,7 +30,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ToasterProvider />
         <Navbar onChatClick={toggleChats}/>
-        {showChats && <Chats />}
+        {showChats && <Chats userId='64961e01cc20c7d29f2c98ea'/>}
         <LoginModal />
         <SignupModal />
         {children}

@@ -9,19 +9,20 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 type Props = {
-  id: number
-  userId: String
+  id: string
+  userId: string
   goBackFunc: () => void
-  sender: string
+  chatWith: string
+  messages: any[]
 }
 
 // let socket;
 
-const ChatConversation = ({id, userId, sender, goBackFunc}: Props) => {
-  const messageData = [
-    {id: 1, chatId: id, content: 'hi', photos: [], sentAt: '2023-06-20T10:30:00Z', sender: userId},
-    {id: 2, chatId: id, content: 'hows it going?', photos: [], sentAt: '2023-06-20T10:32:00Z', sender}]
-
+const ChatConversation = ({id, userId, chatWith, goBackFunc, messages}: Props) => {
+  // const messageData = [
+  //   {id: 1, chatId: id, content: 'hi', photos: [], sentAt: '2023-06-20T10:30:00Z', sender: userId},
+  //   {id: 2, chatId: id, content: 'hows it going?', photos: [], sentAt: '2023-06-20T10:32:00Z', sender}]
+  const [messageData, setMessageData] = useState(messages);
   const [chatInput, setInput] = useState('');
 
   // useEffect(() => {
@@ -35,9 +36,12 @@ const ChatConversation = ({id, userId, sender, goBackFunc}: Props) => {
 
   const sendMessage = () => {
     console.log(chatInput);
-    const data = {userIds: ['6495fab420529e88f6120674', '649600ca20529e88f6120676']};
-    axios.post('../../api/chat', data).then((res) => {
+    const data = {chatId: id, chatInput, userId};
+    axios.post('../../api/message', data).then((res) => {
       console.log(res);
+      const newMessageData = [...messageData, res.data];
+      setMessageData(newMessageData);
+      setInput('');
     }
     ).catch((err) => {
       console.log(err);
@@ -49,23 +53,23 @@ const ChatConversation = ({id, userId, sender, goBackFunc}: Props) => {
       <div className="flex items-center justify-between p-4 bg-blue-500 text-white">
         <div className="flex items-center">
           <BiArrowBack className="mr-2 cursor-pointer" onClick={goBackFunc} />
-          <h1 className="text-xl">Chat with {sender}</h1>
+          <h1 className="text-xl">Chat with {chatWith}</h1>
         </div>
       </div>
       <div className="flex-1 overflow-y-auto p-4 w-full">
         {messageData.map((message) => (
          <div key={message.id} className={`mb-4 w-full`}>
             <div className="text-xs">{format(parseISO(message.sentAt), 'MM/dd/yyyy, hh:mm:ss a')}</div>
-            <div dir={message.sender === userId ? 'rtl' : ''}>{message.content}</div>
+            <div className={message.sender === userId ? 'text-right rtl' : ''}>{message.content}</div>
             <div className="flex mt-2">
-              {message.photos.map((photo) => (
+              {message.photos? message.photos.map((photo: string) => (
                 <Image
                   key={Math.random()}
                   src={photo}
                   alt="imageThumbnail"
                   className="h-1/8 w-1/8 object-cover rounded-full mr-2"
                 />
-              ))}
+              )): <></>}
             </div>
           </div>
         ))}
@@ -74,6 +78,7 @@ const ChatConversation = ({id, userId, sender, goBackFunc}: Props) => {
       <textarea
         className="border rounded-lg p-2 flex-grow resize-none overflow-y-auto"
         rows={2}
+        value={chatInput}
         onChange={(event) => {setInput(event.target.value)}}
       />
       <IoMdSend className="object-center h-full w-1/5" onClick={sendMessage}/>

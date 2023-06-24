@@ -9,10 +9,11 @@ export async function POST(request: Request) {
   try {
     const user = await prisma.user.create({
       data: {
-        name: 'Jane Doe',
-        email: 'jane.doe@example.com',
-        bio: 'Hello, I am John Doe!',
-        address: '123 Main Street',
+        name: 'testperson',
+        email: 'test@testmail.com',
+        bio: 'Hello, I am test!',
+        address: `198 South Young Ave.
+        Providence, RI 02904`,
         itemsClaimed: 0,
         itemsSuccessClaimed: 0,
         blocked: [],

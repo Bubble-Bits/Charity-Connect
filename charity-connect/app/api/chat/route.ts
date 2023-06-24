@@ -13,11 +13,6 @@ export async function POST(request: Request) {
         userIds: userIds,
         messages: {
           create: [
-            {
-              content: 'Hello, welcome to the chat!',
-              sentAt: new Date(),
-              sender: 'system',
-            },
           ],
         },
       },
