@@ -4,7 +4,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import React, { useCallback, useEffect, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import useSignupModal from "../hooks/useSignupModal";
-import AuthStatus from "@/firebase/AuthState";
+
 import UserProfile from "./UserProfile";
 import Link from "next/link";
 
