@@ -15,7 +15,7 @@ type Props = {
   user_address: string;
 };
 
-const input = process.env.NEXT_PUBLIC_INPUT;
+const input: String | undefined = process.env.NEXT_PUBLIC_INPUT;
 const pw = process.env.NEXT_PUBLIC_GEOLOCATION;
 const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI;
 
@@ -46,7 +46,7 @@ const LocationComponent = ({ long, lat, user_address }: Props) => {
     setAddress(input);
     console.log("Items", items);
     console.log("Input", input);
-  }, []);
+  }, [items]);
 
   const defaultProps = {
     center: {
@@ -75,6 +75,7 @@ const LocationComponent = ({ long, lat, user_address }: Props) => {
               {items.map((item) => {
                 return (
                   <FmdGoodTwoToneIcon
+                    key={item}
                     size={50}
                     style={{ color: "red" }}
                     lat={item.lat}

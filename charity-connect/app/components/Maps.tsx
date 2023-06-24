@@ -43,7 +43,7 @@ const LocationComponent = ({ user_address }: Props) => {
     setAddress(input);
     console.log("Items", items);
     console.log("Input", input);
-  }, []);
+  }, [items]);
 
   const defaultProps = {
     center: {
