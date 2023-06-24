@@ -1,12 +1,11 @@
-import { Request } from "node-fetch";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest | Request) {
   const bodyText = await request.text();
   const body = JSON.parse(bodyText);
-  const {chatId, chatInput, userId} = body;
+  const { chatId, chatInput, userId } = body;
   try {
     const message = await prisma.message.create({
       data: {
@@ -17,12 +16,11 @@ export async function POST(request: Request) {
       },
     });
 
-    console.log('Message created:', message);
+    console.log("Message created:", message);
     return NextResponse.json(message);
   } catch (error) {
-    console.error('Error creating message:', error);
+    console.error("Error creating message:", error);
     return NextResponse.json(error);
   }
 }
-
 
