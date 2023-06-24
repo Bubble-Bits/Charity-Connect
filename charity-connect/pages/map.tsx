@@ -17,7 +17,7 @@ type Props = {
 
 const input: String | undefined = process.env.NEXT_PUBLIC_INPUT;
 const pw = process.env.NEXT_PUBLIC_GEOLOCATION;
-const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI;
+const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || 1;
 
 const LocationComponent = ({ long, lat, user_address }: Props) => {
   const [longitude, setLong] = useState(0);
