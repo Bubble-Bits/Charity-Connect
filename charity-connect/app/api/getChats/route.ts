@@ -1,40 +1,39 @@
-import { Request } from "node-fetch";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest | Request) {
   const { searchParams } = new URL(request.url);
-  const userId = searchParams.get('userId') ?? undefined;
+  const userId = searchParams.get("userId") ?? undefined;
 
   try {
     const chats = await prisma.chat.findMany({
       where: {
         userIds: {
-          has: userId
-        }
+          has: userId,
+        },
       },
       include: {
         users: {
           select: {
             id: true,
             name: true,
-          }
+          },
         },
         messages: {
           select: {
             id: true,
             content: true,
             sentAt: true,
-            sender: true
-          }
-        }
+            sender: true,
+          },
+        },
       },
     });
     console.log(chats);
     return NextResponse.json(chats);
   } catch (error) {
-    console.error('Error creating chat:', error);
+    console.error("Error creating chat:", error);
     return NextResponse.error();
   }
 }
