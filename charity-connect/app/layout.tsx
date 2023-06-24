@@ -1,14 +1,15 @@
-'use client';
+"use client";
 import Navbar from "./components/Navbar";
-import Chats from "./components/chat/Chats"
+import Chats from "./components/chat/Chats";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Modal from "./modals/Modal";
+
 import LoginModal from "./modals/LoginModal";
 import SignupModal from "./modals/SignupModal";
 import { useChats } from './hooks/useChats';
 import ToasterProvider from "./providers/ToasterProvider";
 
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 

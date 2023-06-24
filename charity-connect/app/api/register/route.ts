@@ -1,8 +1,4 @@
-import { Request } from "node-fetch";
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
-import User from "@/app/components/User";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(request: Request) {
   //test user
@@ -26,5 +22,5 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Error creating user:', error);
     return NextResponse.json(error);
-  }
+  } 
 }
