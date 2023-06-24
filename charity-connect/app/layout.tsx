@@ -8,6 +8,7 @@ import LoginModal from "./modals/LoginModal";
 import SignupModal from "./modals/SignupModal";
 import { useChats } from './hooks/useChats';
 import ToasterProvider from "./providers/ToasterProvider";
+import Maps from "./components/Maps";
 
 import { useState } from "react";
 
