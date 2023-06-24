@@ -7,13 +7,14 @@ export async function POST(request: NextRequest | Request) {
   const body = JSON.parse(bodyText);
   const { userIds } = body;
   try {
-    const chat = await prisma.chat.create({
-      data: {
-        userIds: userIds,
-        messages: {
-          create: [],
-        },
+    const chatData: any = {
+      userIds: { set: userIds },
+      messages: {
+        create: [],
       },
+    };
+    const chat = await prisma.chat.create({
+      data: chatData,
       include: {
         messages: true,
       },
