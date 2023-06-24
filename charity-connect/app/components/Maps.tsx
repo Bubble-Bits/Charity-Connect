@@ -22,28 +22,28 @@ const LocationComponent = ({}: Props) => {
   const [address, setAddress] = useState("");
   const [pin, setPin] = useState(false);
   const [items, setItems] = useState(exampleDataLocations);
-  useEffect(() => {
-    // axios
-    //   // grabs longitude & latitude based on given address
-    //   .get(`https://api.opencagedata.com/geocode/v1/json?q=${input}&key=${pw}`)
-    //   .then((response) => {
-    //     console.log(response);
-    //     //set those coordinates into my state
-    //     setLong(response.data.results[0].geometry.lng);
-    //     setLat(response.data.results[0].geometry.lat);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // EXAMPLE DATA //
-    // console.log(exampleDataAddress.data.results[0].geometry);
-    // setLong(exampleDataAddress.data.results[0].geometry.lng);
-    // setLat(exampleDataAddress.data.results[0].geometry.lat);
-    setPin(true);
-    // setAddress(input);
-    console.log("Items", items);
-    console.log("Input", input);
-  }, [items]);
+  // useEffect(() => {
+  //   // axios
+  //   //   // grabs longitude & latitude based on given address
+  //   //   .get(`https://api.opencagedata.com/geocode/v1/json?q=${input}&key=${pw}`)
+  //   //   .then((response) => {
+  //   //     console.log(response);
+  //   //     //set those coordinates into my state
+  //   //     setLong(response.data.results[0].geometry.lng);
+  //   //     setLat(response.data.results[0].geometry.lat);
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.log(error);
+  //   //   });
+  //   // EXAMPLE DATA //
+  //   // console.log(exampleDataAddress.data.results[0].geometry);
+  //   // setLong(exampleDataAddress.data.results[0].geometry.lng);
+  //   // setLat(exampleDataAddress.data.results[0].geometry.lat);
+  //   setPin(true);
+  //   // setAddress(input);
+  //   console.log("Items", items);
+  //   console.log("Input", input);
+  // }, [items]);
 
   const defaultProps = {
     center: {
