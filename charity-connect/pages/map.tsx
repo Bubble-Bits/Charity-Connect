@@ -43,7 +43,7 @@ const LocationComponent = ({ long, lat, user_address }: Props) => {
     // setLong(exampleDataAddress.data.results[0].geometry.lng);
     // setLat(exampleDataAddress.data.results[0].geometry.lat);
     setPin(true);
-    setAddress(input);
+    //setAddress(input);
     console.log("Items", items);
     console.log("Input", input);
   }, [items]);
