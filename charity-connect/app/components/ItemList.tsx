@@ -138,33 +138,36 @@ export default function ItemList() {
       <div className='Filters flex md:gap-4 md:ml-48'>
         <div className='FilterCategory m-5'>
         <span
-          className="FilterName text-xl mr-5"
+          className="FilterName text-xl mr-5 bg-green-500 border border-solid border-green-500 rounded p-2 text-white"
           onClick={() => toggleFilter('Category')}
         >
           Category
         </span>
-        <div className="FilterCategory flex flex-wrap">
-          {categories.map((category) => (
-            <label key={category} className="flex items-center mr-5">
-              <input
-                type="checkbox"
-                value={category}
-                onChange={(e) => handleFilterChange(e, 'category')}
-                className="mr-1"
-              />
-              {category}
-            </label>
-          ))}
-        </div>
+        {activeFilter === 'Category' &&
+          <div className="FilterCategory absolute bg-white border border-solid border-black rounded py-2 px-4 transition-opacity duration-50">
+            {categories.map((category) => (
+              <label key={category} className="flex items-center mr-5">
+                <input
+                  type="checkbox"
+                  value={category}
+                  onChange={(e) => handleFilterChange(e, 'category')}
+                  className="mr-1"
+                />
+                {category}
+              </label>
+            ))}
+          </div>
+        }
         </div>
         <div className='FilterDistance m-5'>
         <span
-          className='FilterName text-xl mr-5'
+          className='FilterName text-xl mr-5 bg-green-500 border border-solid border-green-500 rounded p-2 text-white'
           onClick={() => toggleFilter('Distance')}
         >
           Distance
         </span>
-        <div className="FilterDistance flex flex-wrap">
+        {activeFilter === 'Distance' &&
+          <div className="FilterDistance absolute bg-white border border-solid border-black rounded py-2 px-4 transition-opacity duration-50">
           {distance.map((miles) => (
             <label key={miles} className="flex items-center mr-5">
               <input
@@ -176,7 +179,8 @@ export default function ItemList() {
               {miles}
             </label>
           ))}
-        </div>
+          </div>
+        }
         </div>
       </div>
       <div className='h-[70vh] w-screen overflow-x-hidden'>
