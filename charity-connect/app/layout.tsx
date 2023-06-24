@@ -3,8 +3,7 @@ import Navbar from "./components/Navbar";
 import Chats from "./components/chat/Chats";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
+
 import LoginModal from "./modals/LoginModal";
 import SignupModal from "./modals/SignupModal";
 import ToasterProvider from "./providers/ToasterProvider";
@@ -32,15 +31,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider store={store}>
-          <ToasterProvider />
+        <ToasterProvider />
 
-          <Navbar onChatClick={toggleChats} />
-          {showChats && <Chats />}
-          <LoginModal />
-          <SignupModal />
-          {children}
-        </Provider>
+        <Navbar onChatClick={toggleChats} />
+        {showChats && <Chats />}
+        <LoginModal />
+        <SignupModal />
+        {children}
       </body>
     </html>
   );
