@@ -12,9 +12,9 @@ type Props = {
   user_address: string;
 };
 
-const input = process.env.NEXT_PUBLIC_INPUT;
-const pw = process.env.NEXT_PUBLIC_GEOLOCATION;
-const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI;
+const input = process.env.NEXT_PUBLIC_INPUT | '';
+const pw = process.env.NEXT_PUBLIC_GEOLOCATION | '';
+const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI | '';
 
 const LocationComponent = ({ user_address }: Props) => {
   const [longitude, setLong] = useState(0);
