@@ -159,7 +159,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/lovinsondieujuste/Charity-Connect/charity-connect/prisma/generated",
+      "value": "/Users/lovinsondieujuste/Charity-Connect/charity-connect/generated",
       "fromEnvVar": null
     },
     "config": {
@@ -176,10 +176,10 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../.env",
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": "../.env",
+    "schemaEnvPath": "../.env"
   },
-  "relativePath": "..",
+  "relativePath": "../prisma",
   "clientVersion": "4.15.0",
   "engineVersion": "b20ead4d3ab9e78ac112966e242ded703f4a052c",
   "datasourceNames": [
@@ -194,7 +194,7 @@ const fs = require('fs')
 
 config.dirname = __dirname
 if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {
-  config.dirname = path.join(process.cwd(), "prisma/generated")
+  config.dirname = path.join(process.cwd(), "generated")
   config.isBundled = true
 }
 
@@ -218,6 +218,6 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
-path.join(process.cwd(), "prisma/generated/libquery_engine-darwin-arm64.dylib.node")
+path.join(process.cwd(), "generated/libquery_engine-darwin-arm64.dylib.node")
 path.join(__dirname, "schema.prisma");
-path.join(process.cwd(), "prisma/generated/schema.prisma")
+path.join(process.cwd(), "generated/schema.prisma")
