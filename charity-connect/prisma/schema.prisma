@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../generated"
 }
 
 datasource db {
@@ -13,53 +14,69 @@ datasource db {
 // USERS SCHEMA //
 
 model User {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  inbox  Chat[] @relation("userSentTo")
-  outbox Chat[] @relation("userSentFrom")
-  postedItems Item[] @relation("ItemPostedBy")
-  claimedItems Item[] @relation("ItemClaimedBy")
-  name           String @unique
-  email          String @unique
-  bio            String?
-  profilePic     String?
-  address   String
-  itemsClaimed   Int  @default(0)
-  itemsSuccessClaimed  Int @default(0)
-  blocked        String[]
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  chatIds             String[] @db.ObjectId
+  chats               Chat[]   @relation(fields: [chatIds], references: [id])
+  postedItems         Item[]   @relation("ItemPostedBy")
+  claimedItems        Item[]   @relation("ItemClaimedBy")
+  name                String   @unique
+  email               String   @unique
+  bio                 String?
+  profilePic          String?
+  address             String
+  itemsClaimed        Int      @default(0)
+  itemsSuccessClaimed Int      @default(0)
+  blocked             String[]
 }
 
 // CHAT SCHEMA //
 
 model Chat {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  chatId         String    @db.ObjectId
-  to             User      @relation("userSentTo", fields: [chatId], references: [id], onDelete: Cascade)
-  from           User      @relation("userSentFrom", fields: [chatId], references: [id], onDelete: Cascade)
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  userIds  String[]  @db.ObjectId
+  users    User[]    @relation(fields: [userIds], references: [id])
+  messages Message[]
+}
+
+model Message {
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  chat           Chat        @relation(fields: [chatId], references: [id])
+  chatId         String      @db.ObjectId
   content        String
-  photos         String[]
-  sentAt         DateTime  @default(now())
-  messageStatus  String
+  photo          String?
+  sentAt         DateTime
+  sender         String
 }
 
 // ITEMS SCHEMA //
 
 model Item {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  category    String?
+  description String
+  timeOwned   DateTime?
+  features    String[]
+  postedAt    DateTime  @default(now())
+  photos      String[]
+  address     String
+  pickup      Boolean   @default(false)
+  shipping    Boolean   @default(false)
+  status      String    @default("Available")
+  poster      User      @relation("ItemPostedBy", fields: [posterId], references: [id])
+  posterId    String    @db.ObjectId
+  claimer     User?     @relation("ItemClaimedBy", fields: [claimerId], references: [id])
+  claimerId   String?   @db.ObjectId
+}
+
+model ph {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+}
+
+model Test {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  name           String
-  category       String?
-  description    String
-  timeOwned      DateTime?
-  features       String[]
-  postedAt       DateTime  @default(now())
-  photos         String[]
-  address        String
-  pickup         Boolean   @default(false)
-  shipping       Boolean   @default(false)
-  status         String    @default("Available")
-  poster         User      @relation("ItemPostedBy", fields: [posterId], references: [id])
-  posterId       String    @db.ObjectId
-  claimer        User?     @relation("ItemClaimedBy", fields: [claimerId], references: [id])
-  claimerId      String?   @db.ObjectId
+  content        String
 }
 
 //* Example Schema
@@ -100,4 +117,3 @@ model Item {
 //! }
 
 //
-

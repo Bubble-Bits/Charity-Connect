@@ -5,6 +5,7 @@ import { firebaseAuth } from "@/firebase/Firebase";
 import firebase from "firebase/app";
 const AuthStatus = () => {
   const [authUser, setAuthUser] = useState<any>(null);
+  console.log("YOO BsRO");
   useEffect(() => {
     const Auth = onAuthStateChanged(firebaseAuth, (user) => {
       console.log(user);
@@ -15,6 +16,7 @@ const AuthStatus = () => {
       Auth();
     };
   }, []);
+  console.log(authUser?.reloadUserInfo);
   return authUser?.reloadUserInfo;
 };
 
