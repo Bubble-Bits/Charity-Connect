@@ -47,8 +47,8 @@ const LocationComponent = ({}: Props) => {
 
   const defaultProps = {
     center: {
-      lat: latitude,
-      lng: longitude,
+      lat: 0,
+      lng: 0,
     },
     zoom: 14,
   };
