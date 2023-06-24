@@ -10,9 +10,7 @@ export async function POST(request: NextRequest | Request) {
   try {
     const chatData: any = {
       userIds: { set: userIds },
-      messages: {
-        create: [],
-      },
+      messages: [],
     };
     const chat: Chat = await prisma.chat.create({
       data: chatData,
