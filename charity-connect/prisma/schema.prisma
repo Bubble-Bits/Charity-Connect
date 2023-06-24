@@ -79,6 +79,11 @@ model Test {
   content        String
 }
 
+model Test {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  content String
+}
+
 //* Example Schema
 
 //! model User {

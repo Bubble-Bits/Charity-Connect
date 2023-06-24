@@ -6,6 +6,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "res.cloudinary.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.tutorialspoint.com",
+      },
+      {
+        protocol: "https",
+        hostname: "assets.pokemon.com",
+      },
     ],
   },
 };
