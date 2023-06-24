@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated"
+  output   = "./generated"
 }
 
 datasource db {
@@ -43,7 +43,7 @@ model Message {
   chat    Chat     @relation(fields: [chatId], references: [id])
   chatId  String   @db.ObjectId
   content String
-  photos  String[]
+  photo   String?
   sentAt  DateTime
   sender  String
 }
@@ -72,6 +72,11 @@ model Item {
 model ph {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String
+}
+
+model Test {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  content String
 }
 
 //* Example Schema
