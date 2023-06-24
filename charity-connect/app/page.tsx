@@ -1,6 +1,6 @@
 'use client';
 import Image from "next/image";
-import {useState} from 'react';
+import { useState } from 'react';
 import Chats from "./components/chat/Chats"
 import Link from "next/link";
 import Maps from "./components/Maps";
