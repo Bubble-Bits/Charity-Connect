@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "www.tutorialspoint.com",
       },
+      {
+        protocol: "https",
+        hostname: "assets.pokemon.com",
+      },
     ],
   },
 };

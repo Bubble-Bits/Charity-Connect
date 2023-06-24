@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import "@/app/globals.css";
 import Axios from "axios";
 
-type Props = {};
+type Props = { description: String };
 
-const ItemDescription = ({ description }) => {
+const ItemDescription = ({ description }: Props) => {
   const [seeMore, seeMoreTrigger] = useState(false);
   const [seeLess, seeLessTrigger] = useState(false);
 
