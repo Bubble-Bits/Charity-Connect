@@ -1,10 +1,8 @@
-import { Request } from "node-fetch";
 import { PrismaClient, User } from "@prisma/client";
 const prisma = new PrismaClient();
-import User from "@/app/components/User";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest | Request) {
   const profile: User = {
     id: "232323",
     profilePic: "eddw",
