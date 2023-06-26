@@ -10,7 +10,6 @@ import useAuth from "@/firebase/AuthState";
 import UserProfile from "./UserProfile";
 import useSignupModal from "../hooks/useSignupModal";
 import Signout from "./Signout";
-import SignupHandler from "../hooks/AuthHandler";
 
 type Props = { onChatClick?: () => void };
 

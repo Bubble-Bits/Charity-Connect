@@ -4,7 +4,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "@/firebase/Firebase";
 import firebase from "firebase/app";
 function useAuth() {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState<any>("");
 
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, function handleAuth(auth: any) {
