@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "assets.pokemon.com",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
   },
 };

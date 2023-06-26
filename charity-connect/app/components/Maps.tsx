@@ -5,8 +5,6 @@ import exampleDataAddress from "./exampleData-address.js";
 import exampleDataLocations from "./exampleData-locations.js";
 import axios from "axios";
 require("dotenv").config();
-import GoogleMapReact from "google-map-react";
-import FmdGoodTwoToneIcon from "@mui/icons-material/FmdGoodTwoTone";
 
 type Props = {};
 
