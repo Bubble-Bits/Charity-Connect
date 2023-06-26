@@ -3,21 +3,36 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "@/firebase/Firebase";
 import firebase from "firebase/app";
-const AuthStatus = () => {
-  const [authUser, setAuthUser] = useState<any>(null);
-  console.log("YOO BsRO");
+function useAuth() {
+  const [user, setUser] = useState("");
+
   useEffect(() => {
-    const Auth = onAuthStateChanged(firebaseAuth, (user) => {
-      console.log(user);
-      setAuthUser(user);
+    onAuthStateChanged(firebaseAuth, function handleAuth(auth: any) {
+      if (auth) {
+        setUser(auth);
+      } else {
+        setUser(null);
+      }
     });
+  }, [user]);
 
-    return () => {
-      Auth();
-    };
-  }, []);
-  console.log(authUser?.reloadUserInfo);
-  return authUser?.reloadUserInfo;
-};
+  return user?.reloadUserInfo;
+}
 
-export default AuthStatus;
+export default useAuth;
+
+// const useAuthState = () => {
+//   const [user, setUser] = useState(null);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const unsubscribe = auth.onAuthStateChanged((user) => {
+//       setUser(user);
+//       setLoading(false);
+//     });
+
+//     return () => unsubscribe();
+//   }, []); // Add an empty dependency array here
+
+//   return { user, loading };
+// };
