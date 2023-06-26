@@ -5,6 +5,7 @@ import Navbar from "../app/components/Navbar";
 import "@/app/globals.css";
 import ItemDescription from "@/app/components/ItemPage/ItemDescription";
 import Axios from "axios";
+import Maps from "../app/components/Maps";
 
 export default function ItemPage() {
   /*
@@ -90,6 +91,10 @@ export default function ItemPage() {
             </div>
 
             <h1 className="text-green-500 text-xl">Location</h1>
+
+            <div className="h-40 overflow-hidden items-center justify-center">
+              <Maps />
+            </div>
           </div>
 
           <div className="bg-[#01002e] z-10 shadow-sm text-xl">
