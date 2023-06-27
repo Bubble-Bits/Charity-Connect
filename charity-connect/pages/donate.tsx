@@ -91,7 +91,7 @@ function Donate({}: Props) {
               placeholder={owned}
             />
             <AiOutlineCalendar
-            className="relative w-1/5 text-white"
+            className="relative w-1/6 text-white bg-green-500 rounded hover:bg-green-700"
             onClick={() => {
               openModal(!opened);
             }}
