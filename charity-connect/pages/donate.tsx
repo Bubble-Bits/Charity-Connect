@@ -6,6 +6,7 @@ import RootLayout from "../app/layout";
 import axios from "axios";
 import ImageUploader from "../app/components/Donation/ImageUploader";
 import NavBar from "../app/components/Navbar";
+import { AiOutlineCalendar } from 'react-icons/ai';
 
 type Props = {};
 
@@ -80,21 +81,23 @@ function Donate({}: Props) {
             }}
           ></textarea>
 
-          <button
+          <label className={textStyle}>Select Date Obtained</label>
+          <div className= {`${textInput} flex flex-row justify-between`}>
+            <input
+              type="text"
+              name="tenure"
+              disabled
+              className="w-4/5 rounded peer"
+              placeholder={owned}
+            />
+            <AiOutlineCalendar
+            className="relative w-1/5 text-white"
             onClick={() => {
               openModal(!opened);
             }}
-            className="text-white bg-green-500 w-1/2 rounded hover:bg-green-700"
-          >
-            Select Date Owned
-          </button>
-          <input
-            type="text"
-            name="tenure"
-            disabled
-            className={textInput}
-            placeholder={owned}
-          />
+            />
+          </div>
+
           {opened ? (
             <div className="absolute flex justify-center items-center w-full h-full bg-black/50">
               <Calendar
