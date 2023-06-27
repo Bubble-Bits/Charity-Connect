@@ -42,10 +42,10 @@ function Donate({}: Props) {
   const textInput: string = "w-4/5 rounded peer";
 
   const submitInformation = async (dataSet: object) => {
-    if (images.length && name && description && address) {
+    // if (images.length && name && description && address) {
       // !Address to be changed for deployment
-      await axios.post("http://localhost:3000/api/items", dataSet);
-    }
+      await axios.post("/api/items", dataSet);
+    // }
     console.log(dataSet);
   };
 
