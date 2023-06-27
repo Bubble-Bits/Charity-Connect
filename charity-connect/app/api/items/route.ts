@@ -28,7 +28,9 @@ export async function POST(request: Request) {
 }
 
 export async function PUT(request: Request) {
-  // const body = await request.json();
+  const claimed = await prisma.item.updateOne(
+    {_id: ObjectId('INSERTNUMBERSHERE')}, {$set: {status: 'Pending', claimerId: 'INSERTUSER FROM FIND'}}
+    )
 
   return NextResponse.json({ message: "eko" });
 }
