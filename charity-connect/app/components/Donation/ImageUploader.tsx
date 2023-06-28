@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+require('dotenv').config();
 
 const ImageUploader = () => {
   const [files, setFiles] = useState([] as any);
@@ -17,14 +18,14 @@ const ImageUploader = () => {
     const data = new FormData();
     files.map((file: any) => {
       data.append('file', file);
-      data.append('api_key', `${process.env.CLOUDINARY_API}`);
+      data.append('api_key', `${process.env.NEXT_PUBLIC_CLD_API}`);
       data.append('upload_preset', 'charityconnect');
-      axios.post(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD}/upload`, data)
+      axios.post(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLD_CLOUD}/upload`, data)
+      .then(result => {console.log(result, 'result')})
     })
-    // .then(result => {console.log(result, 'result')})
     // .catch(err => {console.log(err, 'error')});
+    console.log(`${process.env.NEXT_PUBLIC_CLD_CLOUD}`);
   }
-  //${process.env.CLOUDINARY}
 
   return (
       <input
