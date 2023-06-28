@@ -1,30 +1,30 @@
 "use client";
-import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
 const ImageUploader = () => {
   const [files, setFiles] = useState([] as any);
-  const [images, setImages] = useState([]);
 
   const MAX_LENGTH = 3;
 
-  // useEffect(() => {
-  //   if (!files.length) {
-  //     return;
-  //   }
-  //   const newImages: any = [];
-  //   files.forEach((file: any) => newImages.push(URL.createObjectURL(file)));
-  //   setImages(newImages);
-  // }, [files]);
-
   function onImageChange(e: any) {
-    if (Array.from(e.target.files).length > MAX_LENGTH) {
-      e.preventDefault();
-      alert(`Cannot upload files more than ${MAX_LENGTH}`);
-      return;
-    }
+    // if (Array.from(e.target.files).length > MAX_LENGTH) {
+    //   e.preventDefault();
+    //   alert(`Cannot upload files more than ${MAX_LENGTH}`);
+    //   return;
+    // }
     setFiles([...e.target.files]);
+    const data = new FormData();
+    files.map((file: any) => {
+      data.append('file', file);
+      data.append('api_key', `${process.env.CLOUDINARY_API}`);
+      data.append('upload_preset', 'charityconnect');
+      axios.post(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD}/upload`, data)
+    })
+    // .then(result => {console.log(result, 'result')})
+    // .catch(err => {console.log(err, 'error')});
   }
+  //${process.env.CLOUDINARY}
 
   return (
       <input
