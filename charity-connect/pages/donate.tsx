@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../app/globals.css";
 import Calendar from "react-calendar";
 import RootLayout from "../app/layout";
@@ -7,6 +7,7 @@ import axios from "axios";
 import ImageUploader from "../app/components/Donation/ImageUploader";
 import NavBar from "../app/components/Navbar";
 import { AiOutlineCalendar } from 'react-icons/ai';
+import useAuth from "@/firebase/AuthState";
 
 type Props = {};
 
@@ -27,8 +28,17 @@ function Donate({}: Props) {
     "Other",
   ];
 
+  const user = useAuth();
+
+  useEffect(()=> {
+    user ?
+    setUserEmail(user.email) :
+    null
+  }, [user])
+
   const [opened, openModal] = useState(false);
 
+  const [userEmail, setUserEmail] = useState('');
   const [images, setImages] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -42,12 +52,14 @@ function Donate({}: Props) {
   const textInput: string = "w-4/5 rounded peer";
 
   const submitInformation = async (dataSet: object) => {
-    // if (images.length && name && description && address) {
-      // !Address to be changed for deployment
-      axios.post("/api/items", dataSet)
-      .then(result => {console.log(result)});
-    // }
-    console.log(dataSet);
+    try {
+      // if (images.length && name && description && address) {
+        await axios.post("/api/items", dataSet)
+      // }
+      }
+    catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -163,6 +175,7 @@ function Donate({}: Props) {
             className="text-white bg-green-500 w-4/5 rounded hover:bg-green-700"
             onClick={() => {
               submitInformation({
+                user: userEmail,
                 images,
                 name,
                 description,
