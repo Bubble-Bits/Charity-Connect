@@ -24,7 +24,7 @@ export default function ItemPage() {
     name: "",
     profilePic: "",
   });
-
+  //comment
   const [mainPhoto, setMainPhoto] = useState("");
 
   useEffect(() => {
