@@ -69,7 +69,7 @@ function Donate({}: Props) {
       <div className="flex justify-center w-full h-full">
         <div className="absolute top-20 flex flex-col justify-evenly items-center w-screen h-screen border-[5px] bg-[#01002e]">
           <label className={textStyle}>Upload Images</label>
-          <ImageUploader />
+          <ImageUploader setImages={setImages} />
           {/* <label className={textStyle}>Upload Images</label>
             <input type="file" className={textStyle} name="images"></input> */}
 
