@@ -10,23 +10,14 @@ const ItemDescription = ({ description }: Props) => {
   const [seeLess, seeLessTrigger] = useState(false);
 
   useEffect(() => {
+    console.log(description);
+
     if (description.length > 200) {
       seeMoreTrigger(true);
     }
   }, [description.length]);
 
   const toggleDescription = () => {
-    // Axios.post("/api/register", {})
-    //   .then((data) => {
-    //     if (!data) {
-    //       throw data;
-    //     }
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
     seeMoreTrigger(!seeMore);
 
     if (seeLess) {

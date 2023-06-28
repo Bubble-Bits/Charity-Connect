@@ -14,6 +14,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "assets.pokemon.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.booksie.com",
+      },
+      {
+        protocol: "https",
+        hostname: "user-images.githubusercontent.com",
+      },
     ],
   },
 };
