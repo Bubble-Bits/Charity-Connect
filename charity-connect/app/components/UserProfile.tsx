@@ -13,11 +13,11 @@ function UserProfile({ user }: Props) {
   return (
     <Link href="/userprofile">
       <div className="flex flex-row items-center gap-1">
-        <div className="p-2  rounded-full text-black">
+        <div className="p-1 w-15 h-15 rounded-full text-black">
           <Image
-            className="rounded-full w-9"
-            width={10}
-            height={10}
+            className="rounded-full w-full h-full object-contain"
+            width={30}
+            height={30}
             src={user.photoUrl}
             alt=""
           />
