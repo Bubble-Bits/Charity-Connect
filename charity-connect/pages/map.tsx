@@ -6,7 +6,7 @@ import exampleDataLocations from "@/example/exampleData-locations.js";
 import axios from "axios";
 require("dotenv").config();
 import GoogleMapReact from "google-map-react";
-import FmdGoodTwoToneIcon from "@mui/icons-material/FmdGoodTwoTone";
+//import FmdGoodTwoToneIcon from "@mui/icons-material/FmdGoodTwoTone";
 import NavBar from "../app/components/Navbar";
 
 type Props = {
@@ -72,22 +72,23 @@ const LocationComponent = ({ user_address }: Props) => {
             >
               {items.map((item) => {
                 return (
-                  <FmdGoodTwoToneIcon
-                    key={item}
-                    size={50}
-                    style={{ color: "red" }}
-                    lat={item.lat}
-                    lng={item.lng}
-                  />
+                  <div key={item.id} className=""></div>
+                  // <FmdGoodTwoToneIcon
+                  //   key={item}
+                  //   size={50}
+                  //   style={{ color: "red" }}
+                  //   lat={item.lat}
+                  //   lng={item.lng}
+                  // />
                 );
               })}
 
-              <FmdGoodTwoToneIcon
+              {/* <FmdGoodTwoToneIcon
                 size={50}
                 style={{ color: "blue" }}
                 lat={latitude}
                 lng={longitude}
-              />
+              /> */}
             </GoogleMapReact>
           </div>
         </div>

@@ -10,21 +10,14 @@ import Link from "next/link";
 
 type Props = {};
 
-function User({ }: Props) {
-  const [auth, setAuth] = useState(null);
-  const signupModal = useSignupModal();
-
-
-
+function User({}: Props) {
   return (
-    <Link href="/userprofile">
-      <div className="flex flex-row items-center gap-1">
-        <div className="p-2 bg-green-500 rounded-full text-black">
-          {auth ? <UserProfile user={auth} /> : <BiUserCircle />}
-        </div>
-        <div className="hidden md:block text-sm font-semibold">User</div>
+    <div className="flex flex-row items-center gap-1">
+      <div className="p-2 bg-green-500 rounded-full text-black">
+        <BiUserCircle />
       </div>
-    </Link>
+      <div className="hidden md:block text-sm font-semibold">User</div>
+    </div>
   );
 }
 

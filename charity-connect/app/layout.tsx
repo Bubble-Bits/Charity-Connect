@@ -6,11 +6,13 @@ import { Inter } from "next/font/google";
 
 import LoginModal from "./modals/LoginModal";
 import SignupModal from "./modals/SignupModal";
-import { useChats } from './hooks/useChats';
+import { useChats } from "./hooks/useChats";
 import ToasterProvider from "./providers/ToasterProvider";
 import Maps from "./components/Maps";
 
 import { useState } from "react";
+import useAuth from "@/firebase/AuthState";
+import useSignupModal from "./hooks/useSignupModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,15 +26,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   const { showChats, toggleChats } = useChats();
 
   return (
     <html lang="en">
       <body className={inter.className}>
         <ToasterProvider />
-        <Navbar onChatClick={toggleChats}/>
-        {showChats && <Chats userId='64961e01cc20c7d29f2c98ea'/>}
+        <Navbar onChatClick={toggleChats} />
+        {showChats && <Chats userId="64961e01cc20c7d29f2c98ea" />}
         <LoginModal />
         <SignupModal />
         {children}
