@@ -53,10 +53,10 @@ function Donate({}: Props) {
 
   const submitInformation = async (dataSet: object) => {
     try {
-      // if (images.length && name && description && address) {
+      if (images.length && name && description && address) {
         await axios.post("/api/items", dataSet)
-      // }
       }
+    }
     catch (err) {
       console.log(err);
     }
@@ -70,8 +70,6 @@ function Donate({}: Props) {
         <div className="absolute top-20 flex flex-col justify-evenly items-center w-screen h-screen border-[5px] bg-[#01002e]">
           <label className={textStyle}>Upload Images</label>
           <ImageUploader setImages={setImages} />
-          {/* <label className={textStyle}>Upload Images</label>
-            <input type="file" className={textStyle} name="images"></input> */}
 
           <label className={textStyle}>Item Name</label>
           <input
