@@ -42,7 +42,7 @@ function Donate({}: Props) {
   const [images, setImages] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [owned, setOwned] = useState(`${new Date()}`);
+  const [owned, setOwned] = useState(`${new Date().toDateString()}`);
   const [address, setAddress] = useState("");
   const [features, setFeatures] = useState("");
   const [category, setCategory] = useState("Apparel");
@@ -116,7 +116,7 @@ function Donate({}: Props) {
               <Calendar
                 className="bg-white md:w-1/3 w-3/5 h-1/4 border-green-500 border-[2px]"
                 onChange={(e: any) => {
-                  setOwned(e);
+                  setOwned(e.toDateString());
                   openModal(!opened);
                 }}
               />
