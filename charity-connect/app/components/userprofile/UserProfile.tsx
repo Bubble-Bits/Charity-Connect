@@ -5,6 +5,7 @@ import Link from "next/link";
 import Logo from "../Logo";
 import Image from "next/image";
 import useAuth from "@/firebase/AuthState";
+import axios from "axios";
 
 export default function UserProfile() {
   var imgLink =
@@ -44,6 +45,13 @@ export default function UserProfile() {
       <div className="bg-[#01002e] text-white pt-4 pl-4">
         <Logo />
       </div>
+      <button onClick={() => axios.get('/register', {
+        params: {
+          test: "test!"
+        }
+      }).then(function (res) {
+        console.log("response: ", res);
+      })}>TEST BUTTON</button>
       <div className="text-center h-full bg-[#01002e] overflow-y-auto text-white">
         <div className="flex items-center justify-center mt-4">
           <Image
