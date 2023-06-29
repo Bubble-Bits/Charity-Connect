@@ -44,7 +44,7 @@ const ChatConversation = ({
     console.log(chatInput);
     const data = { chatId: id, chatInput, userId };
     axios
-      .post("../../api/message", data)
+      .post(`../../api/message?chatId=${id}&chatInput=${chatInput}&userId=${userId}`)
       .then((res) => {
         console.log(res);
         const newMessageData = [...messageData, res.data];
