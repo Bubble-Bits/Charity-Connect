@@ -1,6 +1,7 @@
 "use client";
-import React from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import useAuth from "@/firebase/AuthState";
 
 type Props = {
   itemId: number
@@ -9,8 +10,18 @@ type Props = {
 
 function ClaimButton({ itemId, style }: Props) {
 
+  const user = useAuth();
+
+  useEffect(()=> {
+    user ?
+    setUserEmail(user.email) :
+    null
+  }, [user])
+
+  const [userEmail, setUserEmail] = useState('');
+
   const claimItem = async (item: number) => {
-    await axios.put('/api/items', { item })
+    await axios.put('/api/items', { item, user: userEmail })
   }
 
   return (
