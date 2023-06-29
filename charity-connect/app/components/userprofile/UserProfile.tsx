@@ -4,6 +4,7 @@ import ProfileMenu from "./ProfileMenu";
 import Link from "next/link";
 import Logo from "../Logo";
 import Image from "next/image";
+import useAuth from "@/firebase/AuthState";
 
 export default function UserProfile() {
   var imgLink =
@@ -13,17 +14,21 @@ export default function UserProfile() {
   var postedDonation =
     "https://static.vecteezy.com/system/resources/thumbnails/001/234/040/small/cartoon-donation-box.jpg";
 
-  var user = {
-    name: "Jane Doe",
-    email: "test@testmail.com",
-    bio: "Moving soon and looking to donate lotsa stuff!",
-    address: `198 South Young Ave. Providence, RI 02904`,
-    itemsClaimed: 0,
-    itemsSuccessClaimed: 0,
-    blocked: [],
-    chats: { create: [] }, // Empty array for chats
-    chatIds: [], // Empty array for chatIds
-  };
+
+  const user = useAuth();
+  console.log(user);
+
+  // var user = {
+  //   name: "Jane Doe",
+  //   email: "test@testmail.com",
+  //   bio: "Moving soon and looking to donate lotsa stuff!",
+  //   address: `198 South Young Ave. Providence, RI 02904`,
+  //   itemsClaimed: 0,
+  //   itemsSuccessClaimed: 0,
+  //   blocked: [],
+  //   chats: { create: [] }, // Empty array for chats
+  //   chatIds: [], // Empty array for chatIds
+  // };
 
   const toggleImageShown = () => {
     setShowPostedDonations(!showPostedDonations);
@@ -42,8 +47,10 @@ export default function UserProfile() {
       <div className="text-center h-full bg-[#01002e] overflow-y-auto text-white">
         <div className="flex items-center justify-center mt-4">
           <Image
-            src={imgLink}
+            src={user?.photoUrl}
             alt="image"
+            height={40}
+            width={40}
             className="self-center w-40 h-40 rounded-full"
           />
         </div>
@@ -57,7 +64,7 @@ export default function UserProfile() {
         <br></br>
         <input
           className="text-black bg-slate-200 p-1"
-          defaultValue={user.name}
+          defaultValue={user?.displayName}
         ></input>
         <div className="m-4">
           <button className="text-white bg-green-500 w-1/10 rounded hover:bg-green-700">
@@ -69,7 +76,7 @@ export default function UserProfile() {
         <br></br>
         <textarea
           className="text-black bg-slate-200 p-1"
-          defaultValue={user.bio}
+          defaultValue={"user bio"}
           rows={3}
         />
         <div className="m-4">
@@ -84,42 +91,42 @@ export default function UserProfile() {
             {showPostedDonations ? (
               <Link href="/donate">Create New Post</Link>
             ) : (
-              <Image src={claimedDonation} alt="claimDonation" />
+              <Image src={claimedDonation} alt="claimDonation" height={200} width={200} />
             )}
           </div>
           <div className="">
             {showPostedDonations ? (
-              <Image src={postedDonation} alt="post Donation" />
+              <Image src={postedDonation} alt="post Donation" height={200} width={200} />
             ) : (
-              <Image src={claimedDonation} alt="claimed Donation" />
+              <Image src={claimedDonation} alt="claimed Donation" height={200} width={200} />
             )}
           </div>
           <div className="">
             {showPostedDonations ? (
-              <Image src={postedDonation} alt="Post Dontation" />
+              <Image src={postedDonation} alt="Post Dontation" height={200} width={200} />
             ) : (
-              <Image src={claimedDonation} alt="Claimed Donation" />
+              <Image src={claimedDonation} alt="Claimed Donation" height={200} width={200} />
             )}
           </div>
           <div className="">
             {showPostedDonations ? (
-              <Image src={postedDonation} alt="Posted Donation" />
+              <Image src={postedDonation} alt="Posted Donation" height={200} width={200} />
             ) : (
-              <Image src={claimedDonation} alt="Claimed Donation" />
+              <Image src={claimedDonation} alt="Claimed Donation" height={200} width={200} />
             )}
           </div>
           <div className="">
             {showPostedDonations ? (
-              <Image src={postedDonation} alt="Posted Donation" />
+              <Image src={postedDonation} alt="Posted Donation" height={200} width={200} />
             ) : (
-              <Image src={claimedDonation} alt="Claimed Donation" />
+              <Image src={claimedDonation} alt="Claimed Donation" height={200} width={200} />
             )}
           </div>
           <div className="">
             {showPostedDonations ? (
-              <Image src={postedDonation} alt="Posted Donation" />
+              <Image src={postedDonation} alt="Posted Donation" height={200} width={200} />
             ) : (
-              <Image src={claimedDonation} alt="Claimed Donation" />
+              <Image src={claimedDonation} alt="Claimed Donation" height={200} width={200} />
             )}
           </div>
         </div>
