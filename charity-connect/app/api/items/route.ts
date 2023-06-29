@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-
 export async function POST(request: Request) {
   const body = await request.json();
   // await prisma.$connect();
@@ -43,8 +42,21 @@ export async function POST(request: Request) {
 }
 
 export async function PUT(request: Request) {
+  const body = await request.json();
+  try {
+    const userId = await prisma.user.findUnique({
+      where: {
+        email: body.user
+      }
+    })
+    console.log(userId);
+    // await prisma.$disconnect();
+  }
+  catch (err) {
+    console.log('ERROR: ', err);
+  }
   // const claimed = await prisma.item.updateOne(
-  //   {_id: ObjectId('INSERTNUMBERSHERE')}, {$set: {status: 'Pending', claimerId: 'INSERTUSER FROM FIND'}}
+  //   {_id: ObjectId(`${body.item}`)}, {$set: {status: 'Pending', claimerId: userId}}
   //   )
 
   return NextResponse.json({ message: "eko" });
