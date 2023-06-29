@@ -45,13 +45,65 @@ export default function UserProfile() {
       <div className="bg-[#01002e] text-white pt-4 pl-4">
         <Logo />
       </div>
-      <button onClick={() => axios.get('/register', {
-        params: {
-          test: "test!"
-        }
-      }).then(function (res) {
-        console.log("response: ", res);
-      })}>TEST BUTTON</button>
+      <button onClick={
+        () => axios.get('api/register', {
+          params: {
+            localId: user?.localId
+          }
+        }).then(function (res) {
+          console.log("response: ", res);
+        })}>
+        Test GET request</button>
+      <br></br>
+      <button onClick={
+        () => axios.post('api/register',
+          {
+            params: {
+              newUser: {
+                localId: user?.localId,
+                chatIds: [],
+                chats: [],
+                postedItems: [],
+                claimedItems: [],
+                name: user?.displayName,
+                email: user?.email,
+                bio: "this is a test bio",
+                profilePic: user?.photoUrl,
+                address: "this is a test address",
+                itemsClaimed: 0,
+                itemsSuccessClaimed: 0,
+                blocked: []
+              },
+            }
+          }).then(function (res) {
+            console.log("response: ", res);
+          })}>
+        Test POST request</button>
+      <br></br>
+      <button onClick={
+        () => axios.put('api/register',
+          {
+            params: {
+              updatedUser: {
+                localId: user?.localId,
+                chatIds: [],
+                chats: [],
+                postedItems: [],
+                claimedItems: [],
+                name: user?.displayName,
+                email: user?.email,
+                bio: "this is a test bio",
+                profilePic: user?.photoUrl,
+                address: "this is a test address",
+                itemsClaimed: 0,
+                itemsSuccessClaimed: 0,
+                blocked: []
+              },
+            }
+          }).then(function (res) {
+            console.log("response: ", res);
+          })}>
+        Test PUT request</button>
       <div className="text-center h-full bg-[#01002e] overflow-y-auto text-white">
         <div className="flex items-center justify-center mt-4">
           <Image
