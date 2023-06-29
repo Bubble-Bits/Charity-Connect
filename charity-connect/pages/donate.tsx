@@ -101,12 +101,14 @@ function Donate({}: Props) {
               className="w-4/5 rounded peer"
               placeholder={owned}
             />
-            <AiOutlineCalendar
-            className="relative w-1/6 text-white bg-green-500 rounded hover:bg-green-700"
-            onClick={() => {
-              openModal(!opened);
-            }}
-            />
+            <div className="w-1/6 flex justify-center p-2 bg-green-500 rounded-full hover:bg-green-700">
+              <AiOutlineCalendar
+              className=" text-white"
+              onClick={() => {
+                openModal(!opened);
+              }}
+              />
+            </div>
           </div>
 
           {opened ? (
