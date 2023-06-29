@@ -53,10 +53,10 @@ function Donate({}: Props) {
 
   const submitInformation = async (dataSet: object) => {
     try {
-      if (images.length && name && description && address) {
+      //! if (images.length && name && description && address) {
         await axios.post("/api/items", dataSet)
       }
-    }
+    //! }
     catch (err) {
       console.log(err);
     }

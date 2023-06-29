@@ -1,14 +1,28 @@
 import { NextResponse, NextRequest } from "next/server";
-// import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
+
 
 export async function POST(request: Request) {
   const body = await request.json();
-  console.log('here', body);
+  // await prisma.$connect();
+  let features = body.features.split(/[ ,]+/)
+  try {
+    const userId = await prisma.user.findUnique({
+      where: {
+        email: body.user
+      }
+    })
+    console.log(userId);
+    // await prisma.$disconnect();
+  }
+  catch (err) {
+    console.log('ERROR: ', err);
+  }
   // const newItem = await prisma.item.create({
   //   data: {
-  //     name: 'Alice',
+  //     name:,
   //     category: 'alice@prisma.io',
   //     description: ,
   //     features: ,
