@@ -17,7 +17,6 @@ export async function GET(request: Request) {
   });
 
   console.log(item);
-
   const donor = await prisma.user.findUnique({
     where: {
       id: item?.posterId,
