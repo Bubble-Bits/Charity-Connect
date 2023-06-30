@@ -14,7 +14,7 @@ export async function POST(request: Request) {
         email: "john.doe@example.com"
       }
     })
-
+    if (userId) {
     //? Creates item based on whether delivery is shipping or pickup
     if (body.delivery === "Pickup") {
         const newItem = await prisma.item.create({
@@ -31,16 +31,16 @@ export async function POST(request: Request) {
         }
       })
       //! Issue where User's postedItems array wont push
-      await prisma.user.update({
-        where: {
-          id: userId.id
-        },
-        data: {
-          postedItems : {
-            push: newItem
-          }
-        }
-      })
+      // await prisma.user.update({
+      //   where: {
+      //     id: userId?.id
+      //   },
+      //   data: {
+      //     postedItems : {
+      //       push: newItem
+      //     }
+      //   }
+      // })
     } else {
       const newItem = await prisma.item.create({
         data: {
@@ -57,6 +57,7 @@ export async function POST(request: Request) {
       })
     }
   }
+}
   catch (err) {
     console.log('ERROR: ', err);
   }
