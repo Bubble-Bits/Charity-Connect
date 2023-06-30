@@ -26,6 +26,49 @@ export default function ItemPage() {
   });
   //comment
   const [mainPhoto, setMainPhoto] = useState("");
+  const [imageGallery, setImageGallery] = useState([]);
+
+  var imageGalleryFunc = (imageGallery: []) => {
+    if (imageGallery.length <= 4) {
+      setImageGallery(imageGallery);
+    }
+
+    if (imageGallery.length > 4) {
+      var firstFour = imageGallery.slice(0, 4);
+      setImageGallery(firstFour);
+    }
+  };
+
+  useEffect(() => {
+    //If the first item in the image gallery, do xyz
+
+    //If the last item in the image gallery, do xyz
+
+    if (mainPhoto === imageGallery[0]) {
+      if (mainPhoto === itemData.photos[0]) {
+        var firstPart = itemData.photos.slice(0, 4);
+        setImageGallery(firstPart);
+      } else {
+        var first = itemData.photos.indexOf(mainPhoto as never);
+        var otherFirstPart = itemData.photos.slice(first - 1, first + 3);
+        setImageGallery(otherFirstPart);
+      }
+    }
+
+    if (mainPhoto === imageGallery[imageGallery.length - 1]) {
+      if (mainPhoto === itemData.photos[itemData.photos.length - 1]) {
+        var lastPart = itemData.photos.slice(
+          itemData.photos.length - 4,
+          itemData.photos.length,
+        );
+        setImageGallery(lastPart);
+      } else {
+        var last = itemData.photos.indexOf(mainPhoto as never);
+        var otherLastPart = itemData.photos.slice(last - 2, last + 2);
+        setImageGallery(otherLastPart);
+      }
+    }
+  }, [mainPhoto]);
 
   useEffect(() => {
     Axios.get("/api/getItem", { params: { itemId: item } })
@@ -37,6 +80,7 @@ export default function ItemPage() {
         setItemData(data.data.item);
         setDonorData(data.data.donor);
         setMainPhoto(data.data.item.photos[0]);
+        imageGalleryFunc(data.data.item.photos);
       })
       .catch((error) => {
         console.log("error", error);
@@ -45,28 +89,33 @@ export default function ItemPage() {
 
   return item ? (
     // This keeps it fixed in the div. How do we keep everything inside of the div?
+    // className="h-60 overflow-hidden ml-10"
     <div className="">
       <Navbar />
 
       <div className="pt-24 md:grid grid-cols-7">
-        <div className="space-y-2 col-span-5 pb-4 ">
-          <div className="justify-center flex ">
-            {mainPhoto.length === 0 ? (
-              <></>
-            ) : (
-              <Image
-                src={mainPhoto}
-                alt="Description of the image"
-                width={300}
-                height={200}
-              />
-            )}
+        <div className="space-y-2 col-span-5 pb-4">
+          <div className="flex justify-center ">
+            <div className="flex items-center justify-center w-64 h-64">
+              {mainPhoto.length === 0 ? (
+                <></>
+              ) : (
+                <Image
+                  src={mainPhoto}
+                  alt="Description of the image"
+                  className="max-w-full max-h-full"
+                  width={300}
+                  height={200}
+                />
+              )}
+            </div>
           </div>
+
           <div className="justify-center flex ">
-            {itemData.photos.length === 0 ? (
+            {imageGallery.length === 0 ? (
               <></>
             ) : (
-              itemData.photos.map((picture) => {
+              imageGallery.map((picture) => {
                 return (
                   <div
                     key={picture}
@@ -74,7 +123,9 @@ export default function ItemPage() {
                       setMainPhoto(picture);
                     }}
                     className={
-                      mainPhoto === picture ? "opacity-50" : "opacity-100"
+                      mainPhoto === picture
+                        ? "opacity-100 rounded-full overflow-hidden mr-3"
+                        : "opacity-50 rounded-full overflow-hidden mr-3"
                     }
                   >
                     <Image
@@ -92,24 +143,37 @@ export default function ItemPage() {
 
         <div className="space-y-2 col-span-2 bg-[#01002e] z-10 shadow-sm p-5">
           {/* temporary: when md gets hit, remove the height and overflow y scroll and just let it overextend in the mobile aspect */}
-          <div className="scrollbar-hide">
-            <h1 className="text-green-500 text-4xl">{itemData.name}</h1>
-            <h1 className="text-white text-md">{itemData.status}</h1>
+          <div className="scrollbar-hide pb-5">
+            <div className="pb-5">
+              <h1 className="text-green-500 text-4xl">{itemData.name}</h1>
+              <h1 className="text-white text-md">{itemData.status}</h1>
 
-            <h1 className="text-white text-md pb-5">
-              listed 2 days ago in San Francisco
-            </h1>
-
-            <Link href={`/itempage?item=6495ef45e896d8285cab2958`}>
-              item page
-            </Link>
-
-            <h1 className="text-green-500 text-xl">Item Description</h1>
-            <div className="text-white">
-              <ItemDescription description={itemData.description} />
+              <h1 className="text-white text-md">
+                listed 2 days ago in San Francisco
+              </h1>
             </div>
-            <div className="text-xl flex items-center pb-5 pt-5">
-              <div className="w-20 h-20 inline-block">
+
+            <>
+              {itemData.status !== "Available" ? (
+                <></>
+              ) : (
+                <div className="pb-5">
+                  <button className="cursor-pointer w-24 text-md rounded-lg bg-gray-500 flex justify-center  text-white">
+                    Claim
+                  </button>
+                </div>
+              )}
+            </>
+
+            <div className="pb-5">
+              <h1 className="text-green-500 text-xl">Item Description</h1>
+              <div className="text-white">
+                <ItemDescription description={itemData.description} />
+              </div>
+            </div>
+
+            <div className="text-xl flex items-center pb-5">
+              <div className="w-20 h-20 inline-block rounded-full overflow-hidden">
                 {donorData.profilePic ? (
                   <Image
                     src={donorData.profilePic}
@@ -133,24 +197,26 @@ export default function ItemPage() {
               </div>
             </div>
 
-            <h1 className="text-green-500 text-xl">Location</h1>
+            <div className="pb-5">
+              <h1 className="text-green-500 text-xl pb-2">Location</h1>
 
-            <div className="relative w-full h-40 overflow-hidden">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <Maps />
+              <div className="relative w-full h-40 overflow-hidden">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg">
+                  <Maps />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="bg-[#01002e] z-10 shadow-sm text-xl">
-            <div className="text-white pb-1">Message</div>
-            <textarea
-              className="w-full rounded-lg h-min overflow-y-scroll text-black placeholder-gray-400"
-              placeholder="Send a message to the donor!"
-            ></textarea>
-            <button className=" text-md rounded-lg bg-gray-500 w-full flex justify-center  text-white">
-              Submit
-            </button>
+            <div className="bg-[#01002e] z-10 shadow-sm text-xl ">
+              <div className="text-white">Message</div>
+              <textarea
+                className="w-full rounded-lg h-min overflow-y-scroll text-black placeholder-gray-400 pl-2 pr-2"
+                placeholder="Send a message to the donor!"
+              ></textarea>
+              <button className="cursor-pointer text-md rounded-lg bg-gray-500 w-full flex justify-center  text-white">
+                Submit
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -159,3 +225,32 @@ export default function ItemPage() {
     <div>not found</div>
   );
 }
+
+/*
+
+ {imageGallery.length === 0 ? (
+              <></>
+            ) : (
+              itemData.photos.map((picture) => {
+                return (
+                  <div
+                    key={picture}
+                    onClick={() => {
+                      setMainPhoto(picture);
+                    }}
+                    className={
+                      mainPhoto === picture ? "opacity-100" : "opacity-50"
+                    }
+                  >
+                    <Image
+                      src={picture}
+                      alt="Description of the image"
+                      width={50}
+                      height={50}
+                    />
+                  </div>
+                );
+              })
+            )}
+
+*/

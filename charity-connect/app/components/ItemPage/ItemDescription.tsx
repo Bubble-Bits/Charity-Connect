@@ -40,12 +40,18 @@ const ItemDescription = ({ description }: Props) => {
         {description}
       </div>
       {seeMore && (
-        <button className="text-blue-500 pt-1" onClick={toggleDescription}>
+        <button
+          className="cursor-pointer text-blue-500 pt-1"
+          onClick={toggleDescription}
+        >
           See More
         </button>
       )}
       {seeLess && (
-        <button className="text-blue-500 pt-1" onClick={toggleDescription}>
+        <button
+          className="cursor-pointer text-blue-500 pt-1"
+          onClick={toggleDescription}
+        >
           See Less
         </button>
       )}
