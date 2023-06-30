@@ -75,6 +75,7 @@ export async function PUT(request: Request) {
         email: "john.doe@example.com"
       }
     })
+    if (userId) {
     await prisma.item.update({
       where: {
         //! Needs item id to be passed into prop of claim button
@@ -85,6 +86,7 @@ export async function PUT(request: Request) {
         claimerId: userId.id
         }
       })
+    }
   }
   catch (err) {
     console.log('ERROR: ', err);
