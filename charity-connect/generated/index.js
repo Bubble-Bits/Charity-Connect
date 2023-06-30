@@ -160,7 +160,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/lovinsondieujuste/Charity-Connect/charity-connect/generated",
+      "value": "/Users/nickmonteleone/Documents/RPP2210/Charity-Connect/charity-connect/generated",
       "fromEnvVar": null
     },
     "config": {
@@ -169,7 +169,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "darwin",
         "native": true
       }
     ],
@@ -218,7 +218,7 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
-path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
-path.join(process.cwd(), "generated/libquery_engine-darwin-arm64.dylib.node")
+path.join(__dirname, "libquery_engine-darwin.dylib.node");
+path.join(process.cwd(), "generated/libquery_engine-darwin.dylib.node")
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "generated/schema.prisma")
