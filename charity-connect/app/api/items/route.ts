@@ -31,17 +31,16 @@ export async function POST(request: Request) {
         }
       })
       //! Issue where User's postedItems array wont push
-      // console.log(newItem);
-      // await prisma.user.update({
-      //   where: {
-      //     id: userId.id
-      //   },
-      //   data: {
-      //     postedItems : {
-      //       set: newItem
-      //     }
-      //   }
-      // })
+      await prisma.user.update({
+        where: {
+          id: userId.id
+        },
+        data: {
+          postedItems : {
+            push: newItem
+          }
+        }
+      })
     } else {
       const newItem = await prisma.item.create({
         data: {
@@ -77,15 +76,14 @@ export async function PUT(request: Request) {
     })
     await prisma.item.update({
       where: {
+        //! Needs item id to be passed into prop of claim button
         id: body.item
       },
       data: {
-        set: {
-          status: "Pending",
-          claimerId: userId.id
+        status: "Pending",
+        claimerId: userId.id
         }
-      }
-    })
+      })
   }
   catch (err) {
     console.log('ERROR: ', err);

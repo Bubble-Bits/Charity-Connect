@@ -8,6 +8,8 @@ import ImageUploader from "../app/components/Donation/ImageUploader";
 import NavBar from "../app/components/Navbar";
 import { AiOutlineCalendar } from 'react-icons/ai';
 import useAuth from "@/firebase/AuthState";
+//! TESTING PURPOSE
+//import ClaimButton from "../app/components/Donation/ClaimButton"
 
 type Props = {};
 
@@ -190,6 +192,7 @@ function Donate({}: Props) {
             Donate
           </button>
         </div>
+      {/* <ClaimButton style={"absolute h-full bg-orange-600"} itemId={"6495edfee896d8285cab2955"} /> */}
       </div>
     </div>
     // </RootLayout>

@@ -4,12 +4,11 @@ import axios from "axios";
 import useAuth from "@/firebase/AuthState";
 
 type Props = {
-  itemId: number
+  itemId: string
   style: string
 };
 
 function ClaimButton({ itemId, style }: Props) {
-
   const user = useAuth();
 
   useEffect(()=> {
@@ -20,12 +19,12 @@ function ClaimButton({ itemId, style }: Props) {
 
   const [userEmail, setUserEmail] = useState('');
 
-  const claimItem = async (item: number) => {
+  const claimItem = async (item: string) => {
     await axios.put('/api/items', { item, user: userEmail })
   }
 
   return (
-    <button className={`${style}`} onClick={()=>{claimItem(itemId)}}>Claim</button>
+    <button className={style} onClick={()=>{claimItem(itemId)}}>Claim</button>
   );
 }
 
