@@ -1,29 +1,9 @@
-import { PrismaClient, User } from "@prisma/client";
-const prisma = new PrismaClient();
+import { PrismaClient } from "../../../generated";
 import { NextResponse, NextRequest } from "next/server";
 
-export async function POST(request: NextRequest | Request) {
-  const profile: User = {
-    id: "232323",
-    profilePic: "eddw",
-    name: "exaplmepo",
-    email: "mdw0i",
-    bio: "string",
-    address: ",d-w",
-    itemsClaimed: 0,
-    itemsSuccessClaimed: 0,
-    blocked: ["323"],
-  };
-  const user = await prisma.item.create({
-    data: {
-      name: "Alvin's ITEM!!!",
-      description: "From lalaland",
-      features: ["hello", "there"],
-      photos: ["HELLO!!!!"],
-      address: "6823 Vista Place Brooklyn NY 11220",
-      poster: { connect: { posterId: id } },
-      posterId: "6495fab420529e88f6120674",
-    },
-  });
-  return NextResponse.json(user);
+export async function POST(request: Request) {
+  const body = await request.json();
+  const { name } = body;
+
+  return NextResponse.json({ message: "eko" });
 }
