@@ -4,7 +4,7 @@ import { BiArrowBack } from "react-icons/bi";
 import Image from "next/image";
 import { format, parseISO } from "date-fns";
 import { IoMdSend } from "react-icons/io";
-//import io from 'socket.io-client';
+import io from 'socket.io-client';
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -44,7 +44,7 @@ const ChatConversation = ({
     console.log(chatInput);
     const data = { chatId: id, chatInput, userId };
     axios
-      .post("../../api/message", data)
+      .post(`../../api/message?chatId=${id}&chatInput=${chatInput}&userId=${userId}`)
       .then((res) => {
         console.log(res);
         const newMessageData = [...messageData, res.data];

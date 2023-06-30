@@ -4,14 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma generate && next build",
+    "build": "next build",
     "start": "next start",
+    "postinstall": "npx prisma generate",
     "lint": "next lint",
     "test": "npx jest"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-free": "^6.4.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.5",
     "@prisma/client": "^4.15.0",
@@ -33,7 +35,6 @@
     "next": "^13.4.6",
     "node-fetch": "^3.3.1",
     "postcss": "8.4.24",
-    "prisma": "^4.16.1",
     "react": "^18.2.0",
     "react-calendar": "^4.3.0",
     "react-dom": "^18.2.0",
@@ -51,6 +52,7 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
-    "@types/google-map-react": "^2.1.7"
+    "@types/google-map-react": "^2.1.7",
+    "prisma": "^4.16.1"
   }
 }

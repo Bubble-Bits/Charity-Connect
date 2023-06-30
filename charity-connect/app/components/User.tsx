@@ -11,8 +11,12 @@ import Link from "next/link";
 type Props = {};
 
 function User({}: Props) {
+  const signup = useSignupModal();
   return (
-    <div className="flex flex-row items-center gap-1">
+    <div
+      onClick={() => signup.onOpen()}
+      className="flex flex-row items-center gap-1"
+    >
       <div className="p-2 bg-green-500 rounded-full text-black">
         <BiUserCircle />
       </div>

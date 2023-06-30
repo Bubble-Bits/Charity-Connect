@@ -10,18 +10,33 @@ import useAuth from "@/firebase/AuthState";
 import UserProfile from "./UserProfile";
 import useSignupModal from "../hooks/useSignupModal";
 import Signout from "./Signout";
+import useLoginModal from "../hooks/useLoginModal";
 
 type Props = { onChatClick?: () => void };
 
 function Navbar({ onChatClick }: Props) {
-  const signupModal = useSignupModal();
+  const signup = useSignupModal();
+  const login = useLoginModal();
+  //useModal();
 
   const user = useAuth();
+
+  useEffect(() => {
+    console.log(user);
+    if (user) {
+      signup.onClose();
+      login.onClose();
+    } else {
+      signup.onOpen();
+    }
+  }, [user]);
+
   // if (!user) {
   //   signupModal.onOpen();
   // } else {
   //   signupModal.onClose();
   // }
+
   console.log(user);
   return (
     <div className="fixed w-full bg-[#01002e] z-10 shadow-sm text-white">
