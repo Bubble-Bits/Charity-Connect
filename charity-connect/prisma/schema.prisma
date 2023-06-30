@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id                  String   @id @default(auto()) @map("_id") @db.ObjectId
-  localId             String
+  localId             String?
   chatIds             String[] @db.ObjectId //[]
   chats               Chat[]   @relation(fields: [chatIds], references: [id]) //[]
   postedItems         Item[]   @relation("ItemPostedBy") //[]
@@ -40,13 +40,13 @@ model Chat {
 }
 
 model Message {
-  id             String      @id @default(auto()) @map("_id") @db.ObjectId
-  chat           Chat        @relation(fields: [chatId], references: [id])
-  chatId         String      @db.ObjectId
-  content        String
-  photo          String?
-  sentAt         DateTime
-  sender         String
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  chat    Chat     @relation(fields: [chatId], references: [id])
+  chatId  String   @db.ObjectId
+  content String
+  photo   String?
+  sentAt  DateTime
+  sender  String
 }
 
 // ITEMS SCHEMA //
@@ -76,8 +76,8 @@ model ph {
 }
 
 model Test {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  content        String
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  content String
 }
 
 //* Example Schema

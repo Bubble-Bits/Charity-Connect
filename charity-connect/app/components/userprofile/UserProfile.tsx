@@ -1,12 +1,10 @@
-import Navbar from "../Navbar";
-import { useState, useEffect, useInsertionEffect } from "react";
+import { useState, useEffect } from "react";
 import ProfileMenu from "./ProfileMenu";
 import Link from "next/link";
 import Logo from "../Logo";
 import Image from "next/image";
 import useAuth from "@/firebase/AuthState";
 import axios from "axios";
-import ImageUploader from "../Donation/ImageUploader";
 import ProfileImageUploader from "./ProfileImageUploader";
 
 export default function UserProfile() {
@@ -22,14 +20,15 @@ export default function UserProfile() {
   // console.log(user);
 
 
-  function getUser() {
-    axios.get('api/register', {
+  async function getUser() {
+    const res = await axios.get('api/register', {
       params: {
         localId: user?.localId
       }
-    }).then(function (res) {
-      console.log("response: ", res);
     });
+    console.log("current user: ", res.data);
+    setCurrUser(res.data.user);
+    return res.data.user;
   };
 
   function createNewUser(newUser: {}) {
@@ -42,10 +41,10 @@ export default function UserProfile() {
             chats: [],
             postedItems: [],
             claimedItems: [],
-            name: user?.displayName,
+            name: name,
             email: user?.email,
-            bio: "this is a test bio",
-            profilePic: user?.photoUrl,
+            bio: bio,
+            profilePic: profilePicUrl,
             address: "198 South Young Ave. Providence, RI 02904",
             itemsClaimed: 0,
             itemsSuccessClaimed: 0,
@@ -91,6 +90,7 @@ export default function UserProfile() {
   const [profilePicUrl, setProfilePicUrl] = useState(user?.photoUrl);
   const [name, setName] = useState(user?.displayName);
   const [bio, setBio] = useState("Moving soon and looking to donate lotsa stuff!");
+  const [currUser, setCurrUser] = useState();
 
   useEffect(() => {
     setName(user?.displayName);
@@ -116,7 +116,7 @@ export default function UserProfile() {
         <div className="text-center h-full bg-[#01002e] overflow-y-auto text-white">
           <div className="flex items-center justify-center mt-4">
             <Image
-              src={profilePicUrl}
+              src={currUser ? currUser['profilePic'] : imgLink}
               alt="image"
               height={40}
               width={40}
@@ -146,7 +146,7 @@ export default function UserProfile() {
           <br></br>
           <input
             className="text-black bg-slate-200 p-1"
-            value={name} onChange={(e) => {
+            value={currUser ? currUser['name'] : 'waiting...'} onChange={(e) => { //state will no longer update dynamically
               setName(e.target.value);
             }}
           ></input>
@@ -162,7 +162,7 @@ export default function UserProfile() {
           <br></br>
           <textarea
             className="text-black bg-slate-200 p-1"
-            value={bio}
+            value={currUser ? currUser['bio'] : 'waiting...'}
             rows={3}
             onChange={(e) => {
               setBio(e.target.value);
