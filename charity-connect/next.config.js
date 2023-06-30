@@ -18,6 +18,22 @@ const nextConfig = {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.booksie.com",
+      },
+      {
+        protocol: "https",
+        hostname: "user-images.githubusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.news10.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.shopify.com",
+      },
     ],
   },
 };
