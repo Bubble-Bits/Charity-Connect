@@ -30,6 +30,9 @@ const Maps = ({ user_address }: Props) => {
   const [search, setSearch] = useState<any>(defaultAddress);
 
   useEffect(() => {
+    if (user_address !== null) {
+      setSearch(user_address);
+    }
     axios
       // grabs longitude & latitude based on given address
       .get(`https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${pw}`)

@@ -9,7 +9,7 @@ import GoogleMapReact from "google-map-react";
 import LocationPin from "./LocationPin";
 
 type Props = {
-  user_address: string;
+  user_address?: string;
 };
 
 const defaultAddress = process.env.NEXT_PUBLIC_INPUT;
@@ -22,7 +22,9 @@ const Maps = ({ user_address }: Props) => {
   const [search, setSearch] = useState(defaultAddress);
 
   useEffect(() => {
-    setSearch(user_address);
+    if (user_address !== null) {
+      setSearch(user_address);
+    }
     axios
       // grabs longitude & latitude based on given address
       .get(`https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${pw}`)
