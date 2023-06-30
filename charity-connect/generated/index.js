@@ -160,7 +160,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/stanleychu/Charity-Connect/charity-connect/generated",
+      "value": "/Users/anthonybui/Documents/HackReactorSR/Charity-Connect/charity-connect/generated",
       "fromEnvVar": null
     },
     "config": {

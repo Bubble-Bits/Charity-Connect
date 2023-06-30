@@ -1,11 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../app/globals.css";
 import Calendar from "react-calendar";
 import RootLayout from "../app/layout";
 import axios from "axios";
 import ImageUploader from "../app/components/Donation/ImageUploader";
 import NavBar from "../app/components/Navbar";
+import { AiOutlineCalendar } from 'react-icons/ai';
+import useAuth from "@/firebase/AuthState";
+//! TESTING PURPOSE
+//import ClaimButton from "../app/components/Donation/ClaimButton"
 
 type Props = {};
 
@@ -26,12 +30,21 @@ function Donate({}: Props) {
     "Other",
   ];
 
+  const user = useAuth();
+
+  useEffect(()=> {
+    user ?
+    setUserEmail(user.email) :
+    null
+  }, [user])
+
   const [opened, openModal] = useState(false);
 
+  const [userEmail, setUserEmail] = useState('');
   const [images, setImages] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [owned, setOwned] = useState(`${new Date()}`);
+  const [owned, setOwned] = useState(new Date());
   const [address, setAddress] = useState("");
   const [features, setFeatures] = useState("");
   const [category, setCategory] = useState("Apparel");
@@ -41,11 +54,14 @@ function Donate({}: Props) {
   const textInput: string = "w-4/5 rounded peer";
 
   const submitInformation = async (dataSet: object) => {
-    if (images.length && name && description && address) {
-      // !Address to be changed for deployment
-      await axios.post("http://localhost:3000/api/items", dataSet);
+    try {
+      //! if (images.length && name && description && address) {
+        await axios.post("/api/items", dataSet)
+      }
+    //! }
+    catch (err) {
+      console.log(err);
     }
-    console.log(dataSet);
   };
 
   return (
@@ -55,9 +71,7 @@ function Donate({}: Props) {
       <div className="flex justify-center w-full h-full">
         <div className="absolute top-20 flex flex-col justify-evenly items-center w-screen h-screen border-[5px] bg-[#01002e]">
           <label className={textStyle}>Upload Images</label>
-          <ImageUploader />
-          {/* <label className={textStyle}>Upload Images</label>
-            <input type="file" className={textStyle} name="images"></input> */}
+          <ImageUploader setImages={setImages} />
 
           <label className={textStyle}>Item Name</label>
           <input
@@ -80,21 +94,25 @@ function Donate({}: Props) {
             }}
           ></textarea>
 
-          <button
-            onClick={() => {
-              openModal(!opened);
-            }}
-            className="text-white bg-green-500 w-1/2 rounded hover:bg-green-700"
-          >
-            Select Date Owned
-          </button>
-          <input
-            type="text"
-            name="tenure"
-            disabled
-            className={textInput}
-            placeholder={owned}
-          />
+          <label className={textStyle}>Select Date Obtained</label>
+          <div className= {`${textInput} flex flex-row justify-between`}>
+            <input
+              type="text"
+              name="tenure"
+              disabled
+              className="w-4/5 rounded peer"
+              placeholder={owned ? owned.toDateString() : `${new Date().toDateString()}`}
+            />
+            <div className="w-1/6 flex justify-center p-2 bg-green-500 rounded-full hover:bg-green-700"
+              onClick={() => {
+                openModal(!opened);
+              }}>
+              <AiOutlineCalendar
+              className=" text-white"
+              />
+            </div>
+          </div>
+
           {opened ? (
             <div className="absolute flex justify-center items-center w-full h-full bg-black/50">
               <Calendar
@@ -159,6 +177,7 @@ function Donate({}: Props) {
             className="text-white bg-green-500 w-4/5 rounded hover:bg-green-700"
             onClick={() => {
               submitInformation({
+                user: userEmail,
                 images,
                 name,
                 description,
@@ -173,6 +192,7 @@ function Donate({}: Props) {
             Donate
           </button>
         </div>
+      {/* <ClaimButton style={"absolute h-full bg-orange-600"} itemId={"6495edfee896d8285cab2955"} /> */}
       </div>
     </div>
     // </RootLayout>
