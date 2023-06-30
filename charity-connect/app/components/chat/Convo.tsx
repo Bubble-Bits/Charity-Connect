@@ -4,7 +4,7 @@ import { BiArrowBack } from "react-icons/bi";
 import Image from "next/image";
 import { format, parseISO } from "date-fns";
 import { IoMdSend } from "react-icons/io";
-//import io from 'socket.io-client';
+import io from 'socket.io-client';
 import { useState, useEffect } from "react";
 import axios from "axios";
 

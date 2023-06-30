@@ -1,8 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../../generated";
 const prisma = new PrismaClient();
 import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
+  // return NextResponse.json({'hi': 'bye'})
   const body = request.nextUrl.searchParams;
   const bodyText = body.get('userIds') as string;
   const userIds = bodyText.split(',');
@@ -14,7 +15,7 @@ export async function POST(request: NextRequest) {
   // };
 
   try {
-
+    await prisma.$connect(); // Connect to the database
     const chat = await prisma.chat.create({
       data: {
         userIds: {set: userIds}, messages: {create: []}
@@ -23,10 +24,11 @@ export async function POST(request: NextRequest) {
         messages: true,
       },
     });
-
+    await prisma.$disconnect();
     return NextResponse.json({chat});
   } catch (error) {
     console.error("Error creating chat:", error);
+    await prisma.$disconnect(); // Connect to the database
     return NextResponse.json(error);
   }
 }
