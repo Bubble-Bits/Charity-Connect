@@ -3,11 +3,9 @@ import { PrismaClient } from '../../../generated';
 const prisma = new PrismaClient()
 
 export async function POST(request: Request) {
-  console.log('hello');
-  // const body = await request.json();
-  // await prisma.$connect();
-  // let features = body.features.split(/[ ,]+/)
-  // try {
+  const body = await request.json();
+  let features = body.features.split(/[ ,]+/)
+  try {
     const userId = await prisma.user.findUnique({
       where: {
         //! email: body.user
@@ -15,29 +13,28 @@ export async function POST(request: Request) {
       }
     })
     console.log(userId);
-  //   await prisma.$disconnect();
-  // }
-  // catch (err) {
-  //   console.log('ERROR: ', err);
-  // }
-  // const newItem = await prisma.item.create({
-  //   data: {
-  //     name:,
-  //     category: 'alice@prisma.io',
-  //     description: ,
-  //     features: ,
-  //     timeOwned: ,
-  //     photos: ,
-  //     address: ,
-  //     pickup: ,
-  //     shipping: ,
-  //     status: ,
-  //     poster: ,
-  //     posterId: ,
-  //     claimer: ,
-  //     claimerId: ,
-  //   },
-  // })
+  }
+  catch (err) {
+    console.log('ERROR: ', err);
+  }
+  const newItem = await prisma.item.create({
+    data: {
+      name: body.name,
+      category: body.category,
+      description: body.description,
+      features: body.features,
+      timeOwned: body.owned.toISOString(),
+      photos: body.images,
+      address: body.address,
+      pickup: ,
+      shipping: ,
+      status: ,
+      poster: ,
+      posterId: ,
+      claimer: ,
+      claimerId: ,
+    },
+  })
 
   return NextResponse.json({ message: "eko" });
 }

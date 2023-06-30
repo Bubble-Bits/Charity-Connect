@@ -42,7 +42,7 @@ function Donate({}: Props) {
   const [images, setImages] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [owned, setOwned] = useState(`${new Date().toDateString()}`);
+  const [owned, setOwned] = useState(new Date());
   const [address, setAddress] = useState("");
   const [features, setFeatures] = useState("");
   const [category, setCategory] = useState("Apparel");
@@ -99,7 +99,7 @@ function Donate({}: Props) {
               name="tenure"
               disabled
               className="w-4/5 rounded peer"
-              placeholder={owned}
+              placeholder={owned ? owned.toDateString() : `${new Date().toDateString()}`}
             />
             <div className="w-1/6 flex justify-center p-2 bg-green-500 rounded-full hover:bg-green-700">
               <AiOutlineCalendar
