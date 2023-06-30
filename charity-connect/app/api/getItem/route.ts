@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import { PrismaClient } from "../../../generated";
+//comment
 
 const prisma = new PrismaClient();
 
@@ -17,7 +18,6 @@ export async function GET(request: Request) {
   });
 
   console.log(item);
-
   const donor = await prisma.user.findUnique({
     where: {
       id: item?.posterId,
