@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     }
   }).catch((error) => {
     console.log(error);
-    return NextResponse.json({ status: 204 });
+    return NextResponse.json({ error: error });
   });
 
   return NextResponse.json({ user: user });
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
 
   if (userCount === 0) {
     //if not, create new user, and send the obj in response
-    await prisma.user.create({
+    const newUser: any = await prisma.user.create({
       data:
       {
         localId: localId,
@@ -48,27 +48,37 @@ export async function POST(request: NextRequest) {
       }
     }).catch((error) => {
       console.log("ERROR: ", error);
-    }).then((res) => {
-      console.log("new user: ", res);
-      return NextResponse.json({ status: 201 });
-    });
+    })
+    console.log("new user: ", newUser);
+    return NextResponse.json({ message: "new user created", user: newUser });
+
   } else {
-    return NextResponse.json({ message: "a user with id: " + localId + " already exists." });
+    //if user already exists
+    return NextResponse.json({ message: "a user with id: " + localId + " already exists.", localId: localId });
   }
 }
 
 export async function PUT(request: NextRequest) {
   const body = await request.json(); //use this method to get param objs for put reqs
   const updatedUser = body.params.updatedUser;
-  const { localId, name, email, bio, profilePic, address } = updatedUser;
+  const { localId, chatIds, chats, postedItems, claimedItems, name, email, bio, profilePic, address, itemsClaimed, itemsSuccessClaimed, blocked } = updatedUser;
   //console.log("Updated user: ", updatedUser);
   //here update user info and save to db
   prisma.user.update({
-    where: { name: name }, //should be based off of localId, though. prisma won't let me bc localId isn't tagged unique
+    where: { email: email }, //should be based off of localId, though. prisma won't let me bc localId isn't tagged unique
     data: {
+      chatIds: chatIds,
+      chats: chats,
+      postedItems: postedItems,
+      claimedItems: postedItems,
       name: name,
+      email: email,
       bio: bio,
       profilePic: profilePic,
+      address: address,
+      itemsClaimed: itemsClaimed,
+      itemsSuccessClaimed: itemsSuccessClaimed,
+      blocked: blocked
     }
   }).catch((error) => {
     console.log(error);

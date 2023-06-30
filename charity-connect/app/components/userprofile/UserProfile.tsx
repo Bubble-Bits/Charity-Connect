@@ -7,7 +7,11 @@ import useAuth from "@/firebase/AuthState";
 import axios from "axios";
 import ProfileImageUploader from "./ProfileImageUploader";
 
-export default function UserProfile() {
+type Props = {
+  localId: any
+};
+
+export default function UserProfile({ localId }: Props) {
   var imgLink =
     "https://www.interstatedevelopment.com/wp-content/uploads/2019/04/generic-avatar-1.jpg";
   var claimedDonation =
@@ -87,16 +91,45 @@ export default function UserProfile() {
 
   const [showPostedDonations, setShowPostedDonations] = useState(true);
   const [showUpdatePicMenu, setShowUpdatePicMenu] = useState(false);
-  const [profilePicUrl, setProfilePicUrl] = useState(user?.photoUrl);
-  const [name, setName] = useState(user?.displayName);
-  const [bio, setBio] = useState("Moving soon and looking to donate lotsa stuff!");
-  const [currUser, setCurrUser] = useState();
+  const [profilePicUrl, setProfilePicUrl] = useState<any>();
+  const [name, setName] = useState("");
+  const [bio, setBio] = useState<any>();
+  const [currUser, setCurrUser] = useState({
+    localId: "",
+    chatIds: [],
+    chats: [],
+    postedItems: [],
+    claimedItems: [],
+    name: "",
+    email: "",
+    bio: "",
+    profilePic: imgLink,
+    address: "",
+    itemsClaimed: 0,
+    itemsSuccessClaimed: 0,
+    blocked: []
+  });
 
-  useEffect(() => {
-    setName(user?.displayName);
-    setProfilePicUrl(user?.photoUrl);
-  }, [user]); //whenever status changes from undef to def, default vals will be set
+  // useEffect(() => {
+  //   setName(user?.displayName);
+  //   setProfilePicUrl(user?.photoUrl);
+  // }, [user]); //whenever status changes from undef to def, default vals will be set
 
+
+  useEffect(
+    () => {
+      axios.get('api/register', {
+        params: {
+          localId: localId
+        }
+      }).then((data) => {
+        console.log('data: ', data.data.user);
+        setCurrUser(data.data.user);
+        setProfilePicUrl(data.data.user.profilePic);
+        setName(data.data.user.name);
+        setBio(data.data.user.bio);
+      })
+    }, [localId]);
 
   //bg-[#01002e]
   return (
@@ -116,7 +149,7 @@ export default function UserProfile() {
         <div className="text-center h-full bg-[#01002e] overflow-y-auto text-white">
           <div className="flex items-center justify-center mt-4">
             <Image
-              src={currUser ? currUser['profilePic'] : imgLink}
+              src={profilePicUrl}
               alt="image"
               height={40}
               width={40}
@@ -146,7 +179,7 @@ export default function UserProfile() {
           <br></br>
           <input
             className="text-black bg-slate-200 p-1"
-            value={currUser ? currUser['name'] : 'waiting...'} onChange={(e) => { //state will no longer update dynamically
+            value={name} onChange={(e) => { //state will no longer update dynamically
               setName(e.target.value);
             }}
           ></input>
@@ -162,10 +195,11 @@ export default function UserProfile() {
           <br></br>
           <textarea
             className="text-black bg-slate-200 p-1"
-            value={currUser ? currUser['bio'] : 'waiting...'}
+            value={bio}
             rows={3}
             onChange={(e) => {
               setBio(e.target.value);
+
             }}
           />
           <div className="m-4">
