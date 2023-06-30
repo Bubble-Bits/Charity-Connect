@@ -22,13 +22,14 @@ function Navbar({ onChatClick }: Props) {
   const user = useAuth();
 
   useEffect(() => {
+    console.log(user);
     if (user) {
       signup.onClose();
-      login.onOpen();
+      login.onClose();
     } else {
       signup.onOpen();
     }
-  }, [user, signup, login]);
+  }, [user]);
 
   // if (!user) {
   //   signupModal.onOpen();
