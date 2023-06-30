@@ -5,16 +5,19 @@ const prisma = new PrismaClient()
 export async function POST(request: Request) {
   const body = await request.json();
   let features = body.features.split(/[ ,]+/)
+
   try {
     const userId = await prisma.user.findUnique({
       where: {
-        email: body.user
+        //! Need current user's id to be passed in frontend
+        //! email: body.user
+        email: "john.doe@example.com"
       }
     })
 
     //? Creates item based on whether delivery is shipping or pickup
-    if (body.delivery === "pickup") {
-      const newItem = await prisma.item.create({
+    if (body.delivery === "Pickup") {
+        const newItem = await prisma.item.create({
         data: {
           name: body.name,
           category: body.category,
@@ -27,6 +30,18 @@ export async function POST(request: Request) {
           posterId: userId.id
         }
       })
+      //! Issue where User's postedItems array wont push
+      // console.log(newItem);
+      // await prisma.user.update({
+      //   where: {
+      //     id: userId.id
+      //   },
+      //   data: {
+      //     postedItems : {
+      //       set: newItem
+      //     }
+      //   }
+      // })
     } else {
       const newItem = await prisma.item.create({
         data: {
@@ -47,7 +62,7 @@ export async function POST(request: Request) {
     console.log('ERROR: ', err);
   }
 
-  return NextResponse.json({ message: "eko" });
+  return NextResponse.json({ status: 201 });
 }
 
 export async function PUT(request: Request) {
@@ -55,11 +70,22 @@ export async function PUT(request: Request) {
   try {
     const userId = await prisma.user.findUnique({
       where: {
-        email: body.user
+        //! Need current user's id to be passed in frontend
+        //! email: body.user
+        email: "john.doe@example.com"
       }
     })
-    console.log(userId);
-    // await prisma.$disconnect();
+    await prisma.item.update({
+      where: {
+        id: body.item
+      },
+      data: {
+        set: {
+          status: "Pending",
+          claimerId: userId.id
+        }
+      }
+    })
   }
   catch (err) {
     console.log('ERROR: ', err);
@@ -68,7 +94,7 @@ export async function PUT(request: Request) {
   //   {_id: ObjectId(`${body.item}`)}, {$set: {status: 'Pending', claimerId: userId}}
   //   )
 
-  return NextResponse.json({ message: "eko" });
+  return NextResponse.json({ status: 202 });
 }
 
 export async function GET(request: Request) {
