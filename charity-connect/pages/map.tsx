@@ -21,7 +21,6 @@ type handleEventProps = {
 const defaultAddress = process.env.NEXT_PUBLIC_INPUT;
 const pw = process.env.NEXT_PUBLIC_GEOLOCATION;
 const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || "1";
-const geoapify = "13764a0d1a5146b5862fbbfff65e33e3";
 
 const Maps = ({ user_address }: Props) => {
   const [longitude, setLong] = useState(0);
