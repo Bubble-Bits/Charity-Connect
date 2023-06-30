@@ -10,25 +10,25 @@ import useAuth from "@/firebase/AuthState";
 import UserProfile from "./UserProfile";
 import useSignupModal from "../hooks/useSignupModal";
 import Signout from "./Signout";
+import useLoginModal from "../hooks/useLoginModal";
 
 type Props = { onChatClick?: () => void };
 
 function Navbar({ onChatClick }: Props) {
   const signup = useSignupModal();
+  const login = useLoginModal();
   //useModal();
 
   const user = useAuth();
 
   useEffect(() => {
-    console.log(user);
     if (user) {
       signup.onClose();
-      console.log("USER HERE");
+      login.onOpen();
     } else {
       signup.onOpen();
-      console.log("user not here");
     }
-  }, [user]);
+  }, [user, signup, login]);
 
   // if (!user) {
   //   signupModal.onOpen();
