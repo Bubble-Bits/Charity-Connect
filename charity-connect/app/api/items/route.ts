@@ -8,33 +8,44 @@ export async function POST(request: Request) {
   try {
     const userId = await prisma.user.findUnique({
       where: {
-        //! email: body.user
-        email: "john.doe@example.com"
+        email: body.user
       }
     })
-    console.log(userId);
+
+    //? Creates item based on whether delivery is shipping or pickup
+    if (body.delivery === "pickup") {
+      const newItem = await prisma.item.create({
+        data: {
+          name: body.name,
+          category: body.category,
+          description: body.description,
+          features: features,
+          timeOwned: body.owned,
+          photos: body.images,
+          address: body.address,
+          pickup: true,
+          posterId: userId.id
+        }
+      })
+    } else {
+      const newItem = await prisma.item.create({
+        data: {
+          name: body.name,
+          category: body.category,
+          description: body.description,
+          features: features,
+          timeOwned: body.owned,
+          photos: body.images,
+          address: body.address,
+          shipping: true,
+          posterId: userId.id
+        }
+      })
+    }
   }
   catch (err) {
     console.log('ERROR: ', err);
   }
-  const newItem = await prisma.item.create({
-    data: {
-      name: body.name,
-      category: body.category,
-      description: body.description,
-      features: body.features,
-      timeOwned: body.owned.toISOString(),
-      photos: body.images,
-      address: body.address,
-      pickup: ,
-      shipping: ,
-      status: ,
-      poster: ,
-      posterId: ,
-      claimer: ,
-      claimerId: ,
-    },
-  })
 
   return NextResponse.json({ message: "eko" });
 }

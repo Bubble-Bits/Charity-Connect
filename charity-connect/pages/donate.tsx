@@ -101,12 +101,12 @@ function Donate({}: Props) {
               className="w-4/5 rounded peer"
               placeholder={owned ? owned.toDateString() : `${new Date().toDateString()}`}
             />
-            <div className="w-1/6 flex justify-center p-2 bg-green-500 rounded-full hover:bg-green-700">
-              <AiOutlineCalendar
-              className=" text-white"
+            <div className="w-1/6 flex justify-center p-2 bg-green-500 rounded-full hover:bg-green-700"
               onClick={() => {
                 openModal(!opened);
-              }}
+              }}>
+              <AiOutlineCalendar
+              className=" text-white"
               />
             </div>
           </div>
@@ -116,7 +116,7 @@ function Donate({}: Props) {
               <Calendar
                 className="bg-white md:w-1/3 w-3/5 h-1/4 border-green-500 border-[2px]"
                 onChange={(e: any) => {
-                  setOwned(e.toDateString());
+                  setOwned(e);
                   openModal(!opened);
                 }}
               />
