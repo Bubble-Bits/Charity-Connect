@@ -1,3 +1,4 @@
+import { PrismaClient } from "../../../generated";
 import { NextResponse, NextRequest } from "next/server";
 import { PrismaClient } from '@prisma/client';
 import { where } from "firebase/firestore";

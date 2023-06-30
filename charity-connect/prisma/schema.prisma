@@ -15,18 +15,19 @@ datasource db {
 
 model User {
   id                  String   @id @default(auto()) @map("_id") @db.ObjectId
-  chatIds             String[] @db.ObjectId
-  chats               Chat[]   @relation(fields: [chatIds], references: [id])
-  postedItems         Item[]   @relation("ItemPostedBy")
-  claimedItems        Item[]   @relation("ItemClaimedBy")
-  name                String   @unique
-  email               String   @unique
+  localId             String
+  chatIds             String[] @db.ObjectId //[]
+  chats               Chat[]   @relation(fields: [chatIds], references: [id]) //[]
+  postedItems         Item[]   @relation("ItemPostedBy") //[]
+  claimedItems        Item[]   @relation("ItemClaimedBy") //[]
+  name                String   @unique // FIREBASE
+  email               String   @unique //FIREBASE
   bio                 String?
-  profilePic          String?
-  address             String
-  itemsClaimed        Int      @default(0)
-  itemsSuccessClaimed Int      @default(0)
-  blocked             String[]
+  profilePic          String? //FIREBASE
+  address             String?
+  itemsClaimed        Int      @default(0) //0
+  itemsSuccessClaimed Int      @default(0) // 0
+  blocked             String[] //0
 }
 
 // CHAT SCHEMA //
@@ -39,13 +40,13 @@ model Chat {
 }
 
 model Message {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  chat    Chat     @relation(fields: [chatId], references: [id])
-  chatId  String   @db.ObjectId
-  content String
-  photo   String?
-  sentAt  DateTime
-  sender  String
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  chat           Chat        @relation(fields: [chatId], references: [id])
+  chatId         String      @db.ObjectId
+  content        String
+  photo          String?
+  sentAt         DateTime
+  sender         String
 }
 
 // ITEMS SCHEMA //
@@ -75,8 +76,8 @@ model ph {
 }
 
 model Test {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  content String
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  content        String
 }
 
 //* Example Schema
