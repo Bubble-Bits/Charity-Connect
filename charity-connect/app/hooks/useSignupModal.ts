@@ -1,3 +1,5 @@
+import useAuth from "@/firebase/AuthState";
+
 import { create } from "zustand";
 
 interface SignupModalStore {
@@ -7,7 +9,7 @@ interface SignupModalStore {
 }
 
 const useSignupModal = create<SignupModalStore>((set) => ({
-  isOpen: true,
+  isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));

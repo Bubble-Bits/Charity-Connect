@@ -6,12 +6,10 @@ import exampleDataLocations from "@/example/exampleData-locations.js";
 import axios from "axios";
 require("dotenv").config();
 import GoogleMapReact from "google-map-react";
-import FmdGoodTwoToneIcon from "@mui/icons-material/FmdGoodTwoTone";
+//import FmdGoodTwoToneIcon from "@mui/icons-material/FmdGoodTwoTone";
 import NavBar from "../app/components/Navbar";
 
 type Props = {
-  long: number;
-  lat: number;
   user_address: string;
 };
 
@@ -19,7 +17,7 @@ const input: String | undefined = process.env.NEXT_PUBLIC_INPUT;
 const pw = process.env.NEXT_PUBLIC_GEOLOCATION;
 const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || "1";
 
-const LocationComponent = ({ long, lat, user_address }: Props) => {
+const LocationComponent = ({ user_address }: Props) => {
   const [longitude, setLong] = useState(0);
   const [latitude, setLat] = useState(0);
   const [address, setAddress] = useState("");
@@ -66,7 +64,7 @@ const LocationComponent = ({ long, lat, user_address }: Props) => {
           <div>Latitude:{latitude}</div>
 
           <div style={{ height: "80vh", width: "80vw" }}>
-            {/*             <GoogleMapReact
+            <GoogleMapReact
               bootstrapURLKeys={{ key: googleApi }}
               defaultCenter={defaultProps.center}
               defaultZoom={defaultProps.zoom}
@@ -74,23 +72,24 @@ const LocationComponent = ({ long, lat, user_address }: Props) => {
             >
               {items.map((item) => {
                 return (
-                  <FmdGoodTwoToneIcon
-                    key={item}
-                    size={50}
-                    style={{ color: "red" }}
-                    lat={item.lat}
-                    lng={item.lng}
-                  />
+                  <div key={item.id} className=""></div>
+                  // <FmdGoodTwoToneIcon
+                  //   key={item}
+                  //   size={50}
+                  //   style={{ color: "red" }}
+                  //   lat={item.lat}
+                  //   lng={item.lng}
+                  // />
                 );
               })}
 
-              <FmdGoodTwoToneIcon
+              {/* <FmdGoodTwoToneIcon
                 size={50}
                 style={{ color: "blue" }}
                 lat={latitude}
                 lng={longitude}
-              />
-            </GoogleMapReact> */}
+              /> */}
+            </GoogleMapReact>
           </div>
         </div>
       </div>
