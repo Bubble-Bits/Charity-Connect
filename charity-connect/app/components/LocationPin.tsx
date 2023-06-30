@@ -4,7 +4,7 @@ import styles from "@/app/Map-Item.module.css";
 
 type datatype = {
   name: string;
-  image: string;
+  image?: string;
 };
 
 type LocationProps = {
