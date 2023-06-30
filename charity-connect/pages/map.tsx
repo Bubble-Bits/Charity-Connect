@@ -21,6 +21,7 @@ type handleEventProps = {
 const defaultAddress = process.env.NEXT_PUBLIC_INPUT;
 const pw = process.env.NEXT_PUBLIC_GEOLOCATION;
 const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || "1";
+const geoapify = "13764a0d1a5146b5862fbbfff65e33e3";
 
 const Maps = ({ user_address }: Props) => {
   const [longitude, setLong] = useState(0);
@@ -29,22 +30,43 @@ const Maps = ({ user_address }: Props) => {
   const [items, setItems] = useState(exampleDataLocations);
   const [search, setSearch] = useState<any>(defaultAddress);
 
+  // 6823%20Vista%20Place%20Brooklyn%20NY%2011220
+
   useEffect(() => {
     if (user_address !== null) {
       setSearch(user_address);
     }
     axios
-      // grabs longitude & latitude based on given address
-      .get(`https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${pw}`)
+      .get(
+        `https://api.geoapify.com/v1/geocode/search?text=${defaultAddress}&lang=en&type=state&format=json&apiKey=${geoapify}`
+      )
       .then((response) => {
-        console.log(response);
+        console.log("geoapify data", response);
+        console.log(
+          "geoapify state long name",
+          response.data.results[0].address_line1
+        );
+        console.log("geoapify state", response.data.results[0].state_code);
         //set those coordinates into my state
-        setLong(response.data.results[0].geometry.lng);
-        setLat(response.data.results[0].geometry.lat);
+        // setLong(response.data.results[0].geometry.lng);
+        // setLat(response.data.results[0].geometry.lat);
       })
       .catch((error) => {
         console.log(error);
       });
+
+    // axios
+    //   // grabs longitude & latitude based on given address
+    //   .get(`https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${pw}`)
+    //   .then((response) => {
+    //     console.log(response);
+    //     //set those coordinates into my state
+    //     setLong(response.data.results[0].geometry.lng);
+    //     setLat(response.data.results[0].geometry.lat);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
     // EXAMPLE DATA //
     // console.log(exampleDataAddress.data.results[0].geometry);
     // setLong(exampleDataAddress.data.results[0].geometry.lng);
@@ -106,7 +128,7 @@ const Maps = ({ user_address }: Props) => {
               data={item}
             />
           ))}
-          <div
+          {/* <div
             // className="border-2 p-2 m-2 items-center"
             style={{ height: "80vh", width: "80vw" }}
           >
@@ -131,7 +153,7 @@ const Maps = ({ user_address }: Props) => {
                 colorChoice="DarkOrange"
               />
             </GoogleMapReact>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
