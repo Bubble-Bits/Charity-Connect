@@ -12,14 +12,13 @@ import useAuth from "@/firebase/AuthState";
 import { useRouter } from "next/router";
 
 //! TESTING PURPOSE
-//import ClaimButton from "../app/components/Donation/ClaimButton"
+import ClaimButton from "../app/components/Donation/ClaimButton"
 
 type Props = {};
 
 function Donate({}: Props) {
   const router = useRouter();
   const { user } = router.query;
-  console.log(user);
 
   const categories: string[] = [
     "Apparel",
@@ -37,17 +36,9 @@ function Donate({}: Props) {
     "Other",
   ];
 
-  // const user = useAuth();
-
-  // useEffect(()=> {
-  //   user ?
-  //   setUserEmail(user.email) :
-  //   null
-  // }, [user])
-
   const [opened, openModal] = useState(false);
 
-  const [userLocal, setUserLocal] = useState(user);
+  // const [userLocal, setUserLocal] = useState(user);
   const [images, setImages] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -186,7 +177,7 @@ function Donate({}: Props) {
             onClick={() => {
               //? FOR TESTING -> console.log({
               submitInformation({
-                user: userLocal,
+                user,
                 images,
                 name,
                 description,
@@ -201,7 +192,7 @@ function Donate({}: Props) {
             Donate
           </button>
         </div>
-      {/* <ClaimButton style={"absolute h-full bg-orange-600"} itemId={"6495edfee896d8285cab2955"} /> */}
+      <ClaimButton style={"absolute h-full bg-orange-600"} itemId={"64a0856e0ba6c7795ab65738"} />
       </div>
     </div>
     // </RootLayout>

@@ -30,15 +30,15 @@ export async function POST(request: Request) {
           posterId: userId.id
         }
       })
-      //! Issue where User's postedItems array wont push
-      await prisma.user.update({
-        where: {
-          id: userId.id
-        },
-        data: {
-          postedItems : {set: newItem}
-          }
-        })
+      // //! Issue where User's postedItems array wont push
+      // await prisma.user.update({
+      //   where: {
+      //     id: userId.id
+      //   },
+      //   data: {
+      //     postedItems : {set: newItem}
+      //     }
+      //   })
     } else {
       const newItem = await prisma.item.create({
         data: {
@@ -53,15 +53,15 @@ export async function POST(request: Request) {
           posterId: userId.id
         }
       })
-      //! Issue where User's postedItems array wont push
-      await prisma.user.update({
-        where: {
-          id: userId.id
-        },
-        data: {
-          postedItems : {set: newItem}
-          }
-        })
+      // //! Issue where User's postedItems array wont push
+      // await prisma.user.update({
+      //   where: {
+      //     id: userId.id
+      //   },
+      //   data: {
+      //     postedItems : {set: newItem}
+      //     }
+      //   })
     }
   }
 }
