@@ -98,9 +98,6 @@ export async function PUT(request: Request) {
   catch (err) {
     console.log('ERROR: ', err);
   }
-  // const claimed = await prisma.item.updateOne(
-  //   {_id: ObjectId(`${body.item}`)}, {$set: {status: 'Pending', claimerId: userId}}
-  //   )
 
   return NextResponse.json({ status: 202 });
 }
