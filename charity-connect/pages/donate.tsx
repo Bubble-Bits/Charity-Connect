@@ -9,6 +9,7 @@ import AutoAddress from "../app/components/Donation/AutoAddress";
 import NavBar from "../app/components/Navbar";
 import { AiOutlineCalendar } from 'react-icons/ai';
 import useAuth from "@/firebase/AuthState";
+import { useRouter } from "next/router";
 
 //! TESTING PURPOSE
 //import ClaimButton from "../app/components/Donation/ClaimButton"
@@ -16,6 +17,10 @@ import useAuth from "@/firebase/AuthState";
 type Props = {};
 
 function Donate({}: Props) {
+  const router = useRouter();
+  const { user } = router.query;
+  console.log(user);
+
   const categories: string[] = [
     "Apparel",
     "Electronics",
@@ -32,17 +37,17 @@ function Donate({}: Props) {
     "Other",
   ];
 
-  const user = useAuth();
+  // const user = useAuth();
 
-  useEffect(()=> {
-    user ?
-    setUserEmail(user.email) :
-    null
-  }, [user])
+  // useEffect(()=> {
+  //   user ?
+  //   setUserEmail(user.email) :
+  //   null
+  // }, [user])
 
   const [opened, openModal] = useState(false);
 
-  const [userEmail, setUserEmail] = useState('');
+  const [userLocal, setUserLocal] = useState(user);
   const [images, setImages] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -181,7 +186,7 @@ function Donate({}: Props) {
             onClick={() => {
               //? FOR TESTING -> console.log({
               submitInformation({
-                user: userEmail,
+                user: userLocal,
                 images,
                 name,
                 description,

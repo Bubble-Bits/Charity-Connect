@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id                  String   @id @default(auto()) @map("_id") @db.ObjectId
-  localId             String?
+  localId             String?  @unique
   chatIds             String[] @db.ObjectId //[]
   chats               Chat[]   @relation(fields: [chatIds], references: [id]) //[]
   postedItems         Item[]   @relation("ItemPostedBy") //[]

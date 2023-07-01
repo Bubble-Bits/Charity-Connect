@@ -11,7 +11,7 @@ export async function POST(request: Request) {
       where: {
         //! Need current user's id to be passed in frontend
         //! email: body.user
-        email: "john.doe@example.com"
+        localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
       }
     })
     if (userId) {
@@ -68,11 +68,11 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
   const body = await request.json();
   try {
-    const userId = await prisma.user.findUnique({
+    const userId = await prisma.user.findMany({
       where: {
         //! Need current user's id to be passed in frontend
-        //! email: body.user
-        email: "john.doe@example.com"
+        //! localId: body.user
+        localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
       }
     })
     if (userId) {
