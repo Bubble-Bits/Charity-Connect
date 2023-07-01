@@ -12,7 +12,7 @@ import useAuth from "@/firebase/AuthState";
 import { useRouter } from "next/router";
 
 //! TESTING PURPOSE
-import ClaimButton from "../app/components/Donation/ClaimButton"
+// import ClaimButton from "../app/components/Donation/ClaimButton"
 
 type Props = {};
 
@@ -206,7 +206,7 @@ function Donate({}: Props) {
             Donate
           </button>
         </div>
-      {/* <ClaimButton style={"absolute h-full bg-orange-600"} itemId={"64a0856e0ba6c7795ab65738"} /> */}
+      {/* <ClaimButton style={"absolute h-full bg-orange-600"} itemId={"64a09858cc19995ed7440c16"} /> */}
       </div>
     </div>
     // </RootLayout>
