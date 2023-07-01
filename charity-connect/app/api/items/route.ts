@@ -68,7 +68,7 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
   const body = await request.json();
   try {
-    const userId = await prisma.user.findMany({
+    const userId = await prisma.user.findUnique({
       where: {
         //! Need current user's id to be passed in frontend
         //! localId: body.user
