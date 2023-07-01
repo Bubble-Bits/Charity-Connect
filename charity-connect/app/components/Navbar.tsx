@@ -3,14 +3,16 @@ import React, { useEffect, useState } from "react";
 import Container from "../Container";
 import Logo from "./Logo";
 import Search from "./Search";
-
+import Link from "next/link";
 import User from "./User";
 import ChatIcon from "./ChatIcon";
 import useAuth from "@/firebase/AuthState";
 import UserProfile from "./UserProfile";
+import Donate from "../../pages/donate"
 import useSignupModal from "../hooks/useSignupModal";
 import Signout from "./Signout";
 import useLoginModal from "../hooks/useLoginModal";
+import { AiOutlinePlus } from 'react-icons/ai';
 
 type Props = { onChatClick?: () => void };
 
@@ -45,6 +47,9 @@ function Navbar({ onChatClick }: Props) {
           <div className="flex flex-row items-center justify-between gap-3 md:gap-0 overflow-x-auto">
             <Logo />
             <Search />
+            <div className="p-2 bg-green-500 rounded-full text-black right-0">
+              <Link href="/donate"><AiOutlinePlus /></Link>
+            </div>
             {user ? <UserProfile user={user} /> : <User />}
             <Signout />
             {onChatClick ? <ChatIcon onIconClick={onChatClick} /> : <></>}
