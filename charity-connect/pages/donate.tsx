@@ -179,8 +179,8 @@ function Donate({}: Props) {
           <button
             className="text-white bg-green-500 w-4/5 rounded hover:bg-green-700"
             onClick={() => {
-              console.log({
-              // submitInformation({
+              //? FOR TESTING -> console.log({
+              submitInformation({
                 user: userEmail,
                 images,
                 name,
