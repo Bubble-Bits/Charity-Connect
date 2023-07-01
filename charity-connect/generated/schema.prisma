@@ -20,6 +20,8 @@ model User {
   chats               Chat[]   @relation(fields: [chatIds], references: [id]) //[]
   postedItems         Item[]   @relation("ItemPostedBy") //[]
   claimedItems        Item[]   @relation("ItemClaimedBy") //[]
+  claimedItemIds      String[] @default([])
+  postedItemIds       String[] @default([])
   name                String   @unique // FIREBASE
   email               String   @unique //FIREBASE
   bio                 String?

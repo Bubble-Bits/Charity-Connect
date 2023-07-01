@@ -31,14 +31,15 @@ export async function POST(request: Request) {
         }
       })
       // //! Issue where User's postedItems array wont push
-      // await prisma.user.update({
-      //   where: {
-      //     id: userId.id
-      //   },
-      //   data: {
-      //     postedItems : {set: newItem}
-      //     }
-      //   })
+      await prisma.user.update({
+        where: {
+          id: userId.id
+        },
+        data: {
+          postedItemIds :
+            {push: newItem.id}
+          }
+        })
     } else {
       const newItem = await prisma.item.create({
         data: {
@@ -54,14 +55,15 @@ export async function POST(request: Request) {
         }
       })
       // //! Issue where User's postedItems array wont push
-      // await prisma.user.update({
-      //   where: {
-      //     id: userId.id
-      //   },
-      //   data: {
-      //     postedItems : {set: newItem}
-      //     }
-      //   })
+      await prisma.user.update({
+        where: {
+          id: userId.id
+        },
+        data: {
+          postedItemIds :
+            {push: newItem.id}
+          }
+        })
     }
   }
 }
@@ -83,7 +85,7 @@ export async function PUT(request: Request) {
       }
     })
     if (userId) {
-    await prisma.item.update({
+    const claimedItem = await prisma.item.update({
       where: {
         //! Needs item id to be passed into prop of claim button
         id: body.item
@@ -93,6 +95,15 @@ export async function PUT(request: Request) {
         claimerId: userId.id
         }
       })
+    await prisma.user.update({
+        where: {
+          id: userId.id
+        },
+        data: {
+          claimedItemIds :
+            {push: claimedItem.id}
+          }
+        })
     }
   }
   catch (err) {

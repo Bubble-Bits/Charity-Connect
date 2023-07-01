@@ -90,6 +90,8 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   localId: 'localId',
   chatIds: 'chatIds',
+  claimedItemIds: 'claimedItemIds',
+  postedItemIds: 'postedItemIds',
   name: 'name',
   email: 'email',
   bio: 'bio',
