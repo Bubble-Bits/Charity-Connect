@@ -27,8 +27,7 @@ export default function Home() {
      <div></div>
       Charity-Connect
       <Link href="/map">Map</Link>
-      <Link href="/donate">Donate</Link>
-      <Link href="/itempage">Item Page</Link>
+      <Link href="/itempage?item=6495ef45e896d8285cab2958">Item Page</Link>
     </main>
   );
 }
