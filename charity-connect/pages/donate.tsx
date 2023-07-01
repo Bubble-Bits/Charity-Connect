@@ -128,14 +128,15 @@ function Donate({}: Props) {
           ) : null}
 
           <label className={textStyle}>Address</label>
-          <input
+          {/* <input
             type="text"
             name="address"
             className={textInput}
             onChange={(e) => {
               setAddress(e.target.value);
             }}
-          />
+          /> */}
+          <AutoAddress setAddress={setAddress} style={textInput} />
 
           <label className={textStyle}>Features</label>
           <input
@@ -174,12 +175,12 @@ function Donate({}: Props) {
             <option value="pickup">Pickup</option>
             <option value="shipping">Shipping</option>
           </select>
-          <AutoAddress setAddress={setAddress} />
 
           <button
             className="text-white bg-green-500 w-4/5 rounded hover:bg-green-700"
             onClick={() => {
-              submitInformation({
+              console.log({
+              // submitInformation({
                 user: userEmail,
                 images,
                 name,
