@@ -5,9 +5,11 @@ import Calendar from "react-calendar";
 import RootLayout from "../app/layout";
 import axios from "axios";
 import ImageUploader from "../app/components/Donation/ImageUploader";
+import AutoAddress from "../app/components/Donation/AutoAddress";
 import NavBar from "../app/components/Navbar";
 import { AiOutlineCalendar } from 'react-icons/ai';
 import useAuth from "@/firebase/AuthState";
+
 //! TESTING PURPOSE
 //import ClaimButton from "../app/components/Donation/ClaimButton"
 
@@ -126,14 +128,15 @@ function Donate({}: Props) {
           ) : null}
 
           <label className={textStyle}>Address</label>
-          <input
+          {/* <input
             type="text"
             name="address"
             className={textInput}
             onChange={(e) => {
               setAddress(e.target.value);
             }}
-          />
+          /> */}
+          <AutoAddress setAddress={setAddress} style={textInput} />
 
           <label className={textStyle}>Features</label>
           <input
@@ -176,6 +179,7 @@ function Donate({}: Props) {
           <button
             className="text-white bg-green-500 w-4/5 rounded hover:bg-green-700"
             onClick={() => {
+              //? FOR TESTING -> console.log({
               submitInformation({
                 user: userEmail,
                 images,
