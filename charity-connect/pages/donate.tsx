@@ -62,6 +62,19 @@ function Donate({}: Props) {
     }
   };
 
+  //? FOR TESTING
+  // const getInformation = async () => {
+  //   try {
+  //     //! if (images.length && name && description && address) {
+  //       let result = await axios.get("/api/items")
+  //       console.log(result)
+  //     }
+  //   //! }
+  //   catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   return (
     // <RootLayout>
     <div className="bg-white">
@@ -176,6 +189,7 @@ function Donate({}: Props) {
             className="text-white bg-green-500 w-4/5 rounded hover:bg-green-700"
             onClick={() => {
               //? FOR TESTING -> console.log({
+              //? getInformation()
               submitInformation({
                 user,
                 images,
@@ -192,7 +206,7 @@ function Donate({}: Props) {
             Donate
           </button>
         </div>
-      <ClaimButton style={"absolute h-full bg-orange-600"} itemId={"64a0856e0ba6c7795ab65738"} />
+      {/* <ClaimButton style={"absolute h-full bg-orange-600"} itemId={"64a0856e0ba6c7795ab65738"} /> */}
       </div>
     </div>
     // </RootLayout>

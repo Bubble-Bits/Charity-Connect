@@ -103,9 +103,13 @@ export async function PUT(request: Request) {
 }
 
 export async function GET(request: Request) {
-  // const body = await request.json();
+  const userId = await prisma.user.findUnique({
+    where: {
+      localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
+    }
+  })
 
-  return NextResponse.json({ message: "eko" });
+  return NextResponse.json(userId);
 }
 
 export async function DELETE(request: Request) {
