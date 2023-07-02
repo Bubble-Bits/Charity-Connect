@@ -18,6 +18,9 @@ export default function ItemPage() {
     name: "",
     status: "",
     photos: [],
+    postedAt: "",
+    lng: 0,
+    lat: 0,
   });
 
   const [donorData, setDonorData] = useState({
@@ -59,7 +62,7 @@ export default function ItemPage() {
       if (mainPhoto === itemData.photos[itemData.photos.length - 1]) {
         var lastPart = itemData.photos.slice(
           itemData.photos.length - 4,
-          itemData.photos.length,
+          itemData.photos.length
         );
         setImageGallery(lastPart);
       } else {
@@ -78,6 +81,7 @@ export default function ItemPage() {
         }
         console.log("data", data.data);
         setItemData(data.data.item);
+
         setDonorData(data.data.donor);
         setMainPhoto(data.data.item.photos[0]);
         imageGalleryFunc(data.data.item.photos);
@@ -85,7 +89,22 @@ export default function ItemPage() {
       .catch((error) => {
         console.log("error", error);
       });
+    console.log("itemData lng", itemData.lng);
+    console.log("itemData lat", itemData.lat);
   }, [item]);
+
+  function getDaysAgoFromDate(dateString = "") {
+    const date = new Date(dateString);
+    const today = new Date();
+
+    // Calculate the difference in milliseconds between the two dates
+    const differenceMs: number = today.getTime() - date.getTime();
+
+    // Convert the difference to days
+    const differenceDays = Math.floor(differenceMs / (1000 * 60 * 60 * 24));
+
+    return differenceDays;
+  }
 
   return item ? (
     // This keeps it fixed in the div. How do we keep everything inside of the div?
@@ -149,7 +168,7 @@ export default function ItemPage() {
               <h1 className="text-white text-md">{itemData.status}</h1>
 
               <h1 className="text-white text-md">
-                listed 2 days ago in San Francisco
+                Posted {getDaysAgoFromDate(itemData.postedAt)} days ago
               </h1>
             </div>
 
@@ -202,7 +221,7 @@ export default function ItemPage() {
 
               <div className="relative w-full h-40 overflow-hidden">
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg">
-                  <Maps />
+                  <Maps item_lng={itemData.lng} item_lat={itemData.lat} />
                 </div>
               </div>
             </div>

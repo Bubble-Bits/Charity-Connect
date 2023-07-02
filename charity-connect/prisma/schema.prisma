@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id                  String   @id @default(auto()) @map("_id") @db.ObjectId
-  localId             String
+  localId             String?
   chatIds             String[] @db.ObjectId //[]
   chats               Chat[]   @relation(fields: [chatIds], references: [id]) //[]
   postedItems         Item[]   @relation("ItemPostedBy") //[]
@@ -61,6 +61,8 @@ model Item {
   postedAt    DateTime  @default(now())
   photos      String[]
   address     String
+  lat         Float?
+  lng         Float?
   pickup      Boolean   @default(false)
   shipping    Boolean   @default(false)
   status      String    @default("Available")

@@ -24,12 +24,14 @@
 }
 
 .image {
+  position: relative;
   border: 2px solid rgb(81, 255, 95);
   max-width: 100px;
   max-height: 100px;
   width: auto;
   height: auto;
   border-radius: 2px;
+  margin-top: 6px;
 }
 
 .labels {
