@@ -99,12 +99,11 @@ const Maps = () => {
             </div>
           ))}
 
-          {/* <div
+          <div
             className=" items-center"
             style={{ height: "79vh", width: "100vw" }}
           >
             <GoogleMapReact
-      
               bootstrapURLKeys={{ key: googleApi }}
               center={{ lat: latitude, lng: longitude }}
               defaultZoom={defaultProps.zoom}
@@ -125,7 +124,7 @@ const Maps = () => {
                 colorChoice="DarkOrange"
               />
             </GoogleMapReact>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
