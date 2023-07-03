@@ -22,7 +22,8 @@ const Maps = ({ item_lng, item_lat }: Props) => {
   useEffect(() => {
     setLong(item_lng);
     setLat(item_lat);
-  }, []);
+    console.log("is this infinite loop?");
+  }, [item_lng, item_lat]);
 
   const defaultProps = {
     center: {
@@ -34,10 +35,7 @@ const Maps = ({ item_lng, item_lat }: Props) => {
 
   return (
     <div>
-      <div
-        className="m-2 items-center"
-        style={{ height: "80vh", width: "80vw" }}
-      >
+      <div className="items-center" style={{ height: "80vh", width: "80vw" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: googleApi }}
           center={{ lat: latitude, lng: longitude }}

@@ -25,6 +25,6 @@ export async function GET(request: Request) {
   });
 
   console.log(donor);
-
+  await prisma.$disconnect();
   return NextResponse.json({ item: item, donor: donor });
 }

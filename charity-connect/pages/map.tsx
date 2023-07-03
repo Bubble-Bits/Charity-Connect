@@ -10,22 +10,16 @@ import NavBar from "../app/components/Navbar";
 import LocationPin from "../app/components/LocationPin";
 import { BiSearch } from "react-icons/bi";
 
-type Props = {
-  user_address: any;
-};
-
 const defaultAddress = process.env.NEXT_PUBLIC_INPUT;
 const pw = process.env.NEXT_PUBLIC_GEOLOCATION;
 const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || "1";
 
-const Maps = ({ user_address }: Props) => {
+const Maps = () => {
   const [longitude, setLong] = useState(-74.0163584);
   const [latitude, setLat] = useState(40.63232);
   const [address, setAddress] = useState(defaultAddress);
   const [items, setItems] = useState<any>([]);
   const [search, setSearch] = useState<any>(defaultAddress);
-
-  // 6823%20Vista%20Place%20Brooklyn%20NY%2011220
 
   useEffect(() => {
     //fetches current user's address
@@ -53,21 +47,18 @@ const Maps = ({ user_address }: Props) => {
     zoom: 14,
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     setAddress(search);
-    //fetches the searched address and sets it as the new center
-    axios
-      // grabs longitude & latitude based on given address
-      .get(`https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${pw}`)
-      .then((response) => {
-        //set those coordinates into my state
-        setLong(response.data.results[0].geometry.lng);
-        setLat(response.data.results[0].geometry.lat);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const response = await axios.get(
+        `https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${pw}`
+      );
+      setLong(response.data.results[0].geometry.lng);
+      setLat(response.data.results[0].geometry.lat);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChange = (event: any) => {
@@ -76,13 +67,13 @@ const Maps = ({ user_address }: Props) => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-indigo-900 to-indigo-600">
+    <div>
       <NavBar />
-      <div className="absolute top-20 bg-gradient-to-b from-indigo-900 to-indigo-600 flex-1 flex-col justify-center w-full h-full">
-        <div className="border-2 p-2 m-2 rounded-md text-white text-center text-lg">
-          <form onSubmit={handleSubmit}>
+      <div className="absolute  top-20 bg-gradient-to-b from-indigo-900 to-indigo-600 flex-1 flex-col justify-center w-full h-full">
+        <div className=" text-white text-center text-lg">
+          <form onSubmit={handleSubmit} className="p-3 m-3">
             <input
-              className="text-black p-1 border-2 border-rose-600 rounded-full"
+              className="text-black p-2 px-4 rounded-full w-5/6"
               type="text"
               placeholder=" Find a place"
               onChange={(e) => {
@@ -90,16 +81,14 @@ const Maps = ({ user_address }: Props) => {
               }}
             ></input>
 
-            <button type="submit">
-              <div className="p-2 bg-green-500 rounded-full text-black m-2 border-2 border-rose-600">
+            <button type="submit" className="">
+              <div className=" flex p-3 m-2 bg-gradient-to-b from-emerald-400 to-emerald-500 rounded-full text-white flex-1 flex-col justify-center">
                 <BiSearch />
               </div>
             </button>
           </form>
-          <div>Longitude: {longitude}</div>
-          <div>Latitude: {latitude}</div>
-          {/* {items.map((item: any) => (
-            <div>
+          {items.map((item: any) => (
+            <div className="inline p-2 m-2">
               <LocationPin
                 key={item.id}
                 lat={item.lat}
@@ -108,13 +97,14 @@ const Maps = ({ user_address }: Props) => {
                 data={item}
               />
             </div>
-          ))} */}
+          ))}
 
-          <div
-            className="border-2 p-2 m-2 items-center"
-            style={{ height: "80vh", width: "80vw" }}
+          {/* <div
+            className=" items-center"
+            style={{ height: "79vh", width: "100vw" }}
           >
             <GoogleMapReact
+      
               bootstrapURLKeys={{ key: googleApi }}
               center={{ lat: latitude, lng: longitude }}
               defaultZoom={defaultProps.zoom}
@@ -135,7 +125,7 @@ const Maps = ({ user_address }: Props) => {
                 colorChoice="DarkOrange"
               />
             </GoogleMapReact>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
