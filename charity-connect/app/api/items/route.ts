@@ -11,7 +11,7 @@ export async function POST(request: Request) {
       where: {
         //! Need current user's id to be passed in frontend
         //! email: body.user
-        email: "john.doe@example.com"
+        localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
       }
     })
     if (userId) {
@@ -30,17 +30,16 @@ export async function POST(request: Request) {
           posterId: userId.id
         }
       })
-      //! Issue where User's postedItems array wont push
-      // await prisma.user.update({
-      //   where: {
-      //     id: userId?.id
-      //   },
-      //   data: {
-      //     postedItems : {
-      //       push: newItem
-      //     }
-      //   }
-      // })
+      // //! Issue where User's postedItems array wont push
+      await prisma.user.update({
+        where: {
+          id: userId.id
+        },
+        data: {
+          postedItemIds :
+            {push: newItem.id}
+          }
+        })
     } else {
       const newItem = await prisma.item.create({
         data: {
@@ -55,6 +54,16 @@ export async function POST(request: Request) {
           posterId: userId.id
         }
       })
+      // //! Issue where User's postedItems array wont push
+      await prisma.user.update({
+        where: {
+          id: userId.id
+        },
+        data: {
+          postedItemIds :
+            {push: newItem.id}
+          }
+        })
     }
   }
 }
@@ -71,12 +80,12 @@ export async function PUT(request: Request) {
     const userId = await prisma.user.findUnique({
       where: {
         //! Need current user's id to be passed in frontend
-        //! email: body.user
-        email: "john.doe@example.com"
+        //! localId: body.user
+        localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
       }
     })
     if (userId) {
-    await prisma.item.update({
+    const claimedItem = await prisma.item.update({
       where: {
         //! Needs item id to be passed into prop of claim button
         id: body.item
@@ -86,22 +95,32 @@ export async function PUT(request: Request) {
         claimerId: userId.id
         }
       })
+    await prisma.user.update({
+        where: {
+          id: userId.id
+        },
+        data: {
+          claimedItemIds :
+            {push: claimedItem.id}
+          }
+        })
     }
   }
   catch (err) {
     console.log('ERROR: ', err);
   }
-  // const claimed = await prisma.item.updateOne(
-  //   {_id: ObjectId(`${body.item}`)}, {$set: {status: 'Pending', claimerId: userId}}
-  //   )
 
   return NextResponse.json({ status: 202 });
 }
 
 export async function GET(request: Request) {
-  // const body = await request.json();
+  const userId = await prisma.user.findUnique({
+    where: {
+      localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
+    }
+  })
 
-  return NextResponse.json({ message: "eko" });
+  return NextResponse.json(userId);
 }
 
 export async function DELETE(request: Request) {

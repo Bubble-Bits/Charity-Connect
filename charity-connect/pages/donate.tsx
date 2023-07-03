@@ -9,13 +9,17 @@ import AutoAddress from "../app/components/Donation/AutoAddress";
 import NavBar from "../app/components/Navbar";
 import { AiOutlineCalendar } from 'react-icons/ai';
 import useAuth from "@/firebase/AuthState";
+import { useRouter } from "next/router";
 
 //! TESTING PURPOSE
-//import ClaimButton from "../app/components/Donation/ClaimButton"
+// import ClaimButton from "../app/components/Donation/ClaimButton"
 
 type Props = {};
 
 function Donate({}: Props) {
+  const router = useRouter();
+  const { user } = router.query;
+
   const categories: string[] = [
     "Apparel",
     "Electronics",
@@ -32,17 +36,9 @@ function Donate({}: Props) {
     "Other",
   ];
 
-  const user = useAuth();
-
-  useEffect(()=> {
-    user ?
-    setUserEmail(user.email) :
-    null
-  }, [user])
-
   const [opened, openModal] = useState(false);
 
-  const [userEmail, setUserEmail] = useState('');
+  // const [userLocal, setUserLocal] = useState(user);
   const [images, setImages] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -65,6 +61,19 @@ function Donate({}: Props) {
       console.log(err);
     }
   };
+
+  //? FOR TESTING
+  // const getInformation = async () => {
+  //   try {
+  //     //! if (images.length && name && description && address) {
+  //       let result = await axios.get("/api/items")
+  //       console.log(result)
+  //     }
+  //   //! }
+  //   catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     // <RootLayout>
@@ -180,8 +189,9 @@ function Donate({}: Props) {
             className="text-white bg-green-500 w-4/5 rounded hover:bg-green-700"
             onClick={() => {
               //? FOR TESTING -> console.log({
+              //? getInformation()
               submitInformation({
-                user: userEmail,
+                user,
                 images,
                 name,
                 description,
@@ -196,7 +206,7 @@ function Donate({}: Props) {
             Donate
           </button>
         </div>
-      {/* <ClaimButton style={"absolute h-full bg-orange-600"} itemId={"6495edfee896d8285cab2955"} /> */}
+      {/* <ClaimButton style={"absolute h-full bg-orange-600"} itemId={"64a09858cc19995ed7440c16"} /> */}
       </div>
     </div>
     // </RootLayout>

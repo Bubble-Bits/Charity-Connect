@@ -20,6 +20,8 @@ export type User = {
   id: string
   localId: string | null
   chatIds: string[]
+  claimedItemIds: string[]
+  postedItemIds: string[]
   name: string
   email: string
   bio: string | null
@@ -281,7 +283,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 4.15.0
-   * Query Engine version: b20ead4d3ab9e78ac112966e242ded703f4a052c
+   * Query Engine version: 4bc8b6e1b66cb932731fb1bdbbc550d1e010de81
    */
   export type PrismaVersion = {
     client: string
@@ -1059,6 +1061,8 @@ export namespace Prisma {
     id: number
     localId: number
     chatIds: number
+    claimedItemIds: number
+    postedItemIds: number
     name: number
     email: number
     bio: number
@@ -1109,6 +1113,8 @@ export namespace Prisma {
     id?: true
     localId?: true
     chatIds?: true
+    claimedItemIds?: true
+    postedItemIds?: true
     name?: true
     email?: true
     bio?: true
@@ -1211,6 +1217,8 @@ export namespace Prisma {
     id: string
     localId: string | null
     chatIds: string[]
+    claimedItemIds: string[]
+    postedItemIds: string[]
     name: string
     email: string
     bio: string | null
@@ -1244,6 +1252,8 @@ export namespace Prisma {
     id?: boolean
     localId?: boolean
     chatIds?: boolean
+    claimedItemIds?: boolean
+    postedItemIds?: boolean
     name?: boolean
     email?: boolean
     bio?: boolean
@@ -7051,6 +7061,8 @@ export namespace Prisma {
     id: 'id',
     localId: 'localId',
     chatIds: 'chatIds',
+    claimedItemIds: 'claimedItemIds',
+    postedItemIds: 'postedItemIds',
     name: 'name',
     email: 'email',
     bio: 'bio',
@@ -7148,6 +7160,8 @@ export namespace Prisma {
     id?: StringFilter | string
     localId?: StringNullableFilter | string | null
     chatIds?: StringNullableListFilter
+    claimedItemIds?: StringNullableListFilter
+    postedItemIds?: StringNullableListFilter
     name?: StringFilter | string
     email?: StringFilter | string
     bio?: StringNullableFilter | string | null
@@ -7165,6 +7179,8 @@ export namespace Prisma {
     id?: SortOrder
     localId?: SortOrder
     chatIds?: SortOrder
+    claimedItemIds?: SortOrder
+    postedItemIds?: SortOrder
     name?: SortOrder
     email?: SortOrder
     bio?: SortOrder
@@ -7180,6 +7196,7 @@ export namespace Prisma {
 
   export type UserWhereUniqueInput = {
     id?: string
+    localId?: string
     name?: string
     email?: string
   }
@@ -7188,6 +7205,8 @@ export namespace Prisma {
     id?: SortOrder
     localId?: SortOrder
     chatIds?: SortOrder
+    claimedItemIds?: SortOrder
+    postedItemIds?: SortOrder
     name?: SortOrder
     email?: SortOrder
     bio?: SortOrder
@@ -7210,6 +7229,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter | string
     localId?: StringNullableWithAggregatesFilter | string | null
     chatIds?: StringNullableListFilter
+    claimedItemIds?: StringNullableListFilter
+    postedItemIds?: StringNullableListFilter
     name?: StringWithAggregatesFilter | string
     email?: StringWithAggregatesFilter | string
     bio?: StringNullableWithAggregatesFilter | string | null
@@ -7462,6 +7483,8 @@ export namespace Prisma {
   export type UserCreateInput = {
     id?: string
     localId?: string | null
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -7479,6 +7502,8 @@ export namespace Prisma {
     id?: string
     localId?: string | null
     chatIds?: UserCreatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -7494,6 +7519,8 @@ export namespace Prisma {
 
   export type UserUpdateInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7510,6 +7537,8 @@ export namespace Prisma {
   export type UserUncheckedUpdateInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
     chatIds?: UserUpdatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7527,6 +7556,8 @@ export namespace Prisma {
     id?: string
     localId?: string | null
     chatIds?: UserCreatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -7539,6 +7570,8 @@ export namespace Prisma {
 
   export type UserUpdateManyMutationInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7552,6 +7585,8 @@ export namespace Prisma {
   export type UserUncheckedUpdateManyInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
     chatIds?: UserUpdatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7906,6 +7941,8 @@ export namespace Prisma {
     id?: SortOrder
     localId?: SortOrder
     chatIds?: SortOrder
+    claimedItemIds?: SortOrder
+    postedItemIds?: SortOrder
     name?: SortOrder
     email?: SortOrder
     bio?: SortOrder
@@ -8215,6 +8252,14 @@ export namespace Prisma {
     content?: SortOrder
   }
 
+  export type UserCreateclaimedItemIdsInput = {
+    set: Enumerable<string>
+  }
+
+  export type UserCreatepostedItemIdsInput = {
+    set: Enumerable<string>
+  }
+
   export type UserCreateblockedInput = {
     set: Enumerable<string>
   }
@@ -8266,6 +8311,16 @@ export namespace Prisma {
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
     unset?: boolean
+  }
+
+  export type UserUpdateclaimedItemIdsInput = {
+    set?: Enumerable<string>
+    push?: string | Enumerable<string>
+  }
+
+  export type UserUpdatepostedItemIdsInput = {
+    set?: Enumerable<string>
+    push?: string | Enumerable<string>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8892,6 +8947,8 @@ export namespace Prisma {
   export type UserCreateWithoutChatsInput = {
     id?: string
     localId?: string | null
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -8908,6 +8965,8 @@ export namespace Prisma {
     id?: string
     localId?: string | null
     chatIds?: UserCreatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -8973,6 +9032,8 @@ export namespace Prisma {
     id?: StringFilter | string
     localId?: StringNullableFilter | string | null
     chatIds?: StringNullableListFilter
+    claimedItemIds?: StringNullableListFilter
+    postedItemIds?: StringNullableListFilter
     name?: StringFilter | string
     email?: StringFilter | string
     bio?: StringNullableFilter | string | null
@@ -9044,6 +9105,8 @@ export namespace Prisma {
   export type UserCreateWithoutPostedItemsInput = {
     id?: string
     localId?: string | null
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -9060,6 +9123,8 @@ export namespace Prisma {
     id?: string
     localId?: string | null
     chatIds?: UserCreatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -9080,6 +9145,8 @@ export namespace Prisma {
   export type UserCreateWithoutClaimedItemsInput = {
     id?: string
     localId?: string | null
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -9096,6 +9163,8 @@ export namespace Prisma {
     id?: string
     localId?: string | null
     chatIds?: UserCreatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -9120,6 +9189,8 @@ export namespace Prisma {
 
   export type UserUpdateWithoutPostedItemsInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9135,6 +9206,8 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutPostedItemsInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
     chatIds?: UserUpdatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9154,6 +9227,8 @@ export namespace Prisma {
 
   export type UserUpdateWithoutClaimedItemsInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9169,6 +9244,8 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutClaimedItemsInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
     chatIds?: UserUpdatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9326,6 +9403,8 @@ export namespace Prisma {
 
   export type UserUpdateWithoutChatsInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9341,6 +9420,8 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutChatsInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
     chatIds?: UserUpdatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9356,6 +9437,8 @@ export namespace Prisma {
   export type UserUncheckedUpdateManyWithoutUsersInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
     chatIds?: UserUpdatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
