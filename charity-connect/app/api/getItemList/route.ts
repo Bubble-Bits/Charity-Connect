@@ -19,6 +19,7 @@ export async function GET(request: Request) {
       }
     });
 
+    await prisma.$disconnect();
     console.log("Items obtained:", data);
     return NextResponse.json(data);
 

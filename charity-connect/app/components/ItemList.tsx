@@ -157,7 +157,8 @@ export default function ItemList() {
       }
 
       try {
-        let data: ItemsListType[] = await axios.request(options);
+        let { data } = await axios.request<ItemsListType[]>(options);
+        console.log(data);
         setItems(data);
       } catch (error) {
         console.log(error);
