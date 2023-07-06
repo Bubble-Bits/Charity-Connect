@@ -10,8 +10,8 @@ export async function POST(request: Request) {
     const userId = await prisma.user.findUnique({
       where: {
         //! Need current user's id to be passed in frontend
-        //! email: body.user
-        localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
+        email: body.user
+        // localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
       }
     })
     if (userId) {
@@ -80,8 +80,8 @@ export async function PUT(request: Request) {
     const userId = await prisma.user.findUnique({
       where: {
         //! Need current user's id to be passed in frontend
-        //! localId: body.user
-        localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
+        localId: body.user
+        // localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
       }
     })
     if (userId) {
