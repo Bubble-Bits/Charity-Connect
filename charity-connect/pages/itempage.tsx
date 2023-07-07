@@ -19,6 +19,7 @@ export default function ItemPage() {
     status: "",
     photos: [],
     postedAt: "",
+    address: "",
   });
 
   const [donorData, setDonorData] = useState({
@@ -163,7 +164,9 @@ export default function ItemPage() {
               <h1 className="text-white text-md">{itemData.status}</h1>
 
               <h1 className="text-white text-md">
-                Posted {getDaysAgoFromDate(itemData.postedAt)} days ago
+                {getDaysAgoFromDate(itemData.postedAt) === 0
+                  ? `Posted today`
+                  : `Posted ${getDaysAgoFromDate(itemData.postedAt)} days ago`}
               </h1>
             </div>
 
@@ -216,7 +219,7 @@ export default function ItemPage() {
 
               <div className="relative w-full h-40 overflow-hidden">
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg">
-                  <Maps />
+                  <Maps user_address={itemData.address} />
                 </div>
               </div>
             </div>

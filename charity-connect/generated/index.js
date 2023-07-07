@@ -30,11 +30,11 @@ exports.Prisma = Prisma
 
 /**
  * Prisma Client JS version: 4.15.0
- * Query Engine version: b20ead4d3ab9e78ac112966e242ded703f4a052c
+ * Query Engine version: 4bc8b6e1b66cb932731fb1bdbbc550d1e010de81
  */
 Prisma.prismaVersion = {
   client: "4.15.0",
-  engine: "b20ead4d3ab9e78ac112966e242ded703f4a052c"
+  engine: "4bc8b6e1b66cb932731fb1bdbbc550d1e010de81"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -160,7 +160,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/anthonybui/Documents/HackReactorSR/Charity-Connect/charity-connect/generated",
+      "value": "/Users/stanleychu/Charity-Connect/charity-connect/generated",
       "fromEnvVar": null
     },
     "config": {
@@ -182,7 +182,7 @@ const config = {
   },
   "relativePath": "../prisma",
   "clientVersion": "4.15.0",
-  "engineVersion": "b20ead4d3ab9e78ac112966e242ded703f4a052c",
+  "engineVersion": "4bc8b6e1b66cb932731fb1bdbbc550d1e010de81",
   "datasourceNames": [
     "db"
   ],
