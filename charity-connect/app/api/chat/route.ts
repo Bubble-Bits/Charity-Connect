@@ -13,6 +13,7 @@ export async function POST(request: NextRequest) {
   //     create: [],
   //   },
   // };
+  console.log('userids', userIds);
 
   try {
     await prisma.$connect(); // Connect to the database
@@ -22,6 +23,7 @@ export async function POST(request: NextRequest) {
       },
       include: {
         messages: true,
+        users: true
       },
     });
     await prisma.$disconnect();
