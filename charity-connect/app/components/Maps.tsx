@@ -17,7 +17,6 @@ const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || "1";
 const Maps = ({ item_lng, item_lat }: Props) => {
   const [longitude, setLong] = useState(item_lng);
   const [latitude, setLat] = useState(item_lat);
-  // const [search, setSearch] = useState(item_address);
 
   useEffect(() => {
     setLong(item_lng);

@@ -82,12 +82,12 @@ const Maps = () => {
             ></input>
 
             <button type="submit" className="">
-              <div className=" flex p-3 m-2 bg-gradient-to-b from-emerald-400 to-emerald-500 rounded-full text-white flex-1 flex-col justify-center">
+              <div className=" flex p-3 m-2 bg-green-500 rounded-full text-white flex-1 flex-col justify-center">
                 <BiSearch />
               </div>
             </button>
           </form>
-          {items.map((item: any) => (
+          {/* {items.map((item: any) => (
             <div className="inline p-2 m-2">
               <LocationPin
                 key={item.id}
@@ -97,7 +97,7 @@ const Maps = () => {
                 data={item}
               />
             </div>
-          ))}
+          ))} */}
 
           <div
             className=" items-center"

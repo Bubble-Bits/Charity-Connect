@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/app/Map-Item.module.css";
 import Image from "next/image";
 
@@ -32,13 +32,27 @@ const LocationPin = ({ lat, lng, colorChoice, data }: LocationProps) => {
     setIsHovered(false);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsHovered(false);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const shouldApplyMouseoverEffect = window.innerWidth > 400;
+
   if (lat === null || lng === null) {
     return null;
   } else {
     return (
       <div
         className={`inline-block rounded-full map-item ${styles["map-item"]} ${
-          isHovered ? styles.hovered : ""
+          shouldApplyMouseoverEffect && isHovered ? styles.hovered : ""
         }`}
         style={{ fontSize: "155%" }}
         onMouseEnter={handleMouseEnter}
@@ -54,7 +68,7 @@ const LocationPin = ({ lat, lng, colorChoice, data }: LocationProps) => {
             fill={colorChoice}
           />
         </svg>
-        {isHovered && data?.photos[0] && (
+        {shouldApplyMouseoverEffect && isHovered && data?.photos[0] && (
           <div
             className={styles.popupinfo}
             onClick={() => {
