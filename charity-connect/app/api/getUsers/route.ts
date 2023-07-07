@@ -11,38 +11,14 @@ const prisma = new PrismaClient();
 
 export async function GET(request: NextRequest) {
 
-  const body = request.nextUrl.searchParams;
-  const userId = body.get('userId') as string;
 
   try {
     await prisma.$connect(); // Connect to the database
-    const chats = await prisma.chat.findMany({
-      where: {
-        userIds: {
-          has: userId,
-        },
-      },
-      include: {
-        users: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
-        messages: {
-          select: {
-            id: true,
-            content: true,
-            sentAt: true,
-            sender: true,
-          },
-        },
-      },
-    });
+    const users = await prisma.user.findMany({});
     await prisma.$disconnect(); // Connect to the database
-    return NextResponse.json(chats);
+    return NextResponse.json(users);
   } catch (error) {
-    console.error("Error creating chat:", error);
+    console.error("Error getting users:", error);
     await prisma.$disconnect(); // Connect to the database
     return NextResponse.error();
   }
