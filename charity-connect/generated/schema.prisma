@@ -15,18 +15,21 @@ datasource db {
 
 model User {
   id                  String   @id @default(auto()) @map("_id") @db.ObjectId
-  chatIds             String[] @db.ObjectId
-  chats               Chat[]   @relation(fields: [chatIds], references: [id])
-  postedItems         Item[]   @relation("ItemPostedBy")
-  claimedItems        Item[]   @relation("ItemClaimedBy")
-  name                String   @unique
-  email               String   @unique
+  localId             String?  @unique
+  chatIds             String[] @db.ObjectId //[]
+  chats               Chat[]   @relation(fields: [chatIds], references: [id]) //[]
+  postedItems         Item[]   @relation("ItemPostedBy") //[]
+  claimedItems        Item[]   @relation("ItemClaimedBy") //[]
+  claimedItemIds      String[] @default([])
+  postedItemIds       String[] @default([])
+  name                String   @unique // FIREBASE
+  email               String   @unique //FIREBASE
   bio                 String?
-  profilePic          String?
-  address             String
-  itemsClaimed        Int      @default(0)
-  itemsSuccessClaimed Int      @default(0)
-  blocked             String[]
+  profilePic          String? //FIREBASE
+  address             String?
+  itemsClaimed        Int      @default(0) //0
+  itemsSuccessClaimed Int      @default(0) // 0
+  blocked             String[] //0
 }
 
 // CHAT SCHEMA //
