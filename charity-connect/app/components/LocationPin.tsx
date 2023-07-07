@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/app/Map-Item.module.css";
 import Image from "next/image";
 
@@ -37,7 +37,7 @@ const LocationPin = ({ lat, lng, colorChoice, data }: LocationProps) => {
   } else {
     return (
       <div
-        className={`inline-block map-item ${styles["map-item"]} ${
+        className={`inline-block rounded-full map-item ${styles["map-item"]} ${
           isHovered ? styles.hovered : ""
         }`}
         style={{ fontSize: "155%" }}
@@ -61,19 +61,17 @@ const LocationPin = ({ lat, lng, colorChoice, data }: LocationProps) => {
               handleClick(data);
             }}
           >
-            <div>{data.name}</div>
-            <Image
-              src={data.photos[0]}
-              alt="Hovered Image"
-              width={100}
-              height={100}
-              className={styles.image}
-            ></Image>
-            {/* <img
-              src={data.photos[0]}
-              alt="Hovered Image"
-              className={styles.image}
-            /> */}
+            <div>
+              <Image
+                src={data.photos[0]}
+                alt="Hovered Image"
+                width={150}
+                height={150}
+                className={styles.image}
+              ></Image>
+            </div>
+
+            <div className={styles.pin}>{data.name}</div>
           </div>
         )}
       </div>

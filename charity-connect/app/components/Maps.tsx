@@ -17,12 +17,12 @@ const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || "1";
 const Maps = ({ item_lng, item_lat }: Props) => {
   const [longitude, setLong] = useState(item_lng);
   const [latitude, setLat] = useState(item_lat);
-  // const [search, setSearch] = useState(item_address);
 
   useEffect(() => {
     setLong(item_lng);
     setLat(item_lat);
-  }, []);
+    console.log("is this infinite loop?");
+  }, [item_lng, item_lat]);
 
   const defaultProps = {
     center: {
@@ -34,10 +34,7 @@ const Maps = ({ item_lng, item_lat }: Props) => {
 
   return (
     <div>
-      <div
-        className="m-2 items-center"
-        style={{ height: "80vh", width: "80vw" }}
-      >
+      <div className="items-center" style={{ height: "80vh", width: "80vw" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: googleApi }}
           center={{ lat: latitude, lng: longitude }}
