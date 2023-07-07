@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
-require('dotenv').config();
+import axios from "axios";
+require("dotenv").config();
 
 type Props = {
   closeImageUploader: () => any;
@@ -32,15 +32,21 @@ const ProfileImageUploader = ({
     let cloudLinks: any[] = [];
     const data = new FormData();
     files.map((file: any) => {
-      data.append('file', file);
-      data.append('api_key', `${process.env.NEXT_PUBLIC_CLD_API}`);
-      data.append('upload_preset', 'charityconnect');
-      axios.post(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLD_CLOUD}/upload`, data)
-        .then(result => { cloudLinks.push(result.data.secure_url) })
-    })
-    setImages(cloudLinks)
+      data.append("file", file);
+      data.append("api_key", `${process.env.NEXT_PUBLIC_CLD_API}`);
+      data.append("upload_preset", "charityconnect");
+      axios
+        .post(
+          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLD_CLOUD}/upload`,
+          data,
+        )
+        .then((result) => {
+          cloudLinks.push(result.data.secure_url);
+        });
+    });
+    setImages(cloudLinks);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [files])
+  }, [files]);
 
   function onImageChange(e: any) {
     setFiles([...e.target.files]);
