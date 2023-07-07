@@ -134,7 +134,7 @@ export default function UserProfile({ localId }: Props) {
           localId: localId
         }
       }).then((data) => {
-        //console.log('data: ', data.data.user);
+        console.log('data: ', data.data.user);
         setCurrUser(data.data.user);
         setProfilePicUrl(data.data.user.profilePic);
         setName(data.data.user.name);

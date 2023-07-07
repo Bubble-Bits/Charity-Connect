@@ -15,9 +15,10 @@ export async function GET(request: NextRequest) {
     }
   }).catch((error) => {
     console.log(error);
+    prisma.$disconnect;
     return NextResponse.json({ error: error });
   });
-
+  prisma.$disconnect;
   return NextResponse.json({ user: user });
 }
 
@@ -48,12 +49,15 @@ export async function POST(request: NextRequest) {
       }
     }).catch((error) => {
       console.log("ERROR: ", error);
+      prisma.$disconnect;
     })
     console.log("new user: ", newUser);
+    prisma.$disconnect;
     return NextResponse.json({ message: "new user created", user: newUser });
 
   } else {
     //if user already exists
+    prisma.$disconnect;
     return NextResponse.json({ message: "a user with id: " + localId + " already exists.", localId: localId });
   }
 }
@@ -82,6 +86,8 @@ export async function PUT(request: NextRequest) {
     }
   }).catch((error) => {
     console.log(error);
+    prisma.$disconnect;
   });
+  prisma.$disconnect;
   return NextResponse.json({ updatedUser: updatedUser });
 }
