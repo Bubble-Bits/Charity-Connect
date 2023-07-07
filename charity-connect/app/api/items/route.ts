@@ -114,17 +114,30 @@ export async function PUT(request: Request) {
 }
 
 export async function GET(request: Request) {
-  const userId = await prisma.user.findUnique({
-    where: {
-      localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
+  type storage = {
+    posted: String[],
+    claimed: String[]
+  }
+
+  let Storage:storage = {
+    posted: [],
+    claimed: []
+  }
+
+  const body = await request.json();
+  try {
+    const userInfo = await prisma.user.findUnique({
+      where: {
+        localId: body.user
+      }
+    })
+    if (userInfo) {
+      Storage.posted = userInfo.postedItemIds;
+      Storage.claimed = userInfo.claimedItemIds;
     }
-  })
-
-  return NextResponse.json(userId);
-}
-
-export async function DELETE(request: Request) {
-  // const body = await request.json();
-
-  return NextResponse.json({ message: "eko" });
+  }
+  catch (err) {
+      console.log('ERROR: ', err);
+  }
+  // return NextResponse.json(userId);
 }
