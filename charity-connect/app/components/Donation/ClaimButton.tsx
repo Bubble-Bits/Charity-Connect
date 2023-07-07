@@ -20,7 +20,7 @@ function ClaimButton({ itemId, style }: Props) {
   const [userEmail, setUserEmail] = useState('');
 
   const claimItem = async (item: string) => {
-    await axios.put('/api/items', { item, user: userEmail })
+    await axios.put('/api/items', { item, user: user.localId })
   }
 
   return (
