@@ -1,5 +1,6 @@
 import Navbar from '@/app/components/Navbar';
 import ItemList from '@/app/components/ItemList';
+import Link from "next/link";
 import '../app/globals.css'
 
 export default function Homepage() {
@@ -11,9 +12,24 @@ export default function Homepage() {
           <ItemList />
         </div>
         <div className='mt-0.5 w-screen h-1/5 bg-[#01002e]'>
-          <button className='text-xl mr-5 bg-green-500 border border-solid border-green-500 rounded p-10 text-white'>Donate</button>
-          <div>About</div>
-          <div>Terms & Policy</div>
+        <div className="pt-20 ml-[15vh] flex justify-around items-center">
+              <Link
+                href="/homepage"
+                className="md:text-3xl md:mr-5 md:p-3
+                bg-green-500 border border-solid border-white rounded-full inline-flex items-center justify-center min-w-[20rem]"
+              >
+                Want to Donate?
+              </Link>
+            </div>
+            <div className="pt-20 ml-[15vh]">
+              <Link
+                href="/map"
+                className="md:text-3xl md:mr-5 md:p-3
+                bg-green-500 border border-solid border-white rounded-full inline-flex items-center justify-center min-w-[20rem]"
+              >
+                Search on a map
+              </Link>
+            </div>
         </div>
       </div>
     </div>
