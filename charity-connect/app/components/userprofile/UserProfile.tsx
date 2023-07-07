@@ -6,6 +6,7 @@ import Image from "next/image";
 import useAuth from "@/firebase/AuthState";
 import axios from "axios";
 import ProfileImageUploader from "./ProfileImageUploader";
+import { da } from "date-fns/locale";
 
 type Props = {
   localId: any
@@ -87,6 +88,12 @@ export default function UserProfile({ localId }: Props) {
       });
   };
 
+  function getItem(id: String) {
+    axios.get('api/getItems', { params: { itemId: id } }).then((res) => {
+      console.log('item: ', res);
+    })
+  }
+
   const toggleImageShown = () => {
     setShowPostedDonations(!showPostedDonations);
   };
@@ -96,6 +103,8 @@ export default function UserProfile({ localId }: Props) {
   const [profilePicUrl, setProfilePicUrl] = useState<any>();
   const [name, setName] = useState("");
   const [bio, setBio] = useState<any>();
+  const [address, setAddress] = useState("");
+  const [id, setId] = useState("");
   const [currUser, setCurrUser] = useState({
     localId: "",
     chatIds: [],
@@ -125,11 +134,13 @@ export default function UserProfile({ localId }: Props) {
           localId: localId
         }
       }).then((data) => {
-        console.log('data: ', data.data.user);
+        //console.log('data: ', data.data.user);
         setCurrUser(data.data.user);
         setProfilePicUrl(data.data.user.profilePic);
         setName(data.data.user.name);
         setBio(data.data.user.bio);
+        setAddress(data.data.user.address);
+        setId(data.data.user.id);
       })
     }, [localId]);
 
@@ -138,17 +149,17 @@ export default function UserProfile({ localId }: Props) {
       <div>
         <div className="bg-[#01002e] text-white pt-4 pl-4">
           <Logo />
-          <div className="text-xs">user score: n/a</div>
-          <div className="text-xs">block user</div>
+          {/* <div className="text-xs">user score: n/a</div>
+          <div className="text-xs">block user</div> */}
         </div>
-        <button onClick={getUser}>
+        {/* <button onClick={getUser}>
           Test GET request</button>
         <br></br>
         <button onClick={createNewUser}>
           Save new user</button>
         <br></br>
         <button onClick={updateUser}>
-          Update user info</button>
+          Update user info</button> */}
         <div className="text-center h-full bg-[#01002e] overflow-y-auto text-white">
           <div className="flex items-center justify-center mt-4">
             <Image
@@ -187,11 +198,28 @@ export default function UserProfile({ localId }: Props) {
               updateUser({});
             }}
           ></input>
+          {/* <p>{id}</p> */}
           <div className="m-4">
             <button className="text-white bg-green-500 w-1/10 rounded hover:bg-green-700" onClick={() => {
               console.log('username updated to: ', name);
             }}>
               update username
+            </button>
+          </div>
+
+          <br></br>
+          <textarea
+            className="text-black bg-slate-200 p-1 w-9/12"
+            rows={2} value={address} onChange={(e) => { //state will no longer update dynamically
+              setName(e.target.value);
+              updateUser({});
+            }}
+          ></textarea>
+          <div className="m-4">
+            <button className="text-white bg-green-500 w-1/10 rounded hover:bg-green-700" onClick={() => {
+              console.log('username updated to: ', name);
+            }}>
+              update address
             </button>
           </div>
 

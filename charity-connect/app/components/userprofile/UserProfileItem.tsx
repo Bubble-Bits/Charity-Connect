@@ -1,5 +1,6 @@
 type Props = {
-  itemId: String
+  itemId: String,
+  item: any
 }
 
 const item = {
@@ -13,6 +14,13 @@ const item = {
   shipping: true,
 }
 
-export default function UserProfileItem({ }: Props) {
-  return <div></div>
+export default function UserProfileItem({ item }: Props) {
+
+  var claimedDonation =
+    "https://img.freepik.com/premium-vector/donation-box-quarantine-time_291916-2.jpg?w=2000";
+
+  return (
+    <div>
+    </div>
+  );
 }
