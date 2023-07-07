@@ -32,27 +32,13 @@ const LocationPin = ({ lat, lng, colorChoice, data }: LocationProps) => {
     setIsHovered(false);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsHovered(false);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const shouldApplyMouseoverEffect = window.innerWidth > 400;
-
   if (lat === null || lng === null) {
     return null;
   } else {
     return (
       <div
         className={`inline-block rounded-full map-item ${styles["map-item"]} ${
-          shouldApplyMouseoverEffect && isHovered ? styles.hovered : ""
+          isHovered ? styles.hovered : ""
         }`}
         style={{ fontSize: "155%" }}
         onMouseEnter={handleMouseEnter}
@@ -68,7 +54,7 @@ const LocationPin = ({ lat, lng, colorChoice, data }: LocationProps) => {
             fill={colorChoice}
           />
         </svg>
-        {shouldApplyMouseoverEffect && isHovered && data?.photos[0] && (
+        {isHovered && data?.photos[0] && (
           <div
             className={styles.popupinfo}
             onClick={() => {
