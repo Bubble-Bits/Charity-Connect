@@ -11,8 +11,8 @@ export default function Homepage() {
         <div className='mt-20 h-4/5 w-screen overflow-x-hidden bg-[#01002e]'>
           <ItemList />
         </div>
-        <div className='mt-0.5 w-screen h-1/5 bg-[#01002e] flex justify-around items-center'>
-        <div className="pt-20 ml-[15vh]">
+        <div className='mt-0.5 w-screen h-1/5 bg-[#01002e]'>
+        <div className="pt-20 ml-[15vh] flex justify-around items-center">
               <Link
                 href="/homepage"
                 className="md:text-3xl md:mr-5 md:p-3
