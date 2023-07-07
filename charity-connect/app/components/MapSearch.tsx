@@ -1,46 +1,54 @@
 "use client";
-import React from "react";
-import { BiSearch } from "react-icons/bi";
-type Props = {};
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+require("dotenv").config();
+import GoogleMapReact from "google-map-react";
+import LocationPin from "./LocationPin";
 
-function Search({}: Props) {
+type Props = {
+  item_lat: number;
+  item_lng: number;
+};
+//
+const defaultAddress = process.env.NEXT_PUBLIC_INPUT;
+const pw = process.env.NEXT_PUBLIC_GEOLOCATION;
+const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || "1";
+
+const Maps = ({ item_lng, item_lat }: Props) => {
+  const [longitude, setLong] = useState(item_lng);
+  const [latitude, setLat] = useState(item_lat);
+
+  useEffect(() => {
+    setLong(item_lng);
+    setLat(item_lat);
+    console.log("is this infinite loop?");
+  }, [item_lng, item_lat]);
+
+  const defaultProps = {
+    center: {
+      lat: latitude,
+      lng: longitude,
+    },
+    zoom: 14,
+  };
+
   return (
-    <div
-      className="border-[1px]
-      w-full
-      md:w-[56vw]
-      py-2
-      rounded-full
-      shadow-sm
-      hover:shadow-md
-       transition
-       cursor-pointer"
-    >
-      <div
-        className="flex
-      flex-row
-      items-center
-      justify-between"
-      >
-        <div
-          className="w-full
-        text-sm
-        font-semibold
-        px-6
-        flex
-        items-center
-        float-right"
+    <div>
+      <div className="items-center" style={{ height: "80vh", width: "80vw" }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: googleApi }}
+          center={{ lat: latitude, lng: longitude }}
+          defaultZoom={defaultProps.zoom}
         >
-          <div className="hidden md:block mx-auto float-left w-full">
-            <input></input>
-          </div>
-          <div className="p-2 bg-green-500 rounded-full text-black right-0">
-            <BiSearch />
-          </div>
-        </div>
+          <LocationPin
+            lat={latitude}
+            lng={longitude}
+            colorChoice="DarkOrange"
+          />
+        </GoogleMapReact>
       </div>
     </div>
   );
-}
+};
 
-export default Search;
+export default Maps;

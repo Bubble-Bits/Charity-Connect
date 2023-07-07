@@ -20,6 +20,8 @@ export type User = {
   id: string
   localId: string | null
   chatIds: string[]
+  claimedItemIds: string[]
+  postedItemIds: string[]
   name: string
   email: string
   bio: string | null
@@ -66,6 +68,8 @@ export type Item = {
   postedAt: Date
   photos: string[]
   address: string
+  lat: number | null
+  lng: number | null
   pickup: boolean
   shipping: boolean
   status: string
@@ -281,7 +285,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 4.15.0
-   * Query Engine version: b20ead4d3ab9e78ac112966e242ded703f4a052c
+   * Query Engine version: 4bc8b6e1b66cb932731fb1bdbbc550d1e010de81
    */
   export type PrismaVersion = {
     client: string
@@ -1059,6 +1063,8 @@ export namespace Prisma {
     id: number
     localId: number
     chatIds: number
+    claimedItemIds: number
+    postedItemIds: number
     name: number
     email: number
     bio: number
@@ -1109,6 +1115,8 @@ export namespace Prisma {
     id?: true
     localId?: true
     chatIds?: true
+    claimedItemIds?: true
+    postedItemIds?: true
     name?: true
     email?: true
     bio?: true
@@ -1211,6 +1219,8 @@ export namespace Prisma {
     id: string
     localId: string | null
     chatIds: string[]
+    claimedItemIds: string[]
+    postedItemIds: string[]
     name: string
     email: string
     bio: string | null
@@ -1244,6 +1254,8 @@ export namespace Prisma {
     id?: boolean
     localId?: boolean
     chatIds?: boolean
+    claimedItemIds?: boolean
+    postedItemIds?: boolean
     name?: boolean
     email?: boolean
     bio?: boolean
@@ -4165,8 +4177,20 @@ export namespace Prisma {
 
   export type AggregateItem = {
     _count: ItemCountAggregateOutputType | null
+    _avg: ItemAvgAggregateOutputType | null
+    _sum: ItemSumAggregateOutputType | null
     _min: ItemMinAggregateOutputType | null
     _max: ItemMaxAggregateOutputType | null
+  }
+
+  export type ItemAvgAggregateOutputType = {
+    lat: number | null
+    lng: number | null
+  }
+
+  export type ItemSumAggregateOutputType = {
+    lat: number | null
+    lng: number | null
   }
 
   export type ItemMinAggregateOutputType = {
@@ -4177,6 +4201,8 @@ export namespace Prisma {
     timeOwned: Date | null
     postedAt: Date | null
     address: string | null
+    lat: number | null
+    lng: number | null
     pickup: boolean | null
     shipping: boolean | null
     status: string | null
@@ -4192,6 +4218,8 @@ export namespace Prisma {
     timeOwned: Date | null
     postedAt: Date | null
     address: string | null
+    lat: number | null
+    lng: number | null
     pickup: boolean | null
     shipping: boolean | null
     status: string | null
@@ -4209,6 +4237,8 @@ export namespace Prisma {
     postedAt: number
     photos: number
     address: number
+    lat: number
+    lng: number
     pickup: number
     shipping: number
     status: number
@@ -4218,6 +4248,16 @@ export namespace Prisma {
   }
 
 
+  export type ItemAvgAggregateInputType = {
+    lat?: true
+    lng?: true
+  }
+
+  export type ItemSumAggregateInputType = {
+    lat?: true
+    lng?: true
+  }
+
   export type ItemMinAggregateInputType = {
     id?: true
     name?: true
@@ -4226,6 +4266,8 @@ export namespace Prisma {
     timeOwned?: true
     postedAt?: true
     address?: true
+    lat?: true
+    lng?: true
     pickup?: true
     shipping?: true
     status?: true
@@ -4241,6 +4283,8 @@ export namespace Prisma {
     timeOwned?: true
     postedAt?: true
     address?: true
+    lat?: true
+    lng?: true
     pickup?: true
     shipping?: true
     status?: true
@@ -4258,6 +4302,8 @@ export namespace Prisma {
     postedAt?: true
     photos?: true
     address?: true
+    lat?: true
+    lng?: true
     pickup?: true
     shipping?: true
     status?: true
@@ -4304,6 +4350,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ItemMinAggregateInputType
@@ -4334,6 +4392,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ItemCountAggregateInputType | true
+    _avg?: ItemAvgAggregateInputType
+    _sum?: ItemSumAggregateInputType
     _min?: ItemMinAggregateInputType
     _max?: ItemMaxAggregateInputType
   }
@@ -4349,12 +4409,16 @@ export namespace Prisma {
     postedAt: Date
     photos: string[]
     address: string
+    lat: number | null
+    lng: number | null
     pickup: boolean
     shipping: boolean
     status: string
     posterId: string
     claimerId: string | null
     _count: ItemCountAggregateOutputType | null
+    _avg: ItemAvgAggregateOutputType | null
+    _sum: ItemSumAggregateOutputType | null
     _min: ItemMinAggregateOutputType | null
     _max: ItemMaxAggregateOutputType | null
   }
@@ -4383,6 +4447,8 @@ export namespace Prisma {
     postedAt?: boolean
     photos?: boolean
     address?: boolean
+    lat?: boolean
+    lng?: boolean
     pickup?: boolean
     shipping?: boolean
     status?: boolean
@@ -7051,6 +7117,8 @@ export namespace Prisma {
     id: 'id',
     localId: 'localId',
     chatIds: 'chatIds',
+    claimedItemIds: 'claimedItemIds',
+    postedItemIds: 'postedItemIds',
     name: 'name',
     email: 'email',
     bio: 'bio',
@@ -7094,6 +7162,8 @@ export namespace Prisma {
     postedAt: 'postedAt',
     photos: 'photos',
     address: 'address',
+    lat: 'lat',
+    lng: 'lng',
     pickup: 'pickup',
     shipping: 'shipping',
     status: 'status',
@@ -7148,6 +7218,8 @@ export namespace Prisma {
     id?: StringFilter | string
     localId?: StringNullableFilter | string | null
     chatIds?: StringNullableListFilter
+    claimedItemIds?: StringNullableListFilter
+    postedItemIds?: StringNullableListFilter
     name?: StringFilter | string
     email?: StringFilter | string
     bio?: StringNullableFilter | string | null
@@ -7165,6 +7237,8 @@ export namespace Prisma {
     id?: SortOrder
     localId?: SortOrder
     chatIds?: SortOrder
+    claimedItemIds?: SortOrder
+    postedItemIds?: SortOrder
     name?: SortOrder
     email?: SortOrder
     bio?: SortOrder
@@ -7180,6 +7254,7 @@ export namespace Prisma {
 
   export type UserWhereUniqueInput = {
     id?: string
+    localId?: string
     name?: string
     email?: string
   }
@@ -7188,6 +7263,8 @@ export namespace Prisma {
     id?: SortOrder
     localId?: SortOrder
     chatIds?: SortOrder
+    claimedItemIds?: SortOrder
+    postedItemIds?: SortOrder
     name?: SortOrder
     email?: SortOrder
     bio?: SortOrder
@@ -7210,6 +7287,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter | string
     localId?: StringNullableWithAggregatesFilter | string | null
     chatIds?: StringNullableListFilter
+    claimedItemIds?: StringNullableListFilter
+    postedItemIds?: StringNullableListFilter
     name?: StringWithAggregatesFilter | string
     email?: StringWithAggregatesFilter | string
     bio?: StringNullableWithAggregatesFilter | string | null
@@ -7321,6 +7400,8 @@ export namespace Prisma {
     postedAt?: DateTimeFilter | Date | string
     photos?: StringNullableListFilter
     address?: StringFilter | string
+    lat?: FloatNullableFilter | number | null
+    lng?: FloatNullableFilter | number | null
     pickup?: BoolFilter | boolean
     shipping?: BoolFilter | boolean
     status?: StringFilter | string
@@ -7340,6 +7421,8 @@ export namespace Prisma {
     postedAt?: SortOrder
     photos?: SortOrder
     address?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
     pickup?: SortOrder
     shipping?: SortOrder
     status?: SortOrder
@@ -7363,14 +7446,18 @@ export namespace Prisma {
     postedAt?: SortOrder
     photos?: SortOrder
     address?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
     pickup?: SortOrder
     shipping?: SortOrder
     status?: SortOrder
     posterId?: SortOrder
     claimerId?: SortOrder
     _count?: ItemCountOrderByAggregateInput
+    _avg?: ItemAvgOrderByAggregateInput
     _max?: ItemMaxOrderByAggregateInput
     _min?: ItemMinOrderByAggregateInput
+    _sum?: ItemSumOrderByAggregateInput
   }
 
   export type ItemScalarWhereWithAggregatesInput = {
@@ -7386,6 +7473,8 @@ export namespace Prisma {
     postedAt?: DateTimeWithAggregatesFilter | Date | string
     photos?: StringNullableListFilter
     address?: StringWithAggregatesFilter | string
+    lat?: FloatNullableWithAggregatesFilter | number | null
+    lng?: FloatNullableWithAggregatesFilter | number | null
     pickup?: BoolWithAggregatesFilter | boolean
     shipping?: BoolWithAggregatesFilter | boolean
     status?: StringWithAggregatesFilter | string
@@ -7462,6 +7551,8 @@ export namespace Prisma {
   export type UserCreateInput = {
     id?: string
     localId?: string | null
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -7479,6 +7570,8 @@ export namespace Prisma {
     id?: string
     localId?: string | null
     chatIds?: UserCreatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -7494,6 +7587,8 @@ export namespace Prisma {
 
   export type UserUpdateInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7510,6 +7605,8 @@ export namespace Prisma {
   export type UserUncheckedUpdateInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
     chatIds?: UserUpdatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7527,6 +7624,8 @@ export namespace Prisma {
     id?: string
     localId?: string | null
     chatIds?: UserCreatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -7539,6 +7638,8 @@ export namespace Prisma {
 
   export type UserUpdateManyMutationInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7552,6 +7653,8 @@ export namespace Prisma {
   export type UserUncheckedUpdateManyInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
     chatIds?: UserUpdatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7667,6 +7770,8 @@ export namespace Prisma {
     postedAt?: Date | string
     photos?: ItemCreatephotosInput | Enumerable<string>
     address: string
+    lat?: number | null
+    lng?: number | null
     pickup?: boolean
     shipping?: boolean
     status?: string
@@ -7684,6 +7789,8 @@ export namespace Prisma {
     postedAt?: Date | string
     photos?: ItemCreatephotosInput | Enumerable<string>
     address: string
+    lat?: number | null
+    lng?: number | null
     pickup?: boolean
     shipping?: boolean
     status?: string
@@ -7700,6 +7807,8 @@ export namespace Prisma {
     postedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: ItemUpdatephotosInput | Enumerable<string>
     address?: StringFieldUpdateOperationsInput | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
     pickup?: BoolFieldUpdateOperationsInput | boolean
     shipping?: BoolFieldUpdateOperationsInput | boolean
     status?: StringFieldUpdateOperationsInput | string
@@ -7716,6 +7825,8 @@ export namespace Prisma {
     postedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: ItemUpdatephotosInput | Enumerable<string>
     address?: StringFieldUpdateOperationsInput | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
     pickup?: BoolFieldUpdateOperationsInput | boolean
     shipping?: BoolFieldUpdateOperationsInput | boolean
     status?: StringFieldUpdateOperationsInput | string
@@ -7733,6 +7844,8 @@ export namespace Prisma {
     postedAt?: Date | string
     photos?: ItemCreatephotosInput | Enumerable<string>
     address: string
+    lat?: number | null
+    lng?: number | null
     pickup?: boolean
     shipping?: boolean
     status?: string
@@ -7749,6 +7862,8 @@ export namespace Prisma {
     postedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: ItemUpdatephotosInput | Enumerable<string>
     address?: StringFieldUpdateOperationsInput | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
     pickup?: BoolFieldUpdateOperationsInput | boolean
     shipping?: BoolFieldUpdateOperationsInput | boolean
     status?: StringFieldUpdateOperationsInput | string
@@ -7763,6 +7878,8 @@ export namespace Prisma {
     postedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: ItemUpdatephotosInput | Enumerable<string>
     address?: StringFieldUpdateOperationsInput | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
     pickup?: BoolFieldUpdateOperationsInput | boolean
     shipping?: BoolFieldUpdateOperationsInput | boolean
     status?: StringFieldUpdateOperationsInput | string
@@ -7906,6 +8023,8 @@ export namespace Prisma {
     id?: SortOrder
     localId?: SortOrder
     chatIds?: SortOrder
+    claimedItemIds?: SortOrder
+    postedItemIds?: SortOrder
     name?: SortOrder
     email?: SortOrder
     bio?: SortOrder
@@ -8105,6 +8224,18 @@ export namespace Prisma {
     isSet?: boolean
   }
 
+  export type FloatNullableFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | number | null
+    notIn?: Enumerable<number> | number | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatNullableFilter | number | null
+    isSet?: boolean
+  }
+
   export type BoolFilter = {
     equals?: boolean
     not?: NestedBoolFilter | boolean
@@ -8125,11 +8256,18 @@ export namespace Prisma {
     postedAt?: SortOrder
     photos?: SortOrder
     address?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
     pickup?: SortOrder
     shipping?: SortOrder
     status?: SortOrder
     posterId?: SortOrder
     claimerId?: SortOrder
+  }
+
+  export type ItemAvgOrderByAggregateInput = {
+    lat?: SortOrder
+    lng?: SortOrder
   }
 
   export type ItemMaxOrderByAggregateInput = {
@@ -8140,6 +8278,8 @@ export namespace Prisma {
     timeOwned?: SortOrder
     postedAt?: SortOrder
     address?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
     pickup?: SortOrder
     shipping?: SortOrder
     status?: SortOrder
@@ -8155,11 +8295,18 @@ export namespace Prisma {
     timeOwned?: SortOrder
     postedAt?: SortOrder
     address?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
     pickup?: SortOrder
     shipping?: SortOrder
     status?: SortOrder
     posterId?: SortOrder
     claimerId?: SortOrder
+  }
+
+  export type ItemSumOrderByAggregateInput = {
+    lat?: SortOrder
+    lng?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter = {
@@ -8174,6 +8321,23 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter
     _min?: NestedDateTimeNullableFilter
     _max?: NestedDateTimeNullableFilter
+    isSet?: boolean
+  }
+
+  export type FloatNullableWithAggregatesFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | number | null
+    notIn?: Enumerable<number> | number | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatNullableWithAggregatesFilter | number | null
+    _count?: NestedIntNullableFilter
+    _avg?: NestedFloatNullableFilter
+    _sum?: NestedFloatNullableFilter
+    _min?: NestedFloatNullableFilter
+    _max?: NestedFloatNullableFilter
     isSet?: boolean
   }
 
@@ -8213,6 +8377,14 @@ export namespace Prisma {
   export type TestMinOrderByAggregateInput = {
     id?: SortOrder
     content?: SortOrder
+  }
+
+  export type UserCreateclaimedItemIdsInput = {
+    set: Enumerable<string>
+  }
+
+  export type UserCreatepostedItemIdsInput = {
+    set: Enumerable<string>
   }
 
   export type UserCreateblockedInput = {
@@ -8266,6 +8438,16 @@ export namespace Prisma {
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
     unset?: boolean
+  }
+
+  export type UserUpdateclaimedItemIdsInput = {
+    set?: Enumerable<string>
+    push?: string | Enumerable<string>
+  }
+
+  export type UserUpdatepostedItemIdsInput = {
+    set?: Enumerable<string>
+    push?: string | Enumerable<string>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8514,6 +8696,15 @@ export namespace Prisma {
     push?: string | Enumerable<string>
   }
 
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+    unset?: boolean
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
   }
@@ -8687,6 +8878,18 @@ export namespace Prisma {
     isSet?: boolean
   }
 
+  export type NestedFloatNullableFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | number | null
+    notIn?: Enumerable<number> | number | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatNullableFilter | number | null
+    isSet?: boolean
+  }
+
   export type NestedBoolFilter = {
     equals?: boolean
     not?: NestedBoolFilter | boolean
@@ -8704,6 +8907,23 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter
     _min?: NestedDateTimeNullableFilter
     _max?: NestedDateTimeNullableFilter
+    isSet?: boolean
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter = {
+    equals?: number | null
+    in?: Enumerable<number> | number | null
+    notIn?: Enumerable<number> | number | null
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatNullableWithAggregatesFilter | number | null
+    _count?: NestedIntNullableFilter
+    _avg?: NestedFloatNullableFilter
+    _sum?: NestedFloatNullableFilter
+    _min?: NestedFloatNullableFilter
+    _max?: NestedFloatNullableFilter
     isSet?: boolean
   }
 
@@ -8741,6 +8961,8 @@ export namespace Prisma {
     postedAt?: Date | string
     photos?: ItemCreatephotosInput | Enumerable<string>
     address: string
+    lat?: number | null
+    lng?: number | null
     pickup?: boolean
     shipping?: boolean
     status?: string
@@ -8757,6 +8979,8 @@ export namespace Prisma {
     postedAt?: Date | string
     photos?: ItemCreatephotosInput | Enumerable<string>
     address: string
+    lat?: number | null
+    lng?: number | null
     pickup?: boolean
     shipping?: boolean
     status?: string
@@ -8782,6 +9006,8 @@ export namespace Prisma {
     postedAt?: Date | string
     photos?: ItemCreatephotosInput | Enumerable<string>
     address: string
+    lat?: number | null
+    lng?: number | null
     pickup?: boolean
     shipping?: boolean
     status?: string
@@ -8798,6 +9024,8 @@ export namespace Prisma {
     postedAt?: Date | string
     photos?: ItemCreatephotosInput | Enumerable<string>
     address: string
+    lat?: number | null
+    lng?: number | null
     pickup?: boolean
     shipping?: boolean
     status?: string
@@ -8866,6 +9094,8 @@ export namespace Prisma {
     postedAt?: DateTimeFilter | Date | string
     photos?: StringNullableListFilter
     address?: StringFilter | string
+    lat?: FloatNullableFilter | number | null
+    lng?: FloatNullableFilter | number | null
     pickup?: BoolFilter | boolean
     shipping?: BoolFilter | boolean
     status?: StringFilter | string
@@ -8892,6 +9122,8 @@ export namespace Prisma {
   export type UserCreateWithoutChatsInput = {
     id?: string
     localId?: string | null
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -8908,6 +9140,8 @@ export namespace Prisma {
     id?: string
     localId?: string | null
     chatIds?: UserCreatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -8973,6 +9207,8 @@ export namespace Prisma {
     id?: StringFilter | string
     localId?: StringNullableFilter | string | null
     chatIds?: StringNullableListFilter
+    claimedItemIds?: StringNullableListFilter
+    postedItemIds?: StringNullableListFilter
     name?: StringFilter | string
     email?: StringFilter | string
     bio?: StringNullableFilter | string | null
@@ -9044,6 +9280,8 @@ export namespace Prisma {
   export type UserCreateWithoutPostedItemsInput = {
     id?: string
     localId?: string | null
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -9060,6 +9298,8 @@ export namespace Prisma {
     id?: string
     localId?: string | null
     chatIds?: UserCreatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -9080,6 +9320,8 @@ export namespace Prisma {
   export type UserCreateWithoutClaimedItemsInput = {
     id?: string
     localId?: string | null
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -9096,6 +9338,8 @@ export namespace Prisma {
     id?: string
     localId?: string | null
     chatIds?: UserCreatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserCreateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserCreatepostedItemIdsInput | Enumerable<string>
     name: string
     email: string
     bio?: string | null
@@ -9120,6 +9364,8 @@ export namespace Prisma {
 
   export type UserUpdateWithoutPostedItemsInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9135,6 +9381,8 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutPostedItemsInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
     chatIds?: UserUpdatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9154,6 +9402,8 @@ export namespace Prisma {
 
   export type UserUpdateWithoutClaimedItemsInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9169,6 +9419,8 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutClaimedItemsInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
     chatIds?: UserUpdatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9191,6 +9443,8 @@ export namespace Prisma {
     postedAt?: Date | string
     photos?: ItemCreatephotosInput | Enumerable<string>
     address: string
+    lat?: number | null
+    lng?: number | null
     pickup?: boolean
     shipping?: boolean
     status?: string
@@ -9207,6 +9461,8 @@ export namespace Prisma {
     postedAt?: Date | string
     photos?: ItemCreatephotosInput | Enumerable<string>
     address: string
+    lat?: number | null
+    lng?: number | null
     pickup?: boolean
     shipping?: boolean
     status?: string
@@ -9235,6 +9491,8 @@ export namespace Prisma {
     postedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: ItemUpdatephotosInput | Enumerable<string>
     address?: StringFieldUpdateOperationsInput | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
     pickup?: BoolFieldUpdateOperationsInput | boolean
     shipping?: BoolFieldUpdateOperationsInput | boolean
     status?: StringFieldUpdateOperationsInput | string
@@ -9250,6 +9508,8 @@ export namespace Prisma {
     postedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: ItemUpdatephotosInput | Enumerable<string>
     address?: StringFieldUpdateOperationsInput | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
     pickup?: BoolFieldUpdateOperationsInput | boolean
     shipping?: BoolFieldUpdateOperationsInput | boolean
     status?: StringFieldUpdateOperationsInput | string
@@ -9265,6 +9525,8 @@ export namespace Prisma {
     postedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: ItemUpdatephotosInput | Enumerable<string>
     address?: StringFieldUpdateOperationsInput | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
     pickup?: BoolFieldUpdateOperationsInput | boolean
     shipping?: BoolFieldUpdateOperationsInput | boolean
     status?: StringFieldUpdateOperationsInput | string
@@ -9280,6 +9542,8 @@ export namespace Prisma {
     postedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: ItemUpdatephotosInput | Enumerable<string>
     address?: StringFieldUpdateOperationsInput | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
     pickup?: BoolFieldUpdateOperationsInput | boolean
     shipping?: BoolFieldUpdateOperationsInput | boolean
     status?: StringFieldUpdateOperationsInput | string
@@ -9295,6 +9559,8 @@ export namespace Prisma {
     postedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: ItemUpdatephotosInput | Enumerable<string>
     address?: StringFieldUpdateOperationsInput | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
     pickup?: BoolFieldUpdateOperationsInput | boolean
     shipping?: BoolFieldUpdateOperationsInput | boolean
     status?: StringFieldUpdateOperationsInput | string
@@ -9310,6 +9576,8 @@ export namespace Prisma {
     postedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: ItemUpdatephotosInput | Enumerable<string>
     address?: StringFieldUpdateOperationsInput | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
     pickup?: BoolFieldUpdateOperationsInput | boolean
     shipping?: BoolFieldUpdateOperationsInput | boolean
     status?: StringFieldUpdateOperationsInput | string
@@ -9326,6 +9594,8 @@ export namespace Prisma {
 
   export type UserUpdateWithoutChatsInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9341,6 +9611,8 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutChatsInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
     chatIds?: UserUpdatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9356,6 +9628,8 @@ export namespace Prisma {
   export type UserUncheckedUpdateManyWithoutUsersInput = {
     localId?: NullableStringFieldUpdateOperationsInput | string | null
     chatIds?: UserUpdatechatIdsInput | Enumerable<string>
+    claimedItemIds?: UserUpdateclaimedItemIdsInput | Enumerable<string>
+    postedItemIds?: UserUpdatepostedItemIdsInput | Enumerable<string>
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
