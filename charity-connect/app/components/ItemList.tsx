@@ -251,7 +251,7 @@ export default function ItemList() {
         {filteredItems.length !== 0 &&
           filteredItems.map((item) => {
             return (
-              <div key={item.id} className="w-1/4">
+              <div key={item.id} className="w-1/4" onClick={()=>handleRoute(item.id)} >
                 <Item key={item.id} {...item} />
               </div>
             );

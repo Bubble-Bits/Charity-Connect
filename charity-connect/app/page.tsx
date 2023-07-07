@@ -63,10 +63,10 @@ export default function Home() {
         <div className="w-screen h-2/3 flex justify-between">
           <div className="w-1/3 flex flex-col items-center">
             <h3 className="text-white mb-5 md:text-8xl text-4xl ml-4">Contribute and donate today!</h3>
-            <div className="pt-20 ml-[15vh] md:mt-[10vh]">
+            <div className="ml-[15vh] md:mt-[10vh]">
               <Link
                 href="/donate"
-                className="md:text-3xl md:mr-5 md:p-3
+                className="md:text-3xl md:mr-5 md:p-3 md:mt-[-15vh]
                 bg-green-500 border border-solid border-white rounded-full inline-flex items-center justify-center min-w-[20rem]"
               >
                 View Donations
