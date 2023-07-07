@@ -47,10 +47,10 @@ function Navbar({ onChatClick }: Props) {
           <div className="flex flex-row items-center justify-between gap-3 md:gap-0 overflow-x-auto">
             <Logo />
             <Search />
-            {user?
-            <div className="p-2 bg-green-500 rounded-full text-black right-0">
-              <Link href={`/donate?user=${user.localId}`}><AiOutlinePlus /></Link>
-            </div> : null}
+            {user ?
+              <div className="p-2 bg-green-500 rounded-full text-black right-0">
+                <Link href={`/donate?user=${user.localId}`}><AiOutlinePlus /></Link>
+              </div> : null}
             {user ? <UserProfile user={user} /> : <User />}
             <Signout />
             {onChatClick ? <ChatIcon onIconClick={onChatClick} /> : <></>}

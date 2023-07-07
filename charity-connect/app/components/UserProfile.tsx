@@ -11,7 +11,7 @@ type Props = {
 function UserProfile({ user }: Props) {
   console.log(user);
   return (
-    <Link href="/userprofile">
+    <Link href={`/userprofile?localId=${user.localId}`}>
       <div className="flex flex-row items-center gap-1">
         <div className="p-1 w-15 h-15 rounded-full text-black">
           <Image

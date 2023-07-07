@@ -42,13 +42,13 @@ model Chat {
 }
 
 model Message {
-  id             String      @id @default(auto()) @map("_id") @db.ObjectId
-  chat           Chat        @relation(fields: [chatId], references: [id])
-  chatId         String      @db.ObjectId
-  content        String
-  photo          String?
-  sentAt         DateTime
-  sender         String
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  chat    Chat     @relation(fields: [chatId], references: [id])
+  chatId  String   @db.ObjectId
+  content String
+  photo   String?
+  sentAt  DateTime
+  sender  String
 }
 
 // ITEMS SCHEMA //
@@ -63,6 +63,8 @@ model Item {
   postedAt    DateTime  @default(now())
   photos      String[]
   address     String
+  lat         Float?
+  lng         Float?
   pickup      Boolean   @default(false)
   shipping    Boolean   @default(false)
   status      String    @default("Available")
@@ -78,8 +80,8 @@ model ph {
 }
 
 model Test {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  content        String
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  content String
 }
 
 //* Example Schema
