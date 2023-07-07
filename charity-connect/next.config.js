@@ -63,6 +63,18 @@ const nextConfig = {
         protocol: "https",
         hostname: "avatars.githubusercontent.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.interstatedevelopment.com"
+      },
+      {
+        protocol: "https",
+        hostname: "static.vecteezy.com"
+      },
+      {
+        protocol: "https",
+        hostname: "img.freepik.com"
+      }
     ],
   },
 };
