@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   //   },
   // };
   console.log('userids', userIds);
-   
+     
   try {
     await prisma.$connect(); // Connect to the database
     const chat = await prisma.chat.create({
