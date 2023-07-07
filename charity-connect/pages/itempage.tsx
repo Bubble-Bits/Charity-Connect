@@ -81,7 +81,7 @@ export default function ItemPage() {
         }
         console.log("data", data.data);
         setItemData(data.data.item);
-
+        console.log("data", data.data);
         setDonorData(data.data.donor);
         setMainPhoto(data.data.item.photos[0]);
         imageGalleryFunc(data.data.item.photos);
@@ -160,7 +160,7 @@ export default function ItemPage() {
           </div>
         </div>
 
-        <div className="space-y-2 col-span-2 bg-[#01002e] z-10 shadow-sm p-5">
+        <div className="space-y-2 col-span-2 bg-[#01002e] z-10 shadow-sm p-5 bg-gradient-to-b from-indigo-900 to-indigo-600">
           {/* temporary: when md gets hit, remove the height and overflow y scroll and just let it overextend in the mobile aspect */}
           <div className="scrollbar-hide pb-5">
             <div className="pb-5">
@@ -221,7 +221,7 @@ export default function ItemPage() {
 
               <div className="relative w-full h-40 overflow-hidden">
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg">
-                  <Maps item_lng={itemData.lng} item_lat={itemData.lat} />
+                  {/* <Maps item_lng={itemData.lng} item_lat={itemData.lat} /> */}
                 </div>
               </div>
             </div>

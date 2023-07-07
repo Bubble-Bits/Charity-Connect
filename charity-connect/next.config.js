@@ -13,6 +13,13 @@ const nextConfig = {
       "news.rice.edu",
       "sugarspunrun.com",
       "encrypted-tbn0.gstatic.com",
+      "static.vecteezy.com",
+      "media.istockphoto.com",
+      "cdn.thewirecutter.com",
+      "www.realsimple.com",
+      "cdn.mos.cms.futurecdn.net",
+      "static.independent.co.uk",
+      "m.media-amazon.com",
     ],
     remotePatterns: [
       {
@@ -48,20 +55,19 @@ const nextConfig = {
         hostname: "cdn.shopify.com",
       },
       {
-        protocol: 'https',
-        hostname: 'images.pexels.com',
+        protocol: "https",
+        hostname: "images.pexels.com",
       },
       {
-        protocol: 'https',
-        hostname: 'sugarspunrun.com',
+        protocol: "https",
+        hostname: "sugarspunrun.com",
       },
       {
-        protocol: 'https',
-        hostname: 'encrypted-tbn0.gstatic.com',
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
       },
     ],
   },
 };
 
 module.exports = nextConfig;
-
