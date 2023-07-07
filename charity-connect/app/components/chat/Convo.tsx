@@ -4,7 +4,8 @@ import { BiArrowBack } from "react-icons/bi";
 import Image from "next/image";
 import { format, parseISO } from "date-fns";
 import { IoMdSend } from "react-icons/io";
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
+// const socket = io(`${process.env.VERCEL_URL}:3001`);
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -15,8 +16,6 @@ type Props = {
   chatWith: string;
   messages: any[];
 };
-
-// let socket;
 
 const ChatConversation = ({
   id,
@@ -30,31 +29,40 @@ const ChatConversation = ({
   //   {id: 2, chatId: id, content: 'hows it going?', photos: [], sentAt: '2023-06-20T10:32:00Z', sender}]
   const [messageData, setMessageData] = useState(messages);
   const [chatInput, setInput] = useState("");
-
-  // useEffect(() => {
-  //   socketInitializer();
-  // }, [])
-
-  // async function socketInitializer() {
-  //   // await axios.get('api/socket');
-  //   //socket = io();
-  // }
+  const [isSending, setIsSending] = useState(false);
+  const [isDelivered, setIsDelivered] = useState(false);
 
   const sendMessage = () => {
-    console.log(chatInput);
+    setIsSending(true);
+    setIsDelivered(false);
     const data = { chatId: id, chatInput, userId };
-    axios
-      .post(`../../api/message?chatId=${id}&chatInput=${chatInput}&userId=${userId}`)
-      .then((res) => {
-        console.log(res);
-        const newMessageData = [...messageData, res.data];
-        setMessageData(newMessageData);
-        setInput("");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.post(`../../api/message?chatId=${id}&chatInput=${chatInput}&userId=${userId}`)
+    .then((res) => {
+      setInput("");
+      // socket.emit('send-message', res.data);
+      const newMessageData = [...messageData, res.data];
+      setMessageData(newMessageData);
+      setIsSending(false);
+      setIsDelivered(true);
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsSending(false);
+    });
   };
+
+  // useEffect(() => {
+  //   socket.on('receive-message', (message) => {
+  //     setIsDelivered(false);
+  //     const newMessageData = [...messageData, message];
+  //     setMessageData(newMessageData);
+  //   });
+
+  //   return () => {
+  //     socket.off('receive-message');
+  //   };
+  // }, [messageData]);
+
 
   return (
     <div className="flex flex-col h-full">
@@ -89,6 +97,9 @@ const ChatConversation = ({
             </div>
           </div>
         ))}
+      </div>
+      <div className="flex flex-col ml-2">
+          {isSending && <span>Sending...</span>}
       </div>
       <form className="p-4 flex flex-row">
         <textarea
