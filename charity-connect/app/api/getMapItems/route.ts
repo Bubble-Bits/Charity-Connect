@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
   try {
+    await prisma.$connect();
     const items = await prisma.item.findMany();
     await prisma.$disconnect();
     return NextResponse.json({ items: items });
