@@ -246,13 +246,17 @@ export default function ItemList() {
           )}
         </div>
       </div>
-      <div className="h-[70vh] w-screen overflow-x-hidden">
-        <div className="ItemList flex flex-wrap gap-5 justify-center ml-1 w-screen overflow-x-hidden">
-          {filteredItems.length !== 0 &&
-            filteredItems.map((item) => {
-              return <div key={item.id} onClick={() => handleRoute(item.id)}><Item key={item.id} category={item.category}/></div>;
-            })}
-        </div>
+      <div className="w-screen overflow-x-hidden">
+      <div className="ItemList flex flex-wrap gap-5 justify-center ml-1">
+        {filteredItems.length !== 0 &&
+          filteredItems.map((item) => {
+            return (
+              <div key={item.id} className="w-1/4">
+                <Item key={item.id} {...item} />
+              </div>
+            );
+          })}
+      </div>
       </div>
     </>
   );

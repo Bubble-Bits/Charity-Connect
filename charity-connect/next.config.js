@@ -37,9 +37,18 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'images.pexels.com',
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'sugarspunrun.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'encrypted-tbn0.gstatic.com',
+      },
     ],
   },
 };
 
 module.exports = nextConfig;
+
