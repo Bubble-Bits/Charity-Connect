@@ -21,6 +21,7 @@ const {
   Extensions,
   warnOnce,
   defineDmmfProperty,
+  Public,
 } = require('./runtime/library')
 
 
@@ -29,12 +30,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.15.0
- * Query Engine version: b20ead4d3ab9e78ac112966e242ded703f4a052c
+ * Prisma Client JS version: 4.16.2
+ * Query Engine version: 4bc8b6e1b66cb932731fb1bdbbc550d1e010de81
  */
 Prisma.prismaVersion = {
-  client: "4.15.0",
-  engine: "b20ead4d3ab9e78ac112966e242ded703f4a052c"
+  client: "4.16.2",
+  engine: "4bc8b6e1b66cb932731fb1bdbbc550d1e010de81"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -52,8 +53,13 @@ Prisma.sql = sqltag
 Prisma.empty = empty
 Prisma.join = join
 Prisma.raw = raw
-Prisma.validator = () => (val) => val
+Prisma.validator = Public.validator
 
+/**
+* Extensions
+*/
+Prisma.getExtensionContext = Extensions.getExtensionContext
+Prisma.defineExtension = Extensions.defineExtension
 
 /**
  * Shorthand utilities for JSON filtering
@@ -181,8 +187,8 @@ const config = {
     "schemaEnvPath": "../.env"
   },
   "relativePath": "../prisma",
-  "clientVersion": "4.15.0",
-  "engineVersion": "b20ead4d3ab9e78ac112966e242ded703f4a052c",
+  "clientVersion": "4.16.2",
+  "engineVersion": "4bc8b6e1b66cb932731fb1bdbbc550d1e010de81",
   "datasourceNames": [
     "db"
   ],

@@ -15,7 +15,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.5",
-    "@prisma/client": "^4.15.0",
+    "@prisma/client": "^4.16.2",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/firebase": "^3.2.1",
     "@types/node": "20.3.1",
@@ -52,6 +52,6 @@
   },
   "devDependencies": {
     "@types/google-map-react": "^2.1.7",
-    "prisma": "^4.16.1"
+    "prisma": "^4.16.2"
   }
 }

@@ -67,10 +67,10 @@ export async function PUT(request: NextRequest) {
   prisma.user.update({
     where: { email: email }, //should be based off of localId, though. prisma won't let me bc localId isn't tagged unique
     data: {
-      chatIds: chatIds,
-      chats: chats,
-      postedItems: postedItems,
-      claimedItems: postedItems,
+      // chatIds: chatIds,
+      // chats: chats,
+      // postedItems: postedItems,
+      // claimedItems: postedItems,
       name: name,
       email: email,
       bio: bio,
@@ -78,7 +78,7 @@ export async function PUT(request: NextRequest) {
       address: address,
       itemsClaimed: itemsClaimed,
       itemsSuccessClaimed: itemsSuccessClaimed,
-      blocked: blocked
+      // blocked: blocked
     }
   }).catch((error) => {
     console.log(error);

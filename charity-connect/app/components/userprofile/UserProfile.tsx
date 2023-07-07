@@ -82,7 +82,9 @@ export default function UserProfile({ localId }: Props) {
         }
       }).then(function (res) {
         console.log("response: ", res.data);
-      })
+      }).catch((error) => {
+        console.log('update user error: ', error);
+      });
   };
 
   const toggleImageShown = () => {
@@ -131,21 +133,22 @@ export default function UserProfile({ localId }: Props) {
       })
     }, [localId]);
 
-  //bg-[#01002e]
   return (
     user ? //don't render screen until valid user obj is retrieved
       <div>
         <div className="bg-[#01002e] text-white pt-4 pl-4">
           <Logo />
+          <div className="text-xs">user score: n/a</div>
+          <div className="text-xs">block user</div>
         </div>
         <button onClick={getUser}>
           Test GET request</button>
         <br></br>
         <button onClick={createNewUser}>
-          Test POST request</button>
+          Save new user</button>
         <br></br>
         <button onClick={updateUser}>
-          Test PUT request</button>
+          Update user info</button>
         <div className="text-center h-full bg-[#01002e] overflow-y-auto text-white">
           <div className="flex items-center justify-center mt-4">
             <Image
@@ -181,6 +184,7 @@ export default function UserProfile({ localId }: Props) {
             className="text-black bg-slate-200 p-1"
             value={name} onChange={(e) => { //state will no longer update dynamically
               setName(e.target.value);
+              updateUser({});
             }}
           ></input>
           <div className="m-4">
@@ -199,7 +203,7 @@ export default function UserProfile({ localId }: Props) {
             rows={3}
             onChange={(e) => {
               setBio(e.target.value);
-
+              updateUser({});
             }}
           />
           <div className="m-4">
