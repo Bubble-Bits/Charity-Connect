@@ -115,8 +115,8 @@ export async function PUT(request: Request) {
 
 export async function GET(request: Request) {
   type storage = {
-    posted: String[],
-    claimed: String[]
+    posted: Object[],
+    claimed: Object[]
   }
 
   let Storage:storage = {
@@ -132,12 +132,34 @@ export async function GET(request: Request) {
       }
     })
     if (userInfo) {
-      Storage.posted = userInfo.postedItemIds;
-      Storage.claimed = userInfo.claimedItemIds;
+      if (userInfo.postedItemIds.length) {
+        for (let i = 0; i < userInfo.postedItemIds.length; i++) {
+          const postItem = await prisma.item.findUnique({
+            where: {
+              id: userInfo.postedItemIds[i]
+            }
+          })
+          if (postItem) {
+            Storage.posted.push(postItem);
+          }
+        }
+      }
+      if (userInfo.claimedItemIds.length) {
+        for (let j = 0; j < userInfo.claimedItemIds.length; j++) {
+          const claimItem = await prisma.item.findUnique({
+            where: {
+              id: userInfo.claimedItemIds[j]
+            }
+          })
+          if (claimItem) {
+            Storage.claimed.push(claimItem);
+          }
+        }
+      }
     }
   }
   catch (err) {
       console.log('ERROR: ', err);
   }
-  // return NextResponse.json(userId);
+  return NextResponse.json(Storage);
 }
