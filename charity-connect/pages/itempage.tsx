@@ -18,6 +18,7 @@ export default function ItemPage() {
     name: "",
     status: "",
     photos: [],
+    postedAt: "",
   });
 
   const [donorData, setDonorData] = useState({
@@ -87,6 +88,19 @@ export default function ItemPage() {
       });
   }, [item]);
 
+  function getDaysAgoFromDate(dateString = "") {
+    const date = new Date(dateString);
+    const today = new Date();
+
+    // Calculate the difference in milliseconds between the two dates
+    const differenceMs: number = today.getTime() - date.getTime();
+
+    // Convert the difference to days
+    const differenceDays = Math.floor(differenceMs / (1000 * 60 * 60 * 24));
+
+    return differenceDays;
+  }
+
   return item ? (
     // This keeps it fixed in the div. How do we keep everything inside of the div?
     // className="h-60 overflow-hidden ml-10"
@@ -149,7 +163,7 @@ export default function ItemPage() {
               <h1 className="text-white text-md">{itemData.status}</h1>
 
               <h1 className="text-white text-md">
-                listed 2 days ago in San Francisco
+                Posted {getDaysAgoFromDate(itemData.postedAt)} days ago
               </h1>
             </div>
 

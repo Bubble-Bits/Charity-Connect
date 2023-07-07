@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-free": "^6.4.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.5",
     "@prisma/client": "^4.16.2",
@@ -38,6 +39,7 @@
     "react-calendar": "^4.3.0",
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
+    "react-google-autocomplete": "^2.7.3",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.9.0",
     "react-modal": "^3.16.1",

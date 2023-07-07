@@ -14,12 +14,12 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.16.2
+ * Prisma Client JS version: 4.15.0
  * Query Engine version: 4bc8b6e1b66cb932731fb1bdbbc550d1e010de81
  */
 Prisma.prismaVersion = {
-  client: "4.16.2",
-  engine: "4bc8b6e1b66cb932731fb1bdbbc550d1e010de81"
+  client: "4.15.0",
+  engine: "b20ead4d3ab9e78ac112966e242ded703f4a052c"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -102,6 +102,8 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   localId: 'localId',
   chatIds: 'chatIds',
+  claimedItemIds: 'claimedItemIds',
+  postedItemIds: 'postedItemIds',
   name: 'name',
   email: 'email',
   bio: 'bio',
