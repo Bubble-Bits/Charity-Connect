@@ -63,6 +63,8 @@ model Item {
   postedAt    DateTime  @default(now())
   photos      String[]
   address     String
+  lat         Float?
+  lng         Float?
   pickup      Boolean   @default(false)
   shipping    Boolean   @default(false)
   status      String    @default("Available")

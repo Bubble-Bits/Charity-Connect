@@ -1,6 +1,8 @@
 "use client";
 import Item from "./Item";
 import React, { useState, useEffect, ChangeEvent } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 interface ItemsType {
   id: number;
@@ -8,6 +10,14 @@ interface ItemsType {
   category: string;
   postedAt: number;
   distance: number;
+}
+
+interface ItemsListType {
+  id: string;
+  category: string;
+  address: string;
+  description: string;
+  photos: string[];
 }
 
 interface Filters {
@@ -78,8 +88,8 @@ const temp: ItemsType[] = [
 ];
 
 export default function ItemList() {
-  const [items, setItems] = useState<ItemsType[]>([]);
-  const [filteredItems, setFilteredItems] = useState<ItemsType[]>([]);
+  const [items, setItems] = useState<ItemsListType[]>([]);
+  const [filteredItems, setFilteredItems] = useState<ItemsListType[]>([]);
   const [filters, setFilters] = useState<Filters>({
     categories: [],
     distance: 100,
@@ -116,19 +126,44 @@ export default function ItemList() {
     setFilters(updatedFilters);
   };
 
+  const router = useRouter();
+  const handleRoute = (id: string) => {
+    router.push(`/itempage?item=${id}`);
+  };
+
   const toggleFilter = (filter: string) => {
     setActiveFilter(activeFilter === filter ? null : filter);
   };
 
-  //to set state with data from db - might change
+  //to set state with data without using db
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await new Promise((resolve) => {
+  //       return setTimeout(resolve, 1000);
+  //     });
+  //     const data: any = temp;
+  //     setItems(data);
+  //     setFilteredItems(data);
+  //   };
+  //   fetchData();
+  // }, []);
+
+  //to set state with data from db
   useEffect(() => {
     const fetchData = async () => {
-      await new Promise((resolve) => {
-        return setTimeout(resolve, 1000);
-      });
-      const data: any = temp;
-      setItems(data);
-      setFilteredItems(data);
+      let options = {
+        "url": "/api/getItemList",
+        "method": "get"
+      }
+
+      try {
+        let { data } = await axios.request<ItemsListType[]>(options);
+        console.log(data);
+        setItems(data);
+      } catch (error) {
+        console.log(error);
+        return;
+      }
     };
     fetchData();
   }, []);
@@ -211,14 +246,19 @@ export default function ItemList() {
           )}
         </div>
       </div>
-      <div className="h-[70vh] w-screen overflow-x-hidden">
-        <div className="ItemList flex flex-wrap gap-5 justify-center ml-1 w-screen overflow-x-hidden">
-          {filteredItems.length !== 0 &&
-            filteredItems.map((item) => {
-              return <Item key={item.id} category={item.category} />;
-            })}
-        </div>
+      <div className="w-screen overflow-x-hidden">
+      <div className="ItemList flex flex-wrap gap-5 ml-1 w-full justify-center">
+        {filteredItems.length !== 0 &&
+          filteredItems.map((item) => {
+            return (
+              <div key={item.id} className="w-1/4">
+                <Item key={item.id} {...item} />
+              </div>
+            );
+          })}
+      </div>
       </div>
     </>
   );
 }
+

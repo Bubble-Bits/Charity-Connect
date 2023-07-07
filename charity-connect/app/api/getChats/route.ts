@@ -39,7 +39,6 @@ export async function GET(request: NextRequest) {
         },
       },
     });
-    console.log(chats);
     await prisma.$disconnect(); // Connect to the database
     return NextResponse.json(chats);
   } catch (error) {
