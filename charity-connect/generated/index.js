@@ -21,7 +21,6 @@ const {
   Extensions,
   warnOnce,
   defineDmmfProperty,
-  Public,
 } = require('./runtime/library')
 
 
@@ -30,11 +29,11 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.16.2
+ * Prisma Client JS version: 4.15.0
  * Query Engine version: 4bc8b6e1b66cb932731fb1bdbbc550d1e010de81
  */
 Prisma.prismaVersion = {
-  client: "4.16.2",
+  client: "4.15.0",
   engine: "4bc8b6e1b66cb932731fb1bdbbc550d1e010de81"
 }
 
@@ -53,13 +52,8 @@ Prisma.sql = sqltag
 Prisma.empty = empty
 Prisma.join = join
 Prisma.raw = raw
-Prisma.validator = Public.validator
+Prisma.validator = () => (val) => val
 
-/**
-* Extensions
-*/
-Prisma.getExtensionContext = Extensions.getExtensionContext
-Prisma.defineExtension = Extensions.defineExtension
 
 /**
  * Shorthand utilities for JSON filtering
@@ -170,7 +164,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/christinahunter/Hack_Reactor_SEI/Charity-Connect/charity-connect/generated",
+      "value": "/Users/lovinsondieujuste/Charity-Connect/charity-connect/generated",
       "fromEnvVar": null
     },
     "config": {
@@ -191,7 +185,7 @@ const config = {
     "schemaEnvPath": "../.env"
   },
   "relativePath": "../prisma",
-  "clientVersion": "4.16.2",
+  "clientVersion": "4.15.0",
   "engineVersion": "4bc8b6e1b66cb932731fb1bdbbc550d1e010de81",
   "datasourceNames": [
     "db"

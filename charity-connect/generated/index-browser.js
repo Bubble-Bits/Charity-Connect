@@ -4,8 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const {
   Decimal,
   objectEnumValues,
-  makeStrictEnum,
-  Public,
+  makeStrictEnum
 } = require('./runtime/index-browser')
 
 
@@ -14,11 +13,11 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.16.2
+ * Prisma Client JS version: 4.15.0
  * Query Engine version: 4bc8b6e1b66cb932731fb1bdbbc550d1e010de81
  */
 Prisma.prismaVersion = {
-  client: "4.16.2",
+  client: "4.15.0",
   engine: "4bc8b6e1b66cb932731fb1bdbbc550d1e010de81"
 }
 
@@ -67,19 +66,8 @@ Prisma.raw = () => {
   throw new Error(`raw is unable to be run in the browser.
 In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
 )}
-Prisma.validator = Public.validator
+Prisma.validator = () => (val) => val
 
-/**
-* Extensions
-*/
-Prisma.getExtensionContext = () => {
-  throw new Error(`Extensions.getExtensionContext is unable to be run in the browser.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
-Prisma.defineExtension = () => {
-  throw new Error(`Extensions.defineExtension is unable to be run in the browser.
-In case this error is unexpected for you, please report it in https://github.com/prisma/prisma/issues`,
-)}
 
 /**
  * Shorthand utilities for JSON filtering

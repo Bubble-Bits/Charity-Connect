@@ -54,7 +54,8 @@ function Donate({}: Props) {
   const submitInformation = async (dataSet: object) => {
     try {
       //! if (images.length && name && description && address) {
-        await axios.post("/api/items", dataSet)
+        let result = await axios.post("/api/items", dataSet);
+        router.push(`/itempage?item=${result.data.id}`)
       }
     //! }
     catch (err) {
@@ -187,9 +188,10 @@ function Donate({}: Props) {
 
           <button
             className="text-white bg-green-500 w-4/5 rounded hover:bg-green-700"
-            onClick={() => {
+            onClick={(e) => {
               //? FOR TESTING -> console.log({
               //? getInformation()
+              e.preventDefault();
               submitInformation({
                 user,
                 images,

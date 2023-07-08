@@ -8,24 +8,32 @@ import User from "./User";
 import ChatIcon from "./ChatIcon";
 import useAuth from "@/firebase/AuthState";
 import UserProfile from "./UserProfile";
-import Donate from "../../pages/donate"
+import Donate from "../../pages/donate";
 import useSignupModal from "../hooks/useSignupModal";
 import Signout from "./Signout";
 import useLoginModal from "../hooks/useLoginModal";
-import { AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlinePlus } from "react-icons/ai";
+import axios from "axios";
+import userController from "../controller/userController";
 
 type Props = { onChatClick?: () => void };
 
 function Navbar({ onChatClick }: Props) {
   const signup = useSignupModal();
   const login = useLoginModal();
-  //useModal();
-
   const user = useAuth();
 
+  //useModal();]=
+
+  const retrieveUser = async () => {
+    console.log("retriveing");
+    const result = await userController(user);
+    console.log(result);
+  };
   useEffect(() => {
-    console.log(user);
     if (user) {
+      console.log("Here");
+      retrieveUser();
       signup.onClose();
       login.onClose();
     } else {
@@ -47,10 +55,13 @@ function Navbar({ onChatClick }: Props) {
           <div className="flex flex-row items-center justify-between gap-3 md:gap-0 overflow-x-auto">
             <Logo />
             <Search />
-            {user ?
+            {user ? (
               <div className="p-2 bg-green-500 rounded-full text-black right-0">
-                <Link href={`/donate?user=${user.localId}`}><AiOutlinePlus /></Link>
-              </div> : null}
+                <Link href={`/donate?user=${user.localId}`}>
+                  <AiOutlinePlus />
+                </Link>
+              </div>
+            ) : null}
             {user ? <UserProfile user={user} /> : <User />}
             <Signout />
             {onChatClick ? <ChatIcon onIconClick={onChatClick} /> : <></>}
