@@ -15,6 +15,13 @@ const nextConfig = {
       "encrypted-tbn0.gstatic.com",
       "cdn.onlinewebfonts.com",
       "www.myfreetextures.com",
+      "static.vecteezy.com",
+      "media.istockphoto.com",
+      "cdn.thewirecutter.com",
+      "www.realsimple.com",
+      "cdn.mos.cms.futurecdn.net",
+      "static.independent.co.uk",
+      "m.media-amazon.com",
     ],
     remotePatterns: [
       {
@@ -86,20 +93,20 @@ const nextConfig = {
         hostname: "myfreetextures.com",
       },
       {
-        protocol: 'https',
-        hostname: 'static.vecteezy.com',
+        protocol: "https",
+        hostname: "static.vecteezy.com",
       },
       {
-        protocol: 'https',
-        hostname: 'www.realsimple.com',
+        protocol: "https",
+        hostname: "www.realsimple.com",
       },
       {
-        protocol: 'https',
-        hostname: 'static.independent.co.uk',
+        protocol: "https",
+        hostname: "static.independent.co.uk",
       },
       {
-        protocol: 'https',
-        hostname: 'm.media-amazon.com',
+        protocol: "https",
+        hostname: "m.media-amazon.com",
       },
     ],
   },
