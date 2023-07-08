@@ -22,10 +22,12 @@ export default async function userController(user: Props) {
           chats: [],
           postedItems: [],
           claimedItems: [],
-          name: user.displayName,
+          name: user.displayName ? user.displayName : user.email,
           email: user.email,
           bio: "",
-          profilePic: user.photoUrl,
+          profilePic: user.photoUrl
+            ? user.photoUrl
+            : "https://www.kindpng.com/picc/m/111-1114679_person-png-icon-person-white-symbol-png-transparent.png",
           address: "198 South Young Ave. Providence, RI 02904",
           itemsClaimed: 0,
           itemsSuccessClaimed: 0,
