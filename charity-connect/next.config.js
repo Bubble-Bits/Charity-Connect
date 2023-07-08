@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-images: {
+  images: {
     domains: [
       "www.news10.com",
       "52f4e29a8321344e30ae-0f55c9129972ac85d6b1f4e703468e6b.ssl.cf2.rackcdn.com",
@@ -55,52 +55,52 @@ images: {
         hostname: "cdn.shopify.com",
       },
       {
-        protocol: 'https',
-        hostname: 'images.pexels.com',
+        protocol: "https",
+        hostname: "images.pexels.com",
       },
       {
-        protocol: 'https',
-        hostname: 'sugarspunrun.com',
+        protocol: "https",
+        hostname: "sugarspunrun.com",
       },
       {
-        protocol: 'https',
-        hostname: 'encrypted-tbn0.gstatic.com',
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
       },
       {
-        protocol: 'https',
-        hostname: 'static.vecteezy.com',
+        protocol: "https",
+        hostname: "static.vecteezy.com",
       },
       {
-        protocol: 'https',
-        hostname: 'www.realsimple.com',
+        protocol: "https",
+        hostname: "www.realsimple.com",
       },
       {
-        protocol: 'https',
-        hostname: 'static.independent.co.uk',
+        protocol: "https",
+        hostname: "static.independent.co.uk",
       },
       {
-        protocol: 'https',
-        hostname: 'm.media-amazon.com',
+        protocol: "https",
+        hostname: "m.media-amazon.com",
       },
-       {
+      {
         protocol: "https",
         hostname: "avatars.githubusercontent.com",
       },
       {
         protocol: "https",
-        hostname: "www.interstatedevelopment.com"
+        hostname: "www.interstatedevelopment.com",
       },
       {
         protocol: "https",
-        hostname: "static.vecteezy.com"
+        hostname: "static.vecteezy.com",
       },
       {
         protocol: "https",
-        hostname: "img.freepik.com"
-      }
+        hostname: "img.freepik.com",
+      },
+      { protocol: "https", hostname: "www.kindpng.com" },
     ],
   },
 };
 
 module.exports = nextConfig;
-
