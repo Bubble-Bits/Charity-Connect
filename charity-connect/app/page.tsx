@@ -69,7 +69,7 @@ export default function Home() {
                 className="md:text-3xl md:mr-5 md:p-3 md:mt-[-15vh]
                 bg-green-500 border border-solid border-white rounded-full inline-flex items-center justify-center min-w-[20rem]"
               >
-                View Donations
+                Donate
               </Link>
             </div>
           </div>

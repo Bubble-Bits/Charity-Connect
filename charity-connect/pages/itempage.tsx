@@ -144,11 +144,15 @@ export default function ItemPage() {
   return item ? (
     // This keeps it fixed in the div. How do we keep everything inside of the div?
     // className="h-60 overflow-hidden ml-10"
-    <div className="">
+    <div className="relative">
       <Navbar onChatClick={toggleChats} />
 
+      <div className="absolute z-10">
+        {showChats && (
+          <Chats userId="64a07a8e4425cf31f6b98111" />
+        )}
+      </div>
       <div className="pt-24 md:grid grid-cols-7">
-        {showChats && <Chats userId={userId}/>}
         <div className="space-y-2 col-span-5 pb-4">
           <div className="flex justify-center ">
             <div className="flex items-center justify-center w-64 h-64">
