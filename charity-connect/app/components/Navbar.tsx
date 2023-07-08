@@ -22,46 +22,8 @@ function Navbar({ onChatClick }: Props) {
   const signup = useSignupModal();
   const login = useLoginModal();
   const user = useAuth();
-  async function createNewUser() {
-    const newUser = await axios.post("api/register", {
-      params: {
-        newUser: {
-          localId: user.localId,
-          chatIds: [],
-          chats: [],
-          postedItems: [],
-          claimedItems: [],
-          name: user.displayName,
-          email: user.email,
-          bio: "",
-          profilePic: user.photoUrl,
-          address: "198 South Young Ave. Providence, RI 02904",
-          itemsClaimed: 0,
-          itemsSuccessClaimed: 0,
-          blocked: [],
-        },
-      },
-    });
-    console.log(newUser);
-    return newUser.data.user;
-  }
 
   //useModal();]=
-  async function getUser() {
-    const res = await axios.get("api/register", {
-      params: {
-        localId: user?.localId,
-      },
-    });
-    console.log("current user:", res.data);
-    if (res.data.user.name === undefined) {
-      const newUser = await createNewUser();
-      console.log(newUser);
-      return newUser;
-    }
-
-    return res.data.user;
-  }
 
   const retrieveUser = async () => {
     console.log("retriveing");
