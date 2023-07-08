@@ -7,6 +7,7 @@ import useAuth from "@/firebase/AuthState";
 import axios from "axios";
 import ProfileImageUploader from "./ProfileImageUploader";
 import { da } from "date-fns/locale";
+//import UserProfilePostsGrid from "./UserProfilePostsGrid";
 
 type Props = {
   localId: any
@@ -88,9 +89,10 @@ export default function UserProfile({ localId }: Props) {
       });
   };
 
-  function getItem(id: String) {
-    axios.get('api/getItems', { params: { itemId: id } }).then((res) => {
-      console.log('item: ', res);
+  function getItems() {
+    axios.get('api/getMapItems').then((res) => {
+      console.log('items: ', res.data);
+      setItems(res.data);
     })
   }
 
@@ -105,6 +107,7 @@ export default function UserProfile({ localId }: Props) {
   const [bio, setBio] = useState<any>();
   const [address, setAddress] = useState("");
   const [id, setId] = useState("");
+  const [items, setItems] = useState([]);
   const [currUser, setCurrUser] = useState({
     localId: "",
     chatIds: [],
@@ -141,6 +144,7 @@ export default function UserProfile({ localId }: Props) {
         setBio(data.data.user.bio);
         setAddress(data.data.user.address);
         setId(data.data.user.id);
+        getItems();
       })
     }, [localId]);
 
@@ -241,6 +245,8 @@ export default function UserProfile({ localId }: Props) {
               update bio
             </button>
           </div>
+
+          {/* <UserProfilePostsGrid items={items} /> */}
 
           <ProfileMenu onShowDonationClick={toggleImageShown} />
           <div className="grid grid-cols-2 grid-rows-3 gap-4 place-content-center h-200 p-4">

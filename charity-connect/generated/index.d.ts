@@ -97,6 +97,8 @@ export type ItemPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultAr
     postedAt: Date
     photos: string[]
     address: string
+    lat: number | null
+    lng: number | null
     pickup: boolean
     shipping: boolean
     status: string
@@ -110,7 +112,6 @@ export type ItemPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultAr
  * Model Item
  * 
  */
-<<<<<<< HEAD
 export type Item = runtime.Types.DefaultSelection<ItemPayload>
 export type phPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
   name: "ph"
@@ -120,25 +121,6 @@ export type phPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs
     name: string
   }, ExtArgs["result"]["ph"]>
   composites: {}
-=======
-export type Item = {
-  id: string
-  name: string
-  category: string | null
-  description: string
-  timeOwned: Date | null
-  features: string[]
-  postedAt: Date
-  photos: string[]
-  address: string
-  lat: number | null
-  lng: number | null
-  pickup: boolean
-  shipping: boolean
-  status: string
-  posterId: string
-  claimerId: string | null
->>>>>>> Development
 }
 
 /**
@@ -4960,6 +4942,8 @@ export namespace Prisma {
     postedAt?: boolean
     photos?: boolean
     address?: boolean
+    lat?: boolean
+    lng?: boolean
     pickup?: boolean
     shipping?: boolean
     status?: boolean
