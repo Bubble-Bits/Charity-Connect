@@ -10,7 +10,6 @@ import { useChats } from "./hooks/useChats";
 import ToasterProvider from "./providers/ToasterProvider";
 import Maps from "./components/Maps";
 
-import { useState } from "react";
 import useAuth from "@/firebase/AuthState";
 import useSignupModal from "./hooks/useSignupModal";
 

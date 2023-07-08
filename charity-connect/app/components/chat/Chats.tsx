@@ -158,7 +158,8 @@ function Chats(props: Props) {
       flex
       flex-col
       text-green-600
-      overflow-y-auto">
+      overflow-y-auto
+      z-1000">
       {!chatSelected.length ? (
         <div className="flex-grow flex flex-col">
           <div className='fixed w-full'>
