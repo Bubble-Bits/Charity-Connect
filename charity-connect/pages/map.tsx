@@ -6,9 +6,11 @@ import React, { useEffect, useState } from "react";
 // import exampleDataAddress from "./exampleData-address.js";
 import exampleDataLocations from "../app/components/exampleData-locations";
 import GoogleMapReact from "google-map-react";
-import NavBar from "../app/components/Navbar";
+import Navbar from "../app/components/Navbar";
 import LocationPin from "../app/components/LocationPin";
 import { BiSearch } from "react-icons/bi";
+import Chats from "../app/components/chat/Chats";
+import { useChats } from '../app/hooks/useChats';
 
 type Props = {
   user_address: any;
@@ -72,10 +74,13 @@ const Maps = ({ user_address }: Props) => {
     setSearch(event.target.value);
   };
 
+  const { showChats, toggleChats } = useChats();
+
   return (
     <div>
-      <NavBar />
+      <Navbar onChatClick={toggleChats} />
       <div className="absolute top-20 bg-[#3f50b5] flex-1 flex-col justify-center w-full h-full">
+        {showChats && <Chats userId="64a07a8e4425cf31f6b98111" />}
         <div className="border-2 p-2 m-2 rounded-md text-white text-center text-lg">
           <form onSubmit={handleSubmit}>
             <input

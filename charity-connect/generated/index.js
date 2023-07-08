@@ -162,7 +162,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/anthonybui/Documents/HackReactorSR/Charity-Connect/charity-connect/generated",
+      "value": "/Users/nickmonteleone/Documents/RPP2210/Charity-Connect/charity-connect/generated",
       "fromEnvVar": null
     },
     "config": {
@@ -190,7 +190,7 @@ const config = {
   ],
   "activeProvider": "mongodb",
   "dataProxy": false,
-  "postinstall": false
+  "postinstall": true
 }
 
 const fs = require('fs')

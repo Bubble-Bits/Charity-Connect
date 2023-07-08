@@ -48,7 +48,7 @@ const Maps = ({ user_address }: Props) => {
   };
 
   return (
-    <div>
+    <div className="z-1">
       <div
         className="border-2 p-2 m-2 items-center"
         style={{ height: "80vh", width: "80vw" }}

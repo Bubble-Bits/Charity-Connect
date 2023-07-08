@@ -52,8 +52,8 @@ function Navbar({ onChatClick }: Props) {
               <Link href={`/donate?user=${user.localId}`}><AiOutlinePlus /></Link>
             </div> : null}
             {user ? <UserProfile user={user} /> : <User />}
-            <Signout />
             {onChatClick ? <ChatIcon onIconClick={onChatClick} /> : <></>}
+            <Signout />
           </div>
         </Container>
       </div>
