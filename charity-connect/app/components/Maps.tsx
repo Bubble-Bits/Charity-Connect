@@ -1,43 +1,28 @@
 "use client";
-// import "../global.css";
 import React, { useEffect, useState } from "react";
-// import exampleDataAddress from "./exampleData-address.js";
-// import exampleDataLocations from "./exampleData-locations.js";
 import axios from "axios";
 require("dotenv").config();
 import GoogleMapReact from "google-map-react";
 import LocationPin from "./LocationPin";
 
 type Props = {
-  user_address?: string;
+  item_lat: number;
+  item_lng: number;
 };
-
+//
 const defaultAddress = process.env.NEXT_PUBLIC_INPUT;
 const pw = process.env.NEXT_PUBLIC_GEOLOCATION;
 const googleApi = process.env.NEXT_PUBLIC_GOOGLEAPI || "1";
 
-const Maps = ({ user_address }: Props) => {
-  const [longitude, setLong] = useState(0);
-  const [latitude, setLat] = useState(0);
-  const [search, setSearch] = useState(defaultAddress);
+const Maps = ({ item_lng, item_lat }: Props) => {
+  const [longitude, setLong] = useState(item_lng);
+  const [latitude, setLat] = useState(item_lat);
 
   useEffect(() => {
-    if (user_address !== null) {
-      setSearch(user_address);
-    }
-    axios
-      // grabs longitude & latitude based on given address
-      .get(`https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${pw}`)
-      .then((response) => {
-        console.log(response);
-        //set those coordinates into my state
-        setLong(response.data.results[0].geometry.lng);
-        setLat(response.data.results[0].geometry.lat);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    setLong(item_lng);
+    setLat(item_lat);
+    console.log("is this infinite loop?");
+  }, [item_lng, item_lat]);
 
   const defaultProps = {
     center: {
@@ -48,11 +33,8 @@ const Maps = ({ user_address }: Props) => {
   };
 
   return (
-    <div className="z-1">
-      <div
-        className="border-2 p-2 m-2 items-center"
-        style={{ height: "80vh", width: "80vw" }}
-      >
+    <div>
+      <div className="items-center" style={{ height: "80vh", width: "80vw" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: googleApi }}
           center={{ lat: latitude, lng: longitude }}

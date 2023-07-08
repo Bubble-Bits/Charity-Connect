@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/app/Map-Item.module.css";
+import Image from "next/image";
 
 type datatype = {
   name: string;
-  image?: string;
+  photos: string;
 };
 
 type LocationProps = {
@@ -16,30 +17,11 @@ type LocationProps = {
 
 const LocationPin = ({ lat, lng, colorChoice, data }: LocationProps) => {
   const router = useRouter();
-
-  // const pinIcon = useRef<HTMLDivElement>(null);
-  // const popupInfo = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [height, setHeight] = useState(0);
-  const [topPosition, setTopPosition] = useState(0);
-
-  // useEffect(() => {
-  //   if (pinIcon.current && popupInfo.current) {
-  //     const popupHeight = popupInfo.current.offsetHeight;
-  //     const pinBottomPosition = pinIcon.current.getBoundingClientRect().bottom;
-
-  //     setTopPosition(pinBottomPosition - popupHeight - 10);
-  //   }
-  // }, []);
-
-  type handleClickProps = {
-    data: object;
-  };
 
   const handleClick = (data: any) => {
     console.log("DATA ID =====>", data);
-    // console.log(data.id);
-    router.push("/itempage");
+    router.push(`/itempage?item=${data.id}`);
   };
 
   const handleMouseEnter = () => {
@@ -55,7 +37,7 @@ const LocationPin = ({ lat, lng, colorChoice, data }: LocationProps) => {
   } else {
     return (
       <div
-        className={`inline-block map-item ${styles["map-item"]} ${
+        className={`inline-block rounded-full map-item ${styles["map-item"]} ${
           isHovered ? styles.hovered : ""
         }`}
         style={{ fontSize: "155%" }}
@@ -72,19 +54,24 @@ const LocationPin = ({ lat, lng, colorChoice, data }: LocationProps) => {
             fill={colorChoice}
           />
         </svg>
-        {isHovered && data?.image && (
+        {isHovered && data?.photos[0] && (
           <div
             className={styles.popupinfo}
             onClick={() => {
               handleClick(data);
             }}
           >
-            <div>{data.name}</div>
-            <img
-              src={data.image}
-              alt="Hovered Image"
-              className={styles.image}
-            />
+            <div>
+              <Image
+                src={data.photos[0]}
+                alt="Hovered Image"
+                width={150}
+                height={150}
+                className={styles.image}
+              ></Image>
+            </div>
+
+            <div className={styles.pin}>{data.name}</div>
           </div>
         )}
       </div>

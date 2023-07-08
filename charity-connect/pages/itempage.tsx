@@ -35,6 +35,8 @@ export default function ItemPage() {
     status: "",
     photos: [],
     postedAt: "",
+    lng: 0,
+    lat: 0,
   });
 
   const [donorData, setDonorData] = useState({
@@ -78,7 +80,7 @@ export default function ItemPage() {
       if (mainPhoto === itemData.photos[itemData.photos.length - 1]) {
         var lastPart = itemData.photos.slice(
           itemData.photos.length - 4,
-          itemData.photos.length,
+          itemData.photos.length
         );
         setImageGallery(lastPart);
       } else {
@@ -97,6 +99,7 @@ export default function ItemPage() {
         }
         console.log("data", data.data);
         setItemData(data.data.item);
+
         setDonorData(data.data.donor);
         setMainPhoto(data.data.item.photos[0]);
         imageGalleryFunc(data.data.item.photos);
@@ -104,6 +107,8 @@ export default function ItemPage() {
       .catch((error) => {
         console.log("error", error);
       });
+    console.log("itemData lng", itemData.lng);
+    console.log("itemData lat", itemData.lat);
   }, [item]);
 
   function getDaysAgoFromDate(dateString = "") {
@@ -252,7 +257,7 @@ export default function ItemPage() {
 
               <div className="relative w-full h-40 overflow-hidden">
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg">
-                  <Maps />
+                  <Maps item_lng={itemData.lng} item_lat={itemData.lat} />
                 </div>
               </div>
             </div>
