@@ -11,9 +11,9 @@ type Props = {
 };
 
 export default async function userController(user: Props) {
-  console.log(user);
+  // console.log(user);
   async function createNewUser() {
-    console.log("Pleaseee");
+    // console.log("Pleaseee");
     const newUser = await axios.post("api/register", {
       params: {
         newUser: {
@@ -35,8 +35,8 @@ export default async function userController(user: Props) {
         },
       },
     });
-    console.log("Boo");
-    console.log(newUser);
+    // console.log("Boo");
+    // console.log(newUser);
     return newUser.data.user;
   }
 
@@ -47,24 +47,24 @@ export default async function userController(user: Props) {
       },
     });
 
-    console.log("current user:", res.data);
+    // console.log("current user:", res.data);
     if (res.data.user.name === undefined) {
-      console.log("its undefied");
+      // console.log("its undefied");
       const newUser = await createNewUser();
-      console.log(newUser);
+      // console.log(newUser);
       return newUser;
     }
 
     return res.data.user;
   }
   const retrieveUser = async () => {
-    console.log("Hereeee");
+    // console.log("Hereeee");
     const now = await getUser();
-    console.log(now);
+    // console.log(now);
     return now;
   };
   const currUser = await retrieveUser();
-  console.log(currUser);
+  // console.log(currUser);
 
   return currUser;
 }
