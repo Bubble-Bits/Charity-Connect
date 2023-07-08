@@ -26,13 +26,13 @@ function Navbar({ onChatClick }: Props) {
   //useModal();]=
 
   const retrieveUser = async () => {
-    console.log("retriveing");
+    // console.log("retriveing");
     const result = await userController(user);
-    console.log(result);
+    // console.log(result);
   };
   useEffect(() => {
     if (user) {
-      console.log("Here");
+      // console.log("Here");
       retrieveUser();
       signup.onClose();
       login.onClose();
