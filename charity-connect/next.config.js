@@ -110,6 +110,22 @@ const nextConfig = {
         protocol: "https",
         hostname: "myfreetextures.com",
       },
+      {
+        protocol: 'https',
+        hostname: 'static.vecteezy.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.realsimple.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'static.independent.co.uk',
+      },
+      {
+        protocol: 'https',
+        hostname: 'm.media-amazon.com',
+      },
     ],
   },
 };
