@@ -36,6 +36,11 @@ const PostedItemsList = (props: IPostListProps) => {
 
   return (
     <div>
+      <Link href="/donate">
+        <button className="cursor-pointer w-24 text-md rounded-lg bg-gray-500 flex justify-center  text-white">
+          Create New Post
+        </button>
+      </Link>
       {items.map((item) => {
         if (item.posterId === id) {
           return <Link key={item.id} href={`/itempage?item=${item?.id}`}>
