@@ -34,6 +34,8 @@ const nextConfig = {
       "cdn.mos.cms.futurecdn.net",
       "static.independent.co.uk",
       "m.media-amazon.com",
+      "cdn.onlinewebfonts.com",
+      "www.myfreetextures.com",
     ],
     remotePatterns: [
       {
@@ -81,6 +83,25 @@ const nextConfig = {
         hostname: "encrypted-tbn0.gstatic.com",
       },
       {
+<<<<<<< HEAD
+        protocol: 'https',
+        hostname: 'static.vecteezy.com',
+      },
+      {
+        protocol: "https",
+        hostname: "www.interstatedevelopment.com",
+      },
+      {
+        protocol: 'https',
+        hostname: 'static.independent.co.uk',
+      },
+      {
+        protocol: 'https',
+        hostname: 'm.media-amazon.com',
+      },
+      {
+=======
+>>>>>>> 62efc03 (Complete email password glitch")
         protocol: "https",
         hostname: "static.vecteezy.com",
       },
@@ -119,22 +140,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "myfreetextures.com",
-      },
-      {
-        protocol: "https",
-        hostname: "static.vecteezy.com",
-      },
-      {
-        protocol: "https",
-        hostname: "www.realsimple.com",
-      },
-      {
-        protocol: "https",
-        hostname: "static.independent.co.uk",
-      },
-      {
-        protocol: "https",
-        hostname: "m.media-amazon.com",
       },
     ],
   },
