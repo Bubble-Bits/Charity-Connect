@@ -1,5 +1,4 @@
 type Props = {
-  itemId: String,
   item: any
 }
 
@@ -21,6 +20,7 @@ export default function UserProfileItem({ item }: Props) {
 
   return (
     <div>
+      {item.name}
     </div>
   );
 }

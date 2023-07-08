@@ -7,6 +7,7 @@ import useAuth from "@/firebase/AuthState";
 import axios from "axios";
 import ProfileImageUploader from "./ProfileImageUploader";
 import { da } from "date-fns/locale";
+import UserProfilePostsGrid from "./UserProfilePostsGrid";
 
 type Props = {
   localId: any;
@@ -23,15 +24,8 @@ export default function UserProfile({ localId }: Props) {
   const user = useAuth();
   // console.log(user);
 
-  const getPosted = async () => {
-    console.log("Boom");
-    const res = await axios.get(`api/items?userId=${user.localId}`, {
-      params: {
-        localId: user.localId,
-      },
-    });
-    console.log(res);
-  };
+
+
   async function getUser() {
     const res = await axios.get("api/register", {
       params: {
@@ -98,10 +92,11 @@ export default function UserProfile({ localId }: Props) {
       });
   }
 
-  function getItem(id: String) {
-    axios.get("api/getItems", { params: { itemId: id } }).then((res) => {
-      console.log("item: ", res);
-    });
+  function getItems() {
+    axios.get('api/getMapItems').then((res) => {
+      console.log('items: ', res.data);
+      //setItems(res.data);
+    })
   }
 
   const toggleImageShown = () => {
@@ -110,11 +105,13 @@ export default function UserProfile({ localId }: Props) {
 
   const [showPostedDonations, setShowPostedDonations] = useState(true);
   const [showUpdatePicMenu, setShowUpdatePicMenu] = useState(false);
-  const [profilePicUrl, setProfilePicUrl] = useState<any>();
+  const [profilePicUrl, setProfilePicUrl] = useState<any>('');
   const [name, setName] = useState("");
   const [bio, setBio] = useState<any>();
   const [address, setAddress] = useState("");
   const [id, setId] = useState("");
+  const [claimedItemIds, setClaimedItemIds] = useState([]);
+  const [postedItemIds, setPostedItemIds] = useState([]);
   const [currUser, setCurrUser] = useState({
     localId: "",
     chatIds: [],
@@ -131,33 +128,26 @@ export default function UserProfile({ localId }: Props) {
     blocked: [],
   });
 
-  // useEffect(() => {
-  //   setName(user?.displayName);
-  //   setProfilePicUrl(user?.photoUrl);
-  // }, [user]); //whenever status changes from undef to def, default vals will be set
-  useEffect(() => {
-    if (user) {
-      getPosted();
-    }
-  }, [user]);
-
-  useEffect(() => {
-    axios
-      .get("api/register", {
+  useEffect(
+    () => {
+      axios.get('api/register', {
         params: {
           localId: localId,
         },
       })
-      .then((data) => {
-        console.log("data: ", data.data.user);
-        setCurrUser(data.data.user);
-        setProfilePicUrl(data.data.user.profilePic);
-        setName(data.data.user.name);
-        setBio(data.data.user.bio);
-        setAddress(data.data.user.address);
-        setId(data.data.user.id);
-      });
-  }, [localId]);
+        .then((data) => {
+          console.log("data: ", data.data.user);
+          setCurrUser(data.data.user);
+          setProfilePicUrl(data.data.user.profilePic);
+          setName(data.data.user.name);
+          setBio(data.data.user.bio);
+          setAddress(data.data.user.address);
+          setId(data.data.user.id);
+          setPostedItemIds(data.data.user.postedItemIds);
+          setClaimedItemIds(data.data.user.claimedItemIds);
+          getItems();
+        })
+    }, [localId]);
 
   return user ? ( //don't render screen until valid user obj is retrieved
     <div>
@@ -272,109 +262,56 @@ export default function UserProfile({ localId }: Props) {
           </button>
         </div>
 
+
+
         <ProfileMenu onShowDonationClick={toggleImageShown} />
-        <div className="grid grid-cols-2 grid-rows-3 gap-4 place-content-center h-200 p-4">
-          <div className="bg-gray-500">
-            {showPostedDonations ? (
-              <Link href="/donate">Create New Post</Link>
-            ) : (
-              <Image
-                src={claimedDonation}
-                alt="claimDonation"
-                height={200}
-                width={200}
-              />
-            )}
-          </div>
-          <div className="">
-            {showPostedDonations ? (
-              <Image
-                src={postedDonation}
-                alt="post Donation"
-                height={200}
-                width={200}
-              />
-            ) : (
-              <Image
-                src={claimedDonation}
-                alt="claimed Donation"
-                height={200}
-                width={200}
-              />
-            )}
-          </div>
-          <div className="">
-            {showPostedDonations ? (
-              <Image
-                src={postedDonation}
-                alt="Post Dontation"
-                height={200}
-                width={200}
-              />
-            ) : (
-              <Image
-                src={claimedDonation}
-                alt="Claimed Donation"
-                height={200}
-                width={200}
-              />
-            )}
-          </div>
-          <div className="">
-            {showPostedDonations ? (
-              <Image
-                src={postedDonation}
-                alt="Posted Donation"
-                height={200}
-                width={200}
-              />
-            ) : (
-              <Image
-                src={claimedDonation}
-                alt="Claimed Donation"
-                height={200}
-                width={200}
-              />
-            )}
-          </div>
-          <div className="">
-            {showPostedDonations ? (
-              <Image
-                src={postedDonation}
-                alt="Posted Donation"
-                height={200}
-                width={200}
-              />
-            ) : (
-              <Image
-                src={claimedDonation}
-                alt="Claimed Donation"
-                height={200}
-                width={200}
-              />
-            )}
-          </div>
-          <div className="">
-            {showPostedDonations ? (
-              <Image
-                src={postedDonation}
-                alt="Posted Donation"
-                height={200}
-                width={200}
-              />
-            ) : (
-              <Image
-                src={claimedDonation}
-                alt="Claimed Donation"
-                height={200}
-                width={200}
-              />
-            )}
-          </div>
-        </div>
+        <UserProfilePostsGrid postedItemIds={postedItemIds} claimedItemIds={claimedItemIds} id={id} showPostedDonations={showPostedDonations} />
+        {/* <div className="grid grid-cols-2 grid-rows-3 gap-4 place-content-center h-200 p-4">
+            <div className="bg-gray-500">
+              {showPostedDonations ? (
+                <Link href="/donate">Create New Post</Link>
+              ) : (
+                <Image src={claimedDonation} alt="claimDonation" height={200} width={200} />
+              )}
+            </div>
+            <div className="">
+              {showPostedDonations ? (
+                <Image src={postedDonation} alt="post Donation" height={200} width={200} />
+              ) : (
+                <Image src={claimedDonation} alt="claimed Donation" height={200} width={200} />
+              )}
+            </div>
+            <div className="">
+              {showPostedDonations ? (
+                <Image src={postedDonation} alt="Post Dontation" height={200} width={200} />
+              ) : (
+                <Image src={claimedDonation} alt="Claimed Donation" height={200} width={200} />
+              )}
+            </div>
+            <div className="">
+              {showPostedDonations ? (
+                <Image src={postedDonation} alt="Posted Donation" height={200} width={200} />
+              ) : (
+                <Image src={claimedDonation} alt="Claimed Donation" height={200} width={200} />
+              )}
+            </div>
+            <div className="">
+              {showPostedDonations ? (
+                <Image src={postedDonation} alt="Posted Donation" height={200} width={200} />
+              ) : (
+                <Image src={claimedDonation} alt="Claimed Donation" height={200} width={200} />
+              )}
+            </div>
+            <div className="">
+              {showPostedDonations ? (
+                <Image src={postedDonation} alt="Posted Donation" height={200} width={200} />
+              ) : (
+                <Image src={claimedDonation} alt="Claimed Donation" height={200} width={200} />
+              )}
+            </div>
+          </div> */}
       </div>
-    </div>
-  ) : (
-    <div>Loading...</div>
-  );
+    </div>)
+    : <div>Loading...</div>
+
 }
