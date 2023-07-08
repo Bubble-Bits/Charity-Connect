@@ -74,13 +74,13 @@ const Maps = () => {
     <div className="relative">
       <Navbar onChatClick={toggleChats} />
 
-      <div className="">
+      <div className="absolute z-10">
         {showChats && (
           <Chats userId="64a07a8e4425cf31f6b98111" />
         )}
       </div>
 
-      <div className="top-20 bg-gradient-to-b from-indigo-900 to-indigo-600 flex-1 flex-col justify-center w-full h-full">
+      <div className="absolute top-20 bg-gradient-to-b from-indigo-900 to-indigo-600 flex-1 flex-col justify-center w-full h-full">
         <div className=" text-white text-center text-lg">
           <form onSubmit={handleSubmit} className="p-3 m-3">
             <input
