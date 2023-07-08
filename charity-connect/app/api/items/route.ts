@@ -10,8 +10,8 @@ export async function POST(request: Request) {
     const userId = await prisma.user.findUnique({
       where: {
         //! Need current user's id to be passed in frontend
-        // localId: body.user
-        localId: "5cDMsCMLHDblBhFBN2gyOvsh8Au2"
+        localId: body.user
+        // localId: "5cDMsCMLHDblBhFBN2gyOvsh8Au2"
       }
     })
     if (userId) {
