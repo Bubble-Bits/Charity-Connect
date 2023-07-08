@@ -80,7 +80,7 @@ const Maps = () => {
         )}
       </div>
 
-      <div className="absolute top-20 bg-gradient-to-b from-indigo-900 to-indigo-600 flex-1 flex-col justify-center w-full h-full">
+      <div className="absolute z-9 top-20 bg-gradient-to-b from-indigo-900 to-indigo-600 flex-1 flex-col justify-center w-full h-full">
         <div className=" text-white text-center text-lg">
           <form onSubmit={handleSubmit} className="p-3 m-3">
             <input
