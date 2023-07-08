@@ -10,8 +10,8 @@ export async function POST(request: Request) {
     const userId = await prisma.user.findUnique({
       where: {
         //! Need current user's id to be passed in frontend
-        email: body.user
-        // localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
+        // localId: body.user
+        localId: "5cDMsCMLHDblBhFBN2gyOvsh8Au2"
       }
     })
     if (userId) {
@@ -40,6 +40,7 @@ export async function POST(request: Request) {
             {push: newItem.id}
           }
         })
+        return NextResponse.json(newItem);
     } else {
       const newItem = await prisma.item.create({
         data: {
@@ -64,14 +65,14 @@ export async function POST(request: Request) {
             {push: newItem.id}
           }
         })
+        return NextResponse.json(newItem);
     }
   }
 }
   catch (err) {
     console.log('ERROR: ', err);
+    return NextResponse.json({status: 404});
   }
-
-  return NextResponse.json({ status: 201 });
 }
 
 export async function PUT(request: Request) {
