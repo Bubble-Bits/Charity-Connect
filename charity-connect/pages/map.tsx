@@ -6,9 +6,11 @@ import React, { useEffect, useState } from "react";
 import exampleDataAddress from "../app/components/exampleData-address.js";
 // import exampleDataLocations from "../app/components/exampleData-locations";
 import GoogleMapReact from "google-map-react";
-import NavBar from "../app/components/Navbar";
+import Navbar from "../app/components/Navbar";
 import LocationPin from "../app/components/LocationPin";
 import { BiSearch } from "react-icons/bi";
+import Chats from "../app/components/chat/Chats";
+import { useChats } from '../app/hooks/useChats';
 
 const defaultAddress = process.env.NEXT_PUBLIC_INPUT;
 const pw = process.env.NEXT_PUBLIC_GEOLOCATION;
@@ -66,10 +68,19 @@ const Maps = () => {
     setSearch(event.target.value);
   };
 
+  const { showChats, toggleChats } = useChats();
+
   return (
-    <div>
-      <NavBar />
-      <div className="absolute  top-20 bg-gradient-to-b from-indigo-900 to-indigo-600 flex-1 flex-col justify-center w-full h-full">
+    <div className="relative">
+      <Navbar onChatClick={toggleChats} />
+
+      <div className="">
+        {showChats && (
+          <Chats userId="64a07a8e4425cf31f6b98111" />
+        )}
+      </div>
+
+      <div className="top-20 bg-gradient-to-b from-indigo-900 to-indigo-600 flex-1 flex-col justify-center w-full h-full">
         <div className=" text-white text-center text-lg">
           <form onSubmit={handleSubmit} className="p-3 m-3">
             <input

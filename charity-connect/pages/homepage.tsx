@@ -1,37 +1,20 @@
 import Navbar from '@/app/components/Navbar';
 import ItemList from '@/app/components/ItemList';
-import Link from "next/link";
 import '../app/globals.css'
+import Chats from "../app/components/chat/Chats";
+import { useChats } from '../app/hooks/useChats';
 
 export default function Homepage() {
+  const { showChats, toggleChats } = useChats();
   return (
-    <div className='relative'>
-      <Navbar />
-      <div className='absolute top-0 left-0 right-0 bottom-0 h-screen'>
-        <div className='mt-20 h-4/5 w-screen overflow-x-hidden bg-[#01002e]'>
+    <div className="bg-gradient-to-b from-indigo-900 to-indigo-600">
+      <Navbar onChatClick={toggleChats}/>
+      <div className="bg-gradient-to-b from-indigo-900 to-indigo-600 min-h-screen">
+        {showChats && <Chats userId='64a07a8e4425cf31f6b98111'/>}
+        <div className="container mx-auto px-4 py-20">
           <ItemList />
-        </div>
-        <div className='mt-0.5 w-screen h-1/5 bg-[#01002e]'>
-        <div className="pt-20 ml-[15vh] flex justify-around items-center">
-              <Link
-                href="/homepage"
-                className="md:text-3xl md:mr-5 md:p-3
-                bg-green-500 border border-solid border-white rounded-full inline-flex items-center justify-center min-w-[20rem]"
-              >
-                Want to Donate?
-              </Link>
-            </div>
-            <div className="pt-20 ml-[15vh]">
-              <Link
-                href="/map"
-                className="md:text-3xl md:mr-5 md:p-3
-                bg-green-500 border border-solid border-white rounded-full inline-flex items-center justify-center min-w-[20rem]"
-              >
-                Search on a map
-              </Link>
-            </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

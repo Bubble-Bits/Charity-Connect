@@ -9,9 +9,25 @@ import Maps from "../app/components/Maps";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+import Chats from "../app/components/chat/Chats";
+import { useChats } from '../app/hooks/useChats';
+
+// type Props = {
+//   userId: String;
+// }
+
+
+
 export default function ItemPage() {
   const router = useRouter();
   const { item } = router.query;
+
+
+  //Hardcoded userId for now but will need to be sent down as a prop once
+  //everything is fully integrated
+  const userId = '64a07a8e4425cf31f6b98111';
+
+  const [messageInput, setMessageInput] = useState('');
 
   const [itemData, setItemData] = useState({
     description: "",
@@ -26,10 +42,12 @@ export default function ItemPage() {
   const [donorData, setDonorData] = useState({
     name: "",
     profilePic: "",
+    id: "",
   });
   //comment
   const [mainPhoto, setMainPhoto] = useState("");
   const [imageGallery, setImageGallery] = useState([]);
+  const [isSending, setSending] = useState(false);
 
   var imageGalleryFunc = (imageGallery: []) => {
     if (imageGallery.length <= 4) {
@@ -106,12 +124,34 @@ export default function ItemPage() {
     return differenceDays;
   }
 
+  const sendMessage = () => {
+    setSending(true);
+    Axios.post(`/api/itemPageChat?userIds=${donorData.id},${userId}&content=${messageInput}`)
+      .then((res) => {
+        console.log('message sent', res.data);
+        setSending(false);
+        setMessageInput('');
+      })
+      .catch(err => {
+        console.log('error sending chat');
+        console.error(err);
+      });
+
+  }
+
+  const { showChats, toggleChats } = useChats();
+
   return item ? (
     // This keeps it fixed in the div. How do we keep everything inside of the div?
     // className="h-60 overflow-hidden ml-10"
-    <div className="">
-      <Navbar />
+    <div className="relative">
+      <Navbar onChatClick={toggleChats} />
 
+      <div className="absolute z-10">
+        {showChats && (
+          <Chats userId="64a07a8e4425cf31f6b98111" />
+        )}
+      </div>
       <div className="pt-24 md:grid grid-cols-7">
         <div className="space-y-2 col-span-5 pb-4">
           <div className="flex justify-center ">
@@ -231,10 +271,13 @@ export default function ItemPage() {
               <textarea
                 className="w-full rounded-lg h-min overflow-y-scroll text-black placeholder-gray-400 pl-2 pr-2"
                 placeholder="Send a message to the donor!"
+                value={messageInput}
+                onChange={(event) => {setMessageInput(event.target.value)}}
               ></textarea>
-              <button className="cursor-pointer text-md rounded-lg bg-gray-500 w-full flex justify-center  text-white">
-                Submit
+              <button onClick={sendMessage} className="cursor-pointer text-md rounded-lg bg-gray-500 w-full flex justify-center  text-white">
+                Send
               </button>
+              {isSending && <span className="text-white">Sending ...</span>}
             </div>
           </div>
         </div>
