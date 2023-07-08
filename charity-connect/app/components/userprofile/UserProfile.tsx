@@ -102,7 +102,7 @@ export default function UserProfile({ localId }: Props) {
 
   const [showPostedDonations, setShowPostedDonations] = useState(true);
   const [showUpdatePicMenu, setShowUpdatePicMenu] = useState(false);
-  const [profilePicUrl, setProfilePicUrl] = useState<any>();
+  const [profilePicUrl, setProfilePicUrl] = useState<any>('');
   const [name, setName] = useState("");
   const [bio, setBio] = useState<any>();
   const [address, setAddress] = useState("");
