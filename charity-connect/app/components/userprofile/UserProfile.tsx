@@ -7,7 +7,7 @@ import useAuth from "@/firebase/AuthState";
 import axios from "axios";
 import ProfileImageUploader from "./ProfileImageUploader";
 import { da } from "date-fns/locale";
-//import UserProfilePostsGrid from "./UserProfilePostsGrid";
+import UserProfilePostsGrid from "./UserProfilePostsGrid";
 
 type Props = {
   localId: any
@@ -92,7 +92,7 @@ export default function UserProfile({ localId }: Props) {
   function getItems() {
     axios.get('api/getMapItems').then((res) => {
       console.log('items: ', res.data);
-      setItems(res.data);
+      //setItems(res.data);
     })
   }
 
@@ -107,7 +107,8 @@ export default function UserProfile({ localId }: Props) {
   const [bio, setBio] = useState<any>();
   const [address, setAddress] = useState("");
   const [id, setId] = useState("");
-  const [items, setItems] = useState([]);
+  const [claimedItemIds, setClaimedItemIds] = useState([]);
+  const [postedItemIds, setPostedItemIds] = useState([]);
   const [currUser, setCurrUser] = useState({
     localId: "",
     chatIds: [],
@@ -144,6 +145,8 @@ export default function UserProfile({ localId }: Props) {
         setBio(data.data.user.bio);
         setAddress(data.data.user.address);
         setId(data.data.user.id);
+        setPostedItemIds(data.data.user.postedItemIds);
+        setClaimedItemIds(data.data.user.claimedItemIds);
         getItems();
       })
     }, [localId]);
@@ -246,10 +249,11 @@ export default function UserProfile({ localId }: Props) {
             </button>
           </div>
 
-          {/* <UserProfilePostsGrid items={items} /> */}
+
 
           <ProfileMenu onShowDonationClick={toggleImageShown} />
-          <div className="grid grid-cols-2 grid-rows-3 gap-4 place-content-center h-200 p-4">
+          <UserProfilePostsGrid postedItemIds={postedItemIds} claimedItemIds={claimedItemIds} id={id} showPostedDonations={showPostedDonations} />
+          {/* <div className="grid grid-cols-2 grid-rows-3 gap-4 place-content-center h-200 p-4">
             <div className="bg-gray-500">
               {showPostedDonations ? (
                 <Link href="/donate">Create New Post</Link>
@@ -292,7 +296,7 @@ export default function UserProfile({ localId }: Props) {
                 <Image src={claimedDonation} alt="Claimed Donation" height={200} width={200} />
               )}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       : <div>Loading...</div>
