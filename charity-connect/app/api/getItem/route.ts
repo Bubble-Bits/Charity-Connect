@@ -15,6 +15,9 @@ export async function GET(request: Request) {
     where: {
       id: itemId, // Replace with the appropriate condition to identify the item
     },
+    // include: {
+    //   poster: true,
+    // }
   });
 
   console.log(item);

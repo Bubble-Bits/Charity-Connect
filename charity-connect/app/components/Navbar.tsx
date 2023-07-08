@@ -63,8 +63,8 @@ function Navbar({ onChatClick }: Props) {
               </div>
             ) : null}
             {user ? <UserProfile user={user} /> : <User />}
-            <Signout />
             {onChatClick ? <ChatIcon onIconClick={onChatClick} /> : <></>}
+            <Signout />
           </div>
         </Container>
       </div>
