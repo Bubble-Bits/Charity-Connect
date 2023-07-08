@@ -27,6 +27,13 @@ const nextConfig = {
       "m.media-amazon.com",
       "cdn.onlinewebfonts.com",
       "www.myfreetextures.com",
+      "static.vecteezy.com",
+      "media.istockphoto.com",
+      "cdn.thewirecutter.com",
+      "www.realsimple.com",
+      "cdn.mos.cms.futurecdn.net",
+      "static.independent.co.uk",
+      "m.media-amazon.com",
     ],
     remotePatterns: [
       {
