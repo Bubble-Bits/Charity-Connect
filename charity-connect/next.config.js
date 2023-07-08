@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
+images: {
     domains: [
       "www.news10.com",
       "52f4e29a8321344e30ae-0f55c9129972ac85d6b1f4e703468e6b.ssl.cf2.rackcdn.com",
@@ -13,6 +13,13 @@ const nextConfig = {
       "news.rice.edu",
       "sugarspunrun.com",
       "encrypted-tbn0.gstatic.com",
+      "static.vecteezy.com",
+      "media.istockphoto.com",
+      "cdn.thewirecutter.com",
+      "www.realsimple.com",
+      "cdn.mos.cms.futurecdn.net",
+      "static.independent.co.uk",
+      "m.media-amazon.com",
     ],
     remotePatterns: [
       {

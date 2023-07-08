@@ -10,8 +10,8 @@ export async function POST(request: Request) {
     const userId = await prisma.user.findUnique({
       where: {
         //! Need current user's id to be passed in frontend
-        email: body.user
-        // localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
+        localId: body.user
+        // localId: "5cDMsCMLHDblBhFBN2gyOvsh8Au2"
       }
     })
     if (userId) {
@@ -40,6 +40,7 @@ export async function POST(request: Request) {
             {push: newItem.id}
           }
         })
+        return NextResponse.json(newItem);
     } else {
       const newItem = await prisma.item.create({
         data: {
@@ -64,14 +65,14 @@ export async function POST(request: Request) {
             {push: newItem.id}
           }
         })
+        return NextResponse.json(newItem);
     }
   }
 }
   catch (err) {
     console.log('ERROR: ', err);
+    return NextResponse.json({status: 404});
   }
-
-  return NextResponse.json({ status: 201 });
 }
 
 export async function PUT(request: Request) {
@@ -114,17 +115,52 @@ export async function PUT(request: Request) {
 }
 
 export async function GET(request: Request) {
-  const userId = await prisma.user.findUnique({
-    where: {
-      localId: "Ks5S9W6xEZTUmJmFDXumwC2xA6t1"
+  type storage = {
+    posted: Object[],
+    claimed: Object[]
+  }
+
+  let Storage:storage = {
+    posted: [],
+    claimed: []
+  }
+
+  const body = await request.json();
+  try {
+    const userInfo = await prisma.user.findUnique({
+      where: {
+        localId: body.user
+      }
+    })
+    if (userInfo) {
+      if (userInfo.postedItemIds.length) {
+        for (let i = 0; i < userInfo.postedItemIds.length; i++) {
+          const postItem = await prisma.item.findUnique({
+            where: {
+              id: userInfo.postedItemIds[i]
+            }
+          })
+          if (postItem) {
+            Storage.posted.push(postItem);
+          }
+        }
+      }
+      if (userInfo.claimedItemIds.length) {
+        for (let j = 0; j < userInfo.claimedItemIds.length; j++) {
+          const claimItem = await prisma.item.findUnique({
+            where: {
+              id: userInfo.claimedItemIds[j]
+            }
+          })
+          if (claimItem) {
+            Storage.claimed.push(claimItem);
+          }
+        }
+      }
     }
-  })
-
-  return NextResponse.json(userId);
-}
-
-export async function DELETE(request: Request) {
-  // const body = await request.json();
-
-  return NextResponse.json({ message: "eko" });
+  }
+  catch (err) {
+      console.log('ERROR: ', err);
+  }
+  return NextResponse.json(Storage);
 }
