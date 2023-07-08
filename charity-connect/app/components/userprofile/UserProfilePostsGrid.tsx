@@ -2,16 +2,12 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-
-
-
 type Props = {
   postedItemIds: any[]
   claimedItemIds: any[]
   id: String
   showPostedDonations: Boolean
 }
-
 
 // id: String,
 // name: String,
@@ -36,7 +32,7 @@ const PostedItemsList = (props: IPostListProps) => {
 
   return (
     <div>
-      <Link href="/donate">
+      <Link href="/donate" className="flex justify-center">
         <button className="cursor-pointer w-24 text-md rounded-lg bg-gray-500 flex justify-center  text-white">
           Create New Post
         </button>

@@ -125,12 +125,6 @@ export default function UserProfile({ localId }: Props) {
     blocked: []
   });
 
-  // useEffect(() => {
-  //   setName(user?.displayName);
-  //   setProfilePicUrl(user?.photoUrl);
-  // }, [user]); //whenever status changes from undef to def, default vals will be set
-
-
   useEffect(
     () => {
       axios.get('api/register', {
