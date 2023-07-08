@@ -10,7 +10,6 @@ import NavBar from "../app/components/Navbar";
 import { AiOutlineCalendar } from 'react-icons/ai';
 import useAuth from "@/firebase/AuthState";
 import { useRouter } from "next/router";
-import { redirect } from 'next/navigation';
 
 //! TESTING PURPOSE
 // import ClaimButton from "../app/components/Donation/ClaimButton"
@@ -56,7 +55,7 @@ function Donate({}: Props) {
     try {
       //! if (images.length && name && description && address) {
         let result = await axios.post("/api/items", dataSet);
-        redirect(`/itempage?item=${result.data.id}`)
+        router.push(`/itempage?item=${result.data.id}`)
       }
     //! }
     catch (err) {
