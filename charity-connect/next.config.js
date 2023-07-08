@@ -13,6 +13,8 @@ const nextConfig = {
       "news.rice.edu",
       "sugarspunrun.com",
       "encrypted-tbn0.gstatic.com",
+      "cdn.onlinewebfonts.com",
+      "www.myfreetextures.com",
     ],
     remotePatterns: [
       {
@@ -48,36 +50,43 @@ const nextConfig = {
         hostname: "cdn.shopify.com",
       },
       {
-        protocol: 'https',
-        hostname: 'images.pexels.com',
+        protocol: "https",
+        hostname: "images.pexels.com",
       },
       {
-        protocol: 'https',
-        hostname: 'sugarspunrun.com',
+        protocol: "https",
+        hostname: "sugarspunrun.com",
       },
       {
-        protocol: 'https',
-        hostname: 'encrypted-tbn0.gstatic.com',
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
       },
-       {
+      {
         protocol: "https",
         hostname: "avatars.githubusercontent.com",
       },
       {
         protocol: "https",
-        hostname: "www.interstatedevelopment.com"
+        hostname: "www.interstatedevelopment.com",
       },
       {
         protocol: "https",
-        hostname: "static.vecteezy.com"
+        hostname: "static.vecteezy.com",
       },
       {
         protocol: "https",
-        hostname: "img.freepik.com"
-      }
+        hostname: "img.freepik.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.onlinewebfonts.com",
+      },
+      {
+        protocol: "https",
+        hostname: "myfreetextures.com",
+      },
     ],
   },
 };
 
 module.exports = nextConfig;
-

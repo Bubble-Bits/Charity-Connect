@@ -1,15 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import userController from "../controller/userController";
 
 type Props = {
   user: any;
 };
 
 function UserProfile({ user }: Props) {
+  const [photo, setPhoto] = useState("");
   console.log(user);
+  const checkPhoto = async () => {
+    if (!user.photoUrl) {
+      const photo = await userController(user);
+      setPhoto(photo.profilePic);
+      console.log(user);
+    }
+  };
+  checkPhoto();
+
   return (
     <Link href={`/userprofile?localId=${user.localId}`}>
       <div className="flex flex-row items-center gap-1">
@@ -18,7 +29,7 @@ function UserProfile({ user }: Props) {
             className="rounded-full w-full h-full object-contain"
             width={30}
             height={30}
-            src={user.photoUrl}
+            src={user.photoUrl ? user.photoUrl : photo}
             alt=""
           />
         </div>

@@ -32,6 +32,7 @@ function Navbar({ onChatClick }: Props) {
   };
   useEffect(() => {
     if (user) {
+      console.log(user);
       console.log("Here");
       retrieveUser();
       signup.onClose();

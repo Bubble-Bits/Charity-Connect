@@ -22,10 +22,12 @@ export default async function userController(user: Props) {
           chats: [],
           postedItems: [],
           claimedItems: [],
-          name: user.displayName,
+          name: user.displayName ? user.displayName : user.email,
           email: user.email,
           bio: "",
-          profilePic: user.photoUrl,
+          profilePic: user.photoUrl
+            ? user.photoUrl
+            : "http://cdn.onlinewebfonts.com/svg/img_366217.png",
           address: "198 South Young Ave. Providence, RI 02904",
           itemsClaimed: 0,
           itemsSuccessClaimed: 0,
