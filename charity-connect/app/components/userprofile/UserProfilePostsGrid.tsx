@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import useAuth from "@/firebase/AuthState";
+import axios from "axios";
+
 
 type Props = {
   postedItemIds: any[]
@@ -30,9 +33,12 @@ interface IPostListProps {
 const PostedItemsList = (props: IPostListProps) => {
   const { items, id } = props.postData;
 
+  const user = useAuth();
+  console.log('here: ', user);
+
   return (
     <div>
-      <Link href="/donate" className="flex justify-center">
+      <Link href={`/donate?user=${user?.localId}`} className="flex justify-center">
         <button className="cursor-pointer w-24 text-md rounded-lg bg-gray-500 flex justify-center  text-white">
           Create New Post
         </button>
@@ -77,6 +83,32 @@ const ClaimedItemsList = (props: IPostListProps) => {
 
 
 export default function UserProfilePostsGrid({ postedItemIds, claimedItemIds, id, showPostedDonations }: Props) {
+
+  const user = useAuth();
+
+  const [posted, setPosted] = useState([]);
+  const [claimed, setClaimed] = useState([]);
+
+  const getPosted = async () => {
+    console.log("Boom");
+    const res = await axios.get(`api/items?userId=${user.localId}`, {
+      params: {
+        localId: user.localId,
+      },
+    });
+    console.log(res.data);
+    setPosted(res.data.posted);
+    setClaimed(res.data.claimed);
+  };
+
+
+  useEffect(() => {
+    if (user) {
+      getPosted();
+    }
+  }, [user])
+
+
   const items = {
     id: id,
     items: [
@@ -225,7 +257,7 @@ export default function UserProfilePostsGrid({ postedItemIds, claimedItemIds, id
 
   return (
     <div className="flex justify-center">
-      {showPostedDonations ? <PostedItemsList postData={items} /> : <ClaimedItemsList postData={items} />}
+      {showPostedDonations ? <PostedItemsList postData={{ id: id, items: posted }} /> : <ClaimedItemsList postData={{ id: id, items: claimed }} />}
     </div>
   )
 }

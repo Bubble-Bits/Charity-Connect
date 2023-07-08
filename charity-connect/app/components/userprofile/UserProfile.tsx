@@ -24,15 +24,8 @@ export default function UserProfile({ localId }: Props) {
   const user = useAuth();
   // console.log(user);
 
-  const getPosted = async () => {
-    console.log("Boom");
-    const res = await axios.get(`api/items?userId=${user.localId}`, {
-      params: {
-        localId: user.localId,
-      },
-    });
-    console.log(res);
-  };
+
+
   async function getUser() {
     const res = await axios.get("api/register", {
       params: {
@@ -142,18 +135,18 @@ export default function UserProfile({ localId }: Props) {
           localId: localId,
         },
       })
-      .then((data) => {
-        console.log("data: ", data.data.user);
-        setCurrUser(data.data.user);
-        setProfilePicUrl(data.data.user.profilePic);
-        setName(data.data.user.name);
-        setBio(data.data.user.bio);
-        setAddress(data.data.user.address);
-        setId(data.data.user.id);
-        setPostedItemIds(data.data.user.postedItemIds);
-        setClaimedItemIds(data.data.user.claimedItemIds);
-        getItems();
-      })
+        .then((data) => {
+          console.log("data: ", data.data.user);
+          setCurrUser(data.data.user);
+          setProfilePicUrl(data.data.user.profilePic);
+          setName(data.data.user.name);
+          setBio(data.data.user.bio);
+          setAddress(data.data.user.address);
+          setId(data.data.user.id);
+          setPostedItemIds(data.data.user.postedItemIds);
+          setClaimedItemIds(data.data.user.claimedItemIds);
+          getItems();
+        })
     }, [localId]);
 
   return user ? ( //don't render screen until valid user obj is retrieved
@@ -271,9 +264,9 @@ export default function UserProfile({ localId }: Props) {
 
 
 
-          <ProfileMenu onShowDonationClick={toggleImageShown} />
-          <UserProfilePostsGrid postedItemIds={postedItemIds} claimedItemIds={claimedItemIds} id={id} showPostedDonations={showPostedDonations} />
-          {/* <div className="grid grid-cols-2 grid-rows-3 gap-4 place-content-center h-200 p-4">
+        <ProfileMenu onShowDonationClick={toggleImageShown} />
+        <UserProfilePostsGrid postedItemIds={postedItemIds} claimedItemIds={claimedItemIds} id={id} showPostedDonations={showPostedDonations} />
+        {/* <div className="grid grid-cols-2 grid-rows-3 gap-4 place-content-center h-200 p-4">
             <div className="bg-gray-500">
               {showPostedDonations ? (
                 <Link href="/donate">Create New Post</Link>
@@ -317,8 +310,8 @@ export default function UserProfile({ localId }: Props) {
               )}
             </div>
           </div> */}
-        </div>
       </div>
-      : <div>Loading...</div>
-  );
+    </div>)
+    : <div>Loading...</div>
+
 }
