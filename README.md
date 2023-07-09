@@ -60,7 +60,7 @@ API_KEY2=
 ```
 ## Team Members
 #### [Anthony Bui](https://www.linkedin.com/in/bui-anthony/) | [Github](https://github.com/aboowee) - Product Manager - Donation / Claim
-#### [Lovinson Dieujuste] ***** - Architect Owner - User Signup and Login
+#### [Lovinson Dieujuste](https://github.com/Wisesofthemall) - Architect Owner - User Signup and Login
 #### [Stanley Chu] ***** - UI Owner - Item Page
 #### [Alvin Ruan] ***** - Software Engineer - Map
 #### [Alvino Tam-Handiman] **** - Software Engineer - Home Page
