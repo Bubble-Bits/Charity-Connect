@@ -33,7 +33,14 @@ Charity Connect is a mobile-first web application that _____
 -
 
 ### Chat
-- 
+- The Chat Component is a feature of the Charity Connect application that allows users to connect with each other and communicate via chat messages. It enables users coordinate thier donation process or inquire about potential pickups. 
+
+  Features
+    - User-friendly interface for seamless communication
+    - Chat history with timestamps
+    - Sending and receiving text messages
+    - Sending and displaying images
+    - Creating new chat conversations
 
 ## Additional Components
 
