@@ -1,7 +1,7 @@
 # CHARITY CONNECT MOBILE APPLICATION
 
 Full Stack Mobile Application utilizing the following tech stack:
-Charity Connect is a mobile-first web application that _____
+Charity Connect is a mobile-first web application that allows peer to peer interactions to list items up for donation and claim features to reduce waste.
 
 ## Table of Contents
 
@@ -69,8 +69,12 @@ Google API token to _____.
 Cloudingary API token to ______.
 
 ```bash
-API_KEY=
-API_KEY2=
+DATABASE_URL = "INSERT MONGO ATLAS"
+NEXT_PUBLIC_GEOLOCATION="INSERT KEY HERE"
+NEXT_PUBLIC_GOOGLEAPI="INSERT GOOGLE KEY HERE"
+NEXT_PUBLIC_CLD_CLOUD="INSERT CLOUDINARY ENV HERE"
+NEXT_PUBLIC_CLD_API="INSERT CLOUDINARY SECRET KEY HERE"
+NEXT_PUBLIC_AUTOCOMP="INSERT GOOGLE PLACE API KEY HERE"
 ```
 ## Team Members
 #### [Anthony Bui](https://www.linkedin.com/in/bui-anthony/) | [Github](https://github.com/aboowee) - Product Manager - Donation / Claim
