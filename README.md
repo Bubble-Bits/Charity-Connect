@@ -34,8 +34,12 @@ Charity Connect is a mobile-first web application that allows peer to peer inter
     - Allow users profile to be clicked and analyzed
 
 ### Map
--
-
+- The Map page first asks the user permission for their current location. If not, it'll default to a preset location. If prompted with the user's location, it'll provide the user with the nearest items for up for donation within the map's view through Google Maps API.
+  - There is a search bar located on top of the map if the user would like to navigate to another location.
+  - The search bar converts the address input into a longitude & latitude via Open-Cage API
+  - The information is then passed to the centerpoint of the center element of the Google Map API to reposition. 
+  - Each item has an onhover show the item's name and image as well as onclick, would lead to that specific item's page
+    
 ### User Profile
 -
 
