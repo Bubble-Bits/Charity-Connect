@@ -13,7 +13,7 @@ Charity Connect is a mobile-first web application that allows peer to peer inter
 6. [License](#License)
 
 ![image](https://github.com/Bubble-Bits/Charity-Connect/assets/113706094/e0bfae40-debd-4dc4-91f8-268c33474d06)
-
+![](https://user-images.githubusercontent.com/113706094/254772181-e0bfae40-debd-4dc4-91f8-268c33474d06.png =200x400)
 
 ## Main Product Widgets
 
