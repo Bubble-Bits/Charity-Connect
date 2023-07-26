@@ -39,12 +39,18 @@ Charity Connect is a mobile-first web application that allows peer to peer inter
   - The user has the chance opt to login with Google and Github
   - The user also has the chance to signup with email and password
 
+### Navigation Bar
+- Navigation bar allows has several icons.
+  - The Earth icon allows return the user to the home screen.
+  - 
+
 ### Home Page
 - The homepage contains our company "Charity Connect", buttons for "View Donations" and "Donate Today!"
   - View Donation queries the database to show which items are in the location.
     -  There is a sort button that allows the user to sort by ["Apparel", "Electronics", "Entertainment", "Family", "Garden and Outdoors", "Hobbies", "Homegoods", "Music", "Sports",              "Supplies", "Toys and Games", "Vehicles", "Other"]
     -  There's also a view on map which leads to the map feature of the application.
-
+  - Donate Today button leads to the Item page.
+    
 ### Item Page
 - The Item Page breaks down the donation description from its name, claim status, claim capabilities, description, donor profile, messaging capabilities and location through a google map api.
 
@@ -63,7 +69,9 @@ Charity Connect is a mobile-first web application that allows peer to peer inter
   - Each item has an onhover show the item's name and image as well as onclick, would lead to that specific item's page
     
 ### User Profile
--
+  - User profile builds on the signup & login page to pull from the Mongodatabase to display to the current user.
+    - The user can input a Image, Biography, Address
+    - There is also a list of items that the user has.
 
 ### Chat
 - The Chat Component is a feature of the Charity Connect application that allows users to connect with each other and communicate via chat messages. It enables users coordinate thier donation process or inquire about potential pickups. 
@@ -74,13 +82,6 @@ Charity Connect is a mobile-first web application that allows peer to peer inter
     - Sending and receiving text messages
     - Sending and displaying images
     - Creating new chat conversations
-
-## Additional Components
-
-### Navigation Bar
-- Navigation bar allows has several icons.
-  - The Earth icon allows return the user to the home screen.
-  - 
 
 ## Installation
 
@@ -95,6 +96,7 @@ npm install
 Repository requires the following environment variables:
 Google API token to _____.
 Cloudingary API token to ______.
+Open-Cage API token to ______.
 
 ```bash
 DATABASE_URL = "INSERT MONGO ATLAS"
