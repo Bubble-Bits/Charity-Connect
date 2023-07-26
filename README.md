@@ -35,13 +35,15 @@ Charity Connect is a mobile-first web application that allows peer to peer inter
 ## Main Product Widgets
 
 ### User Signup and Login
-- 
+- The User Signup page triggers on first render of the website depending on whether you have an account signed in or not.
+  - The user has the chance opt to login with Google and Github
+  - The user also has the chance to signup with email and password
 
 ### Home Page
--
-
-### Donate and Claim
--
+- The homepage contains our company "Charity Connect", buttons for "View Donations" and "Donate Today!"
+  - View Donation queries the database to show which items are in the location.
+    -  There is a sort button that allows the user to sort by ["Apparel", "Electronics", "Entertainment", "Family", "Garden and Outdoors", "Hobbies", "Homegoods", "Music", "Sports",              "Supplies", "Toys and Games", "Vehicles", "Other"]
+    -  There's also a view on map which leads to the map feature of the application.
 
 ### Item Page
 - The Item Page breaks down the donation description from its name, claim status, claim capabilities, description, donor profile, messaging capabilities and location through a google map api.
@@ -76,7 +78,9 @@ Charity Connect is a mobile-first web application that allows peer to peer inter
 ## Additional Components
 
 ### Navigation Bar
-- 
+- Navigation bar allows has several icons.
+  - The Earth icon allows return the user to the home screen.
+  - 
 
 ## Installation
 
