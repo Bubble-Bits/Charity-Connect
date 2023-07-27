@@ -38,7 +38,9 @@ Charity Connect is a mobile-first web application that allows peer to peer inter
 - The User Signup page triggers on first render of the website depending on whether you have an account signed in or not.
   - The user has the chance opt to login with Google and Github
   - The user also has the chance to signup with email and password
-    <img width="1440" alt="Screen Shot 2023-07-27 at 12 27 34 AM" src="https://github.com/Bubble-Bits/Charity-Connect/assets/101741874/709b7e60-1716-40fd-ac44-cefe5602c809"><img width="1440" alt="Screen Shot 2023-07-27 at 12 27 52 AM" src="https://github.com/Bubble-Bits/Charity-Connect/assets/101741874/9865cda4-8ef2-46b8-befd-2902ecc6f745">
+    <img width="1434" alt="Screen Shot 2023-07-27 at 12 27 34 AM" src="https://github.com/Bubble-Bits/Charity-Connect/assets/101741874/5bf0ac88-f9ce-474e-a407-2bb70fdf51f1"><img width="1433" alt="Screen Shot 2023-07-27 at 12 27 52 AM" src="https://github.com/Bubble-Bits/Charity-Connect/assets/101741874/8b6c3986-6d28-4d6f-a21f-4f82f05d9fb1">
+
+
 
 
 
