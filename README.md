@@ -42,7 +42,8 @@ Charity Connect is a mobile-first web application that allows peer to peer inter
 ### Navigation Bar
 - Navigation bar allows has several icons.
   - The Earth icon allows return the user to the home screen.
-  - 
+  - The Human Icon prompts the user to login or switch accounts.
+  - The Chat bubble Icon opens up the chat feature for the current user.
 
 ### Home Page
 - The homepage contains our company "Charity Connect", buttons for "View Donations" and "Donate Today!"
