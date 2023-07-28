@@ -114,7 +114,7 @@ NEXT_PUBLIC_AUTOCOMP="INSERT GOOGLE PLACE API KEY HERE"
 #### [Anthony Bui](https://www.linkedin.com/in/bui-anthony/) | [Github](https://github.com/aboowee) - Product Manager - Donation / Claim
 #### [Lovinson Dieujuste](https://github.com/Wisesofthemall) - Architect Owner - User Signup and Login
 #### [Stanley Chu](https://www.linkedin.com/in/chustanleys/) | [Github](https://github.com/chustanley)- UI Owner - Item Page
-#### [Alvin Ruan](https://www.linkedin.com/in/alvin-ruan) | [Github](https://github.com/CaskgarZero) - Software Engineer - Map
+#### [Alvin Ruan](https://www.linkedin.com/in/alvin-ruan) | [Github]([https://github.com/AlvinRuan]) - Software Engineer - Map
 #### [Alvino Tam-Handiman] | [Github](https://github.com/alvinohandiman) - Software Engineer - Home Page
 #### [Nick Monteleone] | [Github](https://github.com/Nickmont3) - Software Engineer - Chat
 #### [Christina Hunter] | [Github](https://github.com/Christina-CS-Foothill) - Software Engineer - User Profile
