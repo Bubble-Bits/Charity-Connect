@@ -27,7 +27,8 @@ Charity Connect is a mobile-first web application that allows peer to peer inter
 5. [Team Members](#Team-members)
 6. [License](#License)
 
-<img src="https://github.com/Bubble-Bits/Charity-Connect/assets/113706094/4ec9956c-7df3-4553-b363-c0f78b974b57" width="225" height="400" alt="image">    <img src="https://github.com/Bubble-Bits/Charity-Connect/assets/113706094/e0bfae40-debd-4dc4-91f8-268c33474d06" width="225" height="400" alt="image">    <img src="https://github.com/Bubble-Bits/Charity-Connect/assets/113706094/c2a7d297-0dc5-4ca4-baec-0ae232f3e16a" width="225" height="400" alt="image"> 
+<img width="225" height="400" alt="Screen Shot 2023-07-27 at 12 27 34 AM" src="https://github.com/Bubble-Bits/Charity-Connect/assets/101741874/b7f0920a-3780-41f4-837c-084374a5167f">
+   <img width="225" height="400" alt="Screen Shot 2023-07-27 at 12 27 52 AM" src="https://github.com/Bubble-Bits/Charity-Connect/assets/101741874/707b2337-70b0-456e-8405-429b6a0f98f5">   <img src="https://github.com/Bubble-Bits/Charity-Connect/assets/113706094/e0bfae40-debd-4dc4-91f8-268c33474d06" width="225" height="400" alt="image">    <img src="https://github.com/Bubble-Bits/Charity-Connect/assets/113706094/c2a7d297-0dc5-4ca4-baec-0ae232f3e16a" width="225" height="400" alt="image"> 
 <img src="https://github.com/Bubble-Bits/Charity-Connect/assets/113706094/96a1fd92-2d30-4154-bf15-e5544dbcb6c5" width="225" height="400" alt="item-page">
 
 
@@ -39,8 +40,7 @@ Charity Connect is a mobile-first web application that allows peer to peer inter
   - The user has the chance opt to login with Google and Github
   - The user also has the chance to signup with email and password
   <br/>
-   <img width="225" height="400" alt="Screen Shot 2023-07-27 at 12 27 34 AM" src="https://github.com/Bubble-Bits/Charity-Connect/assets/101741874/b7f0920a-3780-41f4-837c-084374a5167f">
-   <img width="225" height="400" alt="Screen Shot 2023-07-27 at 12 27 52 AM" src="https://github.com/Bubble-Bits/Charity-Connect/assets/101741874/707b2337-70b0-456e-8405-429b6a0f98f5">
+   
 
 ### Navigation Bar
 - Navigation bar allows has several icons.
